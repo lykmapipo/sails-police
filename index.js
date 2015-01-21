@@ -1,11 +1,11 @@
 /** @module authr */
 
-var Signup = require('./functions/signup.js');
-var Login = require('./functions/login.js');
-var Verify = require('./functions/verify_email.js');
-var Reset = require('./functions/reset_password.js');
-var Delete = require('./functions/delete_account.js');
-var Validate = require('./functions/validator.js');
+var Signup = require('./lib/signup.js');
+var Login = require('./lib/login.js');
+var Verify = require('./lib/verify_email.js');
+var Reset = require('./lib/reset_password.js');
+var Delete = require('./lib/delete_account.js');
+var Validate = require('./lib/validator.js');
 
 /**
  * Represents a new Authr instance.
