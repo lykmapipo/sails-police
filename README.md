@@ -9,3 +9,6 @@ The core module has the following features:
 - [ ] User Login
 - [ ] Password recovery
 - [ ] Account suspension/deletion
+
+#NOTE
+Its under development no release yet.
