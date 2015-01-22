@@ -4,7 +4,7 @@
     "description": "Simple and flexible authentication workflows for sails",
     "main": "index.js",
     "scripts": {
-        "test": "mocha test"
+        "test": "mocha test --recursive"
     },
     "repository": {
         "type": "git",
