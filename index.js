@@ -1,4 +1,4 @@
-/** @module authr */
+/** @module police */
 
 var Signup = require('./lib/signup.js');
 var Login = require('./lib/login.js');
@@ -7,34 +7,83 @@ var Reset = require('./lib/reset_password.js');
 var Delete = require('./lib/delete_account.js');
 var Validate = require('./lib/validator.js');
 
+//morphs
+var Authenticable = require('./lib/morphs/authenticable.js');
+var Confirmable = require('./lib/morphs/confirmable.js');
+var Lockable = require('./lib/morphs/lockable.js');
+var Recoverable = require('./lib/morphs/recoverable.js');
+var Registerable = require('./lib/morphs/registerable.js');
+var Trackable = require('./lib/morphs/trackable.js');
+
 /**
- * Represents a new Authr instance.
+ * Represents a new Police instance.
  * @class
  * @param {object} config - Configuration options for instance.
  */
 
-function Authr(config) {
+function Police(config) {
 
     // initialize config
     this.config = config || {};
 
-    // Check to make sure defaults are not missing.
-    this.db();
-    this.security();
-    this.user();
-    this.errormsg();
+};
 
-    // create a new adapter
-    this.getAdapter();
-    var self = this;
+/**
+ * @description morph a model to be authenticable
+ * @param  {Object} model a sails|waterline model definition
+ * @return {Object} a sails model morphed with authentication ability
+ */
+Police.prototype.morphAuthenticable = function(model) {
+    return new Authenticable(model);
+};
 
-    process.on('SIGINT', function() {
-        self.config.Adapter.disconnect(function() {
-            process.exit(0);
-        });
-    });
 
-}
+/**
+ * @description morph a model to be confirmable
+ * @param  {Object} model a sails|waterline model definition
+ * @return {Object} a sails model morphed with confirmation ability
+ */
+Police.prototype.morphConfirmable = function(model) {
+    return new Confirmable(model);
+};
+
+
+/**
+ * @description morph a model to be lockable
+ * @param  {Object} model a sails|waterline model definition
+ * @return {Object} a sails model morphed with locking ability
+ */
+Police.prototype.morphLockable = function(model) {
+    return new Lockable(model);
+};
+
+/**
+ * @description morph a model to be recorable
+ * @param  {Object} model a sails|waterline model definition
+ * @return {Object} a sails model morphed with authentication recovery ability
+ */
+Police.prototype.morphRecoverable = function(model) {
+    return new Recoverable(model);
+};
+
+/**
+ * @description morph a model to be registerable
+ * @param  {Object} model a sails|waterline model definition
+ * @return {Object} a sails model morphed with authentication registration ability
+ */
+Police.prototype.morphRegisterable = function(model) {
+    return new Registerable(model);
+};
+
+/**
+ * @description morph a model to be trackable
+ * @param  {Object} model a sails|waterline model definition
+ * @return {Object} a sails model morphed with authentication track ability
+ */
+Police.prototype.morphTrackable = function(model) {
+    return new Trackable(model);
+};
+
 
 /**
  * Signup function exposed to user.
@@ -42,14 +91,14 @@ function Authr(config) {
  * @param {signUpCallback} callback - Run callback when finished if it exists
  * @example
  * // Returns the user object that was inserted into the database
- * var Authr = require('authr');
- * var authr = new Authr('./config.json');
+ * var Police = require('police');
+ * var police = new Police('./config.json');
  * var signup = {username: 'test@test.com', password:'test'}
- * authr.signUp(signup, function(err, user){
+ * police.signUp(signup, function(err, user){
  *     console.log(user)
  * });
  */
-Authr.prototype.signUp = function(signup, callback) {
+Police.prototype.signUp = function(signup, callback) {
     Signup(this.config, signup, function(err, user) {
         if (callback) {
             return callback(err, user);
@@ -64,7 +113,7 @@ Authr.prototype.signUp = function(signup, callback) {
  * @param {Object} user - user that was signed up
  */
 
-Authr.prototype.validate = function(signup, callback) {
+Police.prototype.validate = function(signup, callback) {
     Validate(this.config, signup, function(err, signup) {
         if (callback) {
             return callback(err, signup);
@@ -78,14 +127,14 @@ Authr.prototype.validate = function(signup, callback) {
  * @return {loginCallback}
  * @example
  * // Returns the user object that was logged into
- * var Authr = require('authr');
- * var authr = new Authr('./config.json');
+ * var Police = require('police');
+ * var police = new Police('./config.json');
  * var login = {username: 'test@test.com', password:'test'}
- * authr.login(login, function(err, user){
+ * police.login(login, function(err, user){
  *     console.log(user)
  * });
  */
-Authr.prototype.login = function(login, callback) {
+Police.prototype.login = function(login, callback) {
     Login(this.config, login, function(err, user) {
         if (callback) {
             return callback(err, user);
@@ -106,13 +155,13 @@ Authr.prototype.login = function(login, callback) {
  * @param {verifyEmailCallback} callback - execute callback when function finishes
  * @example
  * // Returns the user object for the user that was verified
- * var Authr = require('authr');
- * var authr = new Authr('./config.json');
- * authr.verifyEmail(token_from_signup, function(err, user){
+ * var Police = require('police');
+ * var police = new Police('./config.json');
+ * police.verifyEmail(token_from_signup, function(err, user){
  *     console.log(user);
  * });
  */
-Authr.prototype.verifyEmail = function(token, callback) {
+Police.prototype.verifyEmail = function(token, callback) {
     Verify(this.config, token, function(err, user) {
         if (callback) {
             return callback(err, user);
@@ -133,13 +182,13 @@ Authr.prototype.verifyEmail = function(token, callback) {
  * @return {createPasswordResetTokenCallback} callback - return a callback after the token is generated
  * @example
  * // Returns the user object for the user that requested the reset, including the token
- * var Authr = require('authr');
- * var authr = new Authr('./config.json');
- * authr.createPasswordResetToken('test@test.com', function(err, user){
+ * var Police = require('police');
+ * var police = new Police('./config.json');
+ * police.createPasswordResetToken('test@test.com', function(err, user){
  *     console.log(user);
  * });
  */
-Authr.prototype.createPasswordResetToken = function(email_address, callback) {
+Police.prototype.createPasswordResetToken = function(email_address, callback) {
     Reset.generateToken(this.config, email_address, function(err, user) {
         if (callback) {
             return callback(err, user);
@@ -160,13 +209,13 @@ Authr.prototype.createPasswordResetToken = function(email_address, callback) {
  * @return {verifyPasswordResetTokenCallback} callback - return a callback after the token is verified
  * @example
  * // Returns the user object that the token was verified against
- * var Authr = require('authr');
- * var authr = new Authr('./config.json');
- * authr.verifyPasswordResetToken(token_from_createPasswordResetToken, function(err, user){
+ * var Police = require('police');
+ * var police = new Police('./config.json');
+ * police.verifyPasswordResetToken(token_from_createPasswordResetToken, function(err, user){
  *     console.log(user);
  * });
  */
-Authr.prototype.verifyPasswordResetToken = function(token, callback) {
+Police.prototype.verifyPasswordResetToken = function(token, callback) {
     Reset.verifyToken(this.config, token, function(err, user) {
         if (callback) {
             return callback(err, user);
@@ -187,14 +236,14 @@ Authr.prototype.verifyPasswordResetToken = function(token, callback) {
  * @return {updatePasswordCallback} callback - return a callback after the token is verified
  * @example
  * // Returns the user that updated their password
- * var Authr = require('authr');
- * var authr = new Authr('./config.json');
+ * var Police = require('police');
+ * var police = new Police('./config.json');
  * var signup = {username:'test@test.com', passowrd:'brand_new_password'};
- * authr.updatePassword(login, function(err, user){
+ * police.updatePassword(login, function(err, user){
  *     console.log(user);
  * });
  */
-Authr.prototype.updatePassword = function(token, password, callback) {
+Police.prototype.updatePassword = function(token, password, callback) {
     Reset.resetPassword(this.config, token, password, function(err, user) {
         if (callback) {
             return callback(err, user);
@@ -215,15 +264,15 @@ Authr.prototype.updatePassword = function(token, password, callback) {
  * @return {deleteAccountCallback} callback - return a callback after account is deleted
  * @example
  * // Deletes a user and returns their account in case you need it for something
- * var Authr = require('authr');
- * var authr = new Authr('./config.json');
+ * var Police = require('police');
+ * var police = new Police('./config.json');
  * // require username and password again to verify account deletion
  * var login = {username: 'test@test.com', password:'test'};
- * authr.deleteAccount(login, function(err, user){
+ * police.deleteAccount(login, function(err, user){
  *     console.log(user)
  * });
  */
-Authr.prototype.deleteAccount = function(login, callback) {
+Police.prototype.deleteAccount = function(login, callback) {
     Delete(this.config, login, function(err, user) {
         if (callback) {
             return callback(err, user);
@@ -242,7 +291,7 @@ Authr.prototype.deleteAccount = function(login, callback) {
  * Sets default database configuration - in-memory nedb. Does not set any mising options.
  * @private
  */
-Authr.prototype.db = function() {
+Police.prototype.db = function() {
     if (!this.config.db) {
         this.config.db = {
             type: 'nedb'
@@ -255,7 +304,7 @@ Authr.prototype.db = function() {
  * Sets default error message text
  * @private
  */
-Authr.prototype.errormsg = function() {
+Police.prototype.errormsg = function() {
     if (!this.config.errmsg) {
         this.config.errmsg = {
             username_taken: 'This username is taken Please choose another.',
@@ -310,7 +359,7 @@ Authr.prototype.errormsg = function() {
  * Sets default user config if it is missing or checks for any missing options and sets defaults.
  * @private
  */
-Authr.prototype.user = function() {
+Police.prototype.user = function() {
     if (!this.config.user) {
         this.config.user = {
             username: 'username',
@@ -378,7 +427,7 @@ Authr.prototype.user = function() {
  * Sets default security config. Checks for a missing config and sets all defaults or checks for missing options and sets defaults for any missing options
  * @private
  */
-Authr.prototype.security = function() {
+Police.prototype.security = function() {
     if (!this.config.security) {
         this.config.security = {
             hash_password: true,
@@ -440,31 +489,31 @@ Authr.prototype.security = function() {
  * Gets a new instance of the adapter depending on the db type specified in the config
  * @private
  */
-Authr.prototype.getAdapter = function() {
+Police.prototype.getAdapter = function() {
     var self = this;
     var Adapter;
     switch (this.config.db.type) {
         case 'mongodb':
-            Adapter = require('authr-mongo');
+            Adapter = require('police-mongo');
             break;
         case 'sqlite':
-            Adapter = require('authr-sql');
+            Adapter = require('police-sql');
             break;
         case 'mysql':
-            Adapter = require('authr-sql');
+            Adapter = require('police-sql');
             break;
         case 'mariadb':
-            Adapter = require('authr-sql');
+            Adapter = require('police-sql');
             break;
         case 'postgresql':
-            Adapter = require('authr-sql');
+            Adapter = require('police-sql');
             break;
         default:
-            Adapter = require('authr-nedb');
+            Adapter = require('police-nedb');
             break;
     }
     self.config.Adapter = new Adapter(self.config);
     self.config.Adapter.connect(function(err) {});
 };
 
-module.exports = Authr;
+module.exports = new Police();
