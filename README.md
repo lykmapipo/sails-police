@@ -11,8 +11,10 @@ It composed of the following modules:
 * [Registerable](): handles signing up users through a registration process, also allowing them to edit and destroy their account.
 * [Trackable](): tracks sign in count, timestamps and IP address.
 
+
 #NOTE
 Its under development no release yet.
+
 
 ##Authenticable
 - [x] email and password attributes
@@ -23,6 +25,7 @@ Its under development no release yet.
 
 ##Confirmable
 - [x] confirmationToken, confirmationTokenExpiryAt, confirmedAt, confirmationSentAt attributes
+- [ ] generateConfirmationToken(confirmable,callback)
 - [x] sendConfirmation(registable,callback)
 - [ ] confirm(confirmationToken,callback)
 - [ ] beforeConfirm(confirmable,callback)
@@ -30,6 +33,7 @@ Its under development no release yet.
 
 ##Lockable
 - [x] failedAttempt, lockedAt, unlockToken, unlockTokenSentAt, unlockTokenExpiryAt attributes
+- [ ] generateLockingToken(lockable,callback)
 - [ ] lock(criteria,callback)
 - [ ] unlock(token,callback)
 - [ ] beforeLock(lockable,callback)
@@ -37,6 +41,7 @@ Its under development no release yet.
 
 ##Recoverable
 - [x] recoveryToken, recoveryTokenExpiryAt, recoveryTokenSentAt attributes
+- [ ] generateRecoveryToken(recoverable,callback)
 - [ ] sendRecovery(recoverable,callback)
 - [ ] recover(recoveryToken,callback)
 - [ ] beforeRecovery(recoverable,callback)
@@ -44,6 +49,7 @@ Its under development no release yet.
 
 ##Registerable
 - [x] registeredAt and unregisteredAt datetime attributes
+- [ ] generateUnregisterToken(registerable,callback)
 - [x] register(subject,callback)
 - [x] unregister(callback)
 - [ ] beforeRegister(registerable,done)

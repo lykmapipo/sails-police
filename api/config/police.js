@@ -35,6 +35,7 @@ module.exports.police = {
         }
     },
     confirmable: {
+        sendConfirmation: true,
         tokenDuration: 3, //token duration since generation till it expired
         /**
          * @description a service to send confirmation. since we dont know
@@ -53,7 +54,8 @@ module.exports.police = {
 
     },
     registerable: {
-        destroy: function(registerable, done) {
+        sendUregisterConfirmation: true,
+        unregister: function(registerable, done) {
             done(null, registerable);
         }
     },
