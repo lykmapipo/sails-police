@@ -5,6 +5,9 @@ var User = {};
 //make User authenticable
 police.morphAuthenticable(User);
 
+//make User confrimable
+police.morphConfirmable(User);
+
 //make user lockable
 police.morphLockable(User);
 

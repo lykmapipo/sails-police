@@ -7,7 +7,7 @@
  * (e.g. lifting and lowering your sails application):
  */
 var sails = require('sails');
-
+var Promise = require('bluebird');
 /**
  * Lifting sails before all tests
  */
@@ -40,6 +40,12 @@ before(function(done) {
  * Lowering sails after done testing
  */
 after(function(done) {
-    // here you can clear fixtures, etc.
-    sails.lower(done);
+    Promise
+        .all([User.destroy()])
+        .then(function(result) {
+            sails.lower(done);
+        })
+        .catch(function(error) {
+            done(error);
+        });
 });

@@ -4,7 +4,7 @@
     "description": "Simple and flexible authentication workflows for sails",
     "main": "index.js",
     "scripts": {
-        "test": "mocha test --recursive"
+        "test": "mocha test --recursive --timeout 10000"
     },
     "repository": {
         "type": "git",
@@ -30,7 +30,8 @@
         "bluebird": "^2.8.2",
         "es6-promise": "~1.0.0",
         "lodash": "^2.4.1",
-        "moment": "~2.8.1",
+        "moment": "^2.8.4",
+        "sails-validation-messages": "0.0.0",
         "validate.js": "~0.2.0"
     },
     "devDependencies": {
