@@ -1,6 +1,6 @@
 sails-police
 =============
-Simple and flexible authentication workflows for sails inspired by [devise]()
+Simple and flexible authentication workflows for sails inspired by [devise](https://github.com/plataformatec/devise)
 
 It composed of the following modules:
 
