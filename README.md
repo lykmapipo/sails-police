@@ -14,5 +14,45 @@ It composed of the following modules:
 #NOTE
 Its under development no release yet.
 
-#TODO
-- [ ] Adding security layer
+##Authenticable
+- [x] email and password attributes
+- [x] generateToken(callback)
+- [x] encryptPassword(password,callback)
+- [x] comparePassword(password, hash, callback)
+- [ ] authenticate(credentials,callback)
+
+##Confirmable
+- [x] confirmationToken, confirmationTokenExpiryAt, confirmedAt, confirmationSentAt attributes
+- [x] sendConfirmation(registable,callback)
+- [ ] confirm(confirmationToken,callback)
+- [ ] beforeConfirm(confirmable,callback)
+- [ ] afterConfirmable(confirmable,callback)
+
+##Lockable
+- [x] failedAttempt, lockedAt, unlockToken, unlockTokenSentAt, unlockTokenExpiryAt attributes
+- [ ] lock(criteria,callback)
+- [ ] unlock(token,callback)
+- [ ] beforeLock(lockable,callback)
+- [ ] afterLock(lockable,callback)
+
+##Recoverable
+- [x] recoveryToken, recoveryTokenExpiryAt, recoveryTokenSentAt attributes
+- [ ] sendRecovery(recoverable,callback)
+- [ ] recover(recoveryToken,callback)
+- [ ] beforeRecovery(recoverable,callback)
+- [ ] afterRecovery(recoverable,callback)
+
+##Registerable
+- [x] registeredAt and unregisteredAt datetime attributes
+- [x] register(subject,callback)
+- [x] unregister(callback)
+- [ ] beforeRegister(registerable,done)
+- [ ] afterRegister(registerable,done)
+- [ ] beforeUnregister(registerable,done)
+- [ ] afterUnregister(registerable,done)
+
+##Trackable
+- [x] signInCount, currentSignInAt, currentSignInIpAddress, lastSignInAt, lastSignInIpAddress attributes
+- [ ] track(trackable,callback)
+- [ ] track(callback)
+- [ ] track(criteria,callback)

@@ -53,7 +53,9 @@ module.exports.police = {
 
     },
     registerable: {
-
+        destroy: function(registerable, done) {
+            done(null, registerable);
+        }
     },
     trackable: {
 
