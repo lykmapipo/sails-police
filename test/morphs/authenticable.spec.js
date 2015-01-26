@@ -16,7 +16,7 @@ describe('Authenticable', function() {
         expect(User.generateToken).to.be.a('function');
 
         User
-            .generateToken(function(error, token) {
+            .generateToken(Math.random().toString(), function(error, token) {
 
                 if (error) {
                     done(error);

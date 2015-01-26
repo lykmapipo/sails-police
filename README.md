@@ -21,11 +21,11 @@ Its under development no release yet.
 - [x] generateToken(callback)
 - [x] encryptPassword(password,callback)
 - [x] comparePassword(password, hash, callback)
-- [ ] authenticate(credentials,callback)
+- [ ] authenticate(authenticable,callback)
 
 ##Confirmable
 - [x] confirmationToken, confirmationTokenExpiryAt, confirmedAt, confirmationSentAt attributes
-- [ ] generateConfirmationToken(confirmable,callback)
+- [x] generateConfirmationToken(confirmable,callback)
 - [x] sendConfirmation(registable,callback)
 - [ ] confirm(confirmationToken,callback)
 - [ ] beforeConfirm(confirmable,callback)
@@ -49,16 +49,19 @@ Its under development no release yet.
 
 ##Registerable
 - [x] registeredAt and unregisteredAt datetime attributes
-- [ ] generateUnregisterToken(registerable,callback)
 - [x] register(subject,callback)
 - [x] unregister(callback)
 - [ ] beforeRegister(registerable,done)
 - [ ] afterRegister(registerable,done)
 - [ ] beforeUnregister(registerable,done)
 - [ ] afterUnregister(registerable,done)
+- [ ] generateUnregisterToken(registerable,callback)
 
 ##Trackable
 - [x] signInCount, currentSignInAt, currentSignInIpAddress, lastSignInAt, lastSignInIpAddress attributes
 - [ ] track(trackable,callback)
 - [ ] track(callback)
 - [ ] track(criteria,callback)
+
+##Transport
+- [ ] send(authentication,callback)

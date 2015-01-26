@@ -29,7 +29,7 @@ describe('Registerable', function() {
                 if (error) {
                     done(error);
                 } else {
-                    expect(registerable.id).to.exist;
+                    expect(registerable.registeredAt).to.not.be.null;
                     done();
                 }
             });
@@ -49,7 +49,9 @@ describe('Registerable', function() {
                         next(null, registerable);
                     },
                     function(registerable, next) {
-                        registerable.unregister(next);
+                        //unregister
+                        registerable
+                            .unregister(next);
                     },
                     function(registerable, next) {
                         expect(registerable.unregisteredAt).to.not.be.null;

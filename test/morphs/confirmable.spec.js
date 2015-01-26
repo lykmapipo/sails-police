@@ -14,8 +14,38 @@ describe('Confirmable', function() {
         done();
     });
 
+    it('should be able to generate confirmation token and set confirmation expriry at date', function(done) {
+        expect(User.generateConfirmationToken).to.be.a('function');
+
+        User
+            .generateConfirmationToken({}, function(error, confirmable) {
+                if (error) {
+                    done(error)
+                } else {
+                    expect(confirmable.confirmationToken).to.not.be.null;
+                    expect(confirmable.confirmationTokenExpiryAt).to.not.be.null;
+                    done();
+                }
+            })
+    });
+
     it('should be able to send confirmation', function(done) {
+        var confirmable = {
+            save: function(callback) {
+                callback(null, confirmable);
+            }
+        };
+
         expect(User.sendConfirmation).to.be.a('function');
-        done();
+
+        User
+            .sendConfirmation(confirmable, function(error, confirmable) {
+                if (error) {
+                    done(error);
+                } else {
+                    expect(confirmable.confirmationSentAt).to.not.be.null;
+                    done();
+                }
+            });
     });
 });
