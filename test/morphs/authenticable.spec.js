@@ -12,56 +12,52 @@ describe('Authenticable', function() {
         done();
     });
 
-    it('should be able to generate token', function(done) {
-        expect(User.generateToken).to.be.a('function');
 
-        User
-            .generateToken(Math.random().toString(), function(error, token) {
+    it('should be able to encrypt password', function(done) {
+        var password = 'password';
+        var user = User.new({
+            password: password
+        });
+
+        expect(user.encryptPassword).to.be.a("function");
+
+        user
+            .encryptPassword(function(error, authenticable) {
 
                 if (error) {
                     done(error);
                 } else {
-                    expect(token).to.not.be.null;
+
+                    expect(authenticable.password).to.not.equal(password);
                     done();
                 }
             });
     });
 
-    it('should be able to encrypt password', function(done) {
-        expect(User.encryptPassword).to.be.a("function");
-
-        User
-            .encryptPassword('password', function(error, hash) {
-
-                if (error) {
-                    done(error);
-                }
-
-                expect(hash).to.not.equal('password');
-                done();
-            });
-    });
-
     it('should be able to compare password with hash', function(done) {
-        expect(User.comparePassword).to.be.a("function");
+        var password = 'password';
 
-        User
-            .encryptPassword('password', function(error, hash) {
+        var user = User.new({
+            password: password
+        });
+
+        expect(user.comparePassword).to.be.a("function");
+
+        user
+            .encryptPassword(function(error, authenticable) {
                 if (error) {
                     done(error);
+                } else {
+                    authenticable
+                        .comparePassword('password', function(error, result) {
+                            if (error) {
+                                done(error);
+                            } else {
+                                expect(result).to.not.be.null;
+                                done();
+                            }
+                        });
                 }
-
-                User
-                    .comparePassword('password', hash, function(error, result) {
-                        if (error) {
-                            done(error);
-                        }
-
-                        expect(result).to.be.true;
-
-                        done();
-                    });
-
             });
     });
 

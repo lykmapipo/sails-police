@@ -18,15 +18,14 @@ Its under development no release yet.
 
 ##Authenticable
 - [x] email and password attributes
-- [x] generateToken(callback)
-- [x] encryptPassword(password,callback)
-- [x] comparePassword(password, hash, callback)
+- [x] encryptPassword(callback(error,authenticable))
+- [x] comparePassword(password,callback)
 - [ ] authenticate(authenticable,callback)
 
 ##Confirmable
 - [x] confirmationToken, confirmationTokenExpiryAt, confirmedAt, confirmationSentAt attributes
-- [x] generateConfirmationToken(confirmable,callback)
-- [x] sendConfirmation(registable,callback)
+- [x] generateConfirmationToken(callback)
+- [x] sendConfirmation(callback)
 - [ ] confirm(confirmationToken,callback)
 - [ ] beforeConfirm(confirmable,callback)
 - [ ] afterConfirmable(confirmable,callback)

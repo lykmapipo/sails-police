@@ -15,10 +15,12 @@ describe('Confirmable', function() {
     });
 
     it('should be able to generate confirmation token and set confirmation expriry at date', function(done) {
-        expect(User.generateConfirmationToken).to.be.a('function');
+        var user = User.new();
 
-        User
-            .generateConfirmationToken({}, function(error, confirmable) {
+        expect(user.generateConfirmationToken).to.be.a('function');
+
+        user
+            .generateConfirmationToken(function(error, confirmable) {
                 if (error) {
                     done(error)
                 } else {
@@ -30,16 +32,15 @@ describe('Confirmable', function() {
     });
 
     it('should be able to send confirmation', function(done) {
-        var confirmable = {
-            save: function(callback) {
-                callback(null, confirmable);
-            }
-        };
+        var user = User.new({
+            email: 'example@example.com',
+            password: 'password'
+        });
 
-        expect(User.sendConfirmation).to.be.a('function');
+        expect(user.sendConfirmation).to.be.a('function');
 
-        User
-            .sendConfirmation(confirmable, function(error, confirmable) {
+        user
+            .sendConfirmation(function(error, confirmable) {
                 if (error) {
                     done(error);
                 } else {
