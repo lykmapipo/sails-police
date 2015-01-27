@@ -21,6 +21,13 @@ Its under development no release yet.
 - [x] encryptPassword(callback(error,authenticable))
 - [x] comparePassword(password,callback)
 - [ ] authenticate(credentials,callback)
+	- [ ] validate credentials
+	- [x] findOneByEmail
+	- [ ] check if already confirmed/verified
+	- [ ] check if account locked
+	- [ ] check fail attempts
+	- [x] compare password
+	- [ ] if no authenticable found create not found error
 
 ##Confirmable
 - [x] confirmationToken, confirmationTokenExpiryAt, confirmedAt, confirmationSentAt attributes
