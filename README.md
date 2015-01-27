@@ -23,6 +23,7 @@ Its under development no release yet.
 - [ ] authenticate(credentials,callback)
 	- [ ] validate credentials
 	- [x] findOneByEmail
+	- [ ] check if authenticable found/exist
 	- [ ] check if already confirmed/verified
 	- [ ] check if account locked
 	- [ ] check fail attempts
