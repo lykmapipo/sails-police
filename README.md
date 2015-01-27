@@ -20,12 +20,13 @@ Its under development no release yet.
 - [x] email and password attributes
 - [x] encryptPassword(callback(error,authenticable))
 - [x] comparePassword(password,callback)
-- [ ] authenticate(authenticable,callback)
+- [ ] authenticate(credentials,callback)
 
 ##Confirmable
 - [x] confirmationToken, confirmationTokenExpiryAt, confirmedAt, confirmationSentAt attributes
 - [x] generateConfirmationToken(callback)
 - [x] sendConfirmation(callback)
+- [ ] resendConfirmation(callback)
 - [ ] confirm(confirmationToken,callback)
 - [ ] beforeConfirm(confirmable,callback)
 - [ ] afterConfirmable(confirmable,callback)
