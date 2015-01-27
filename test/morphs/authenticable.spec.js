@@ -61,4 +61,11 @@ describe('Authenticable', function() {
             });
     });
 
+
+    it('should have authenticate method', function (done) {
+        expect(User.authenticate).to.exist;
+        expect(User.authenticate).to.be.a('function');
+        done();
+    });
+
 });
