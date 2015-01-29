@@ -1,6 +1,8 @@
 var expect = require('chai').expect;
+var faker = require('faker');
 
 describe('Confirmable', function() {
+
     it('should have confirmable static flag', function(done) {
         expect(User.confirmable).to.be.true;
         done();
@@ -33,8 +35,8 @@ describe('Confirmable', function() {
 
     it('should be able to send confirmation', function(done) {
         var user = User.new({
-            email: 'example@example.com',
-            password: 'password'
+            email: faker.internet.email(),
+            password: faker.internet.password()
         });
 
         expect(user.sendConfirmation).to.be.a('function');

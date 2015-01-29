@@ -71,5 +71,7 @@ Its under development no release yet.
 - [ ] track(callback)
 - [ ] track(criteria,callback)
 
-##Transport
-- [ ] send(authentication,callback)
+##Transport (Notification Transport)
+- [ ] setTransport(transport)
+- [ ] add default noop transport
+- [ ] send(type,authentication,callback)

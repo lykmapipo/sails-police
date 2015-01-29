@@ -1,6 +1,3 @@
-//TODO install chai && supertest
-//TODO move test config in test rc
-//load sails in test mode
 /**
  * This file is useful when you want to execute some
  * code before and after running your tests

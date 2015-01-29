@@ -3,6 +3,7 @@ var faker = require('faker');
 var async = require('async');
 
 describe('Authenticable', function() {
+    
     it('should have authenticable static flag', function(done) {
         expect(User.authenticable).to.be.true;
         done();
@@ -45,24 +46,25 @@ describe('Authenticable', function() {
 
         expect(user.comparePassword).to.be.a("function");
 
-        async.waterfall(
-            [
-                function(next) {
-                    user.encryptPassword(next)
-                },
-                function(authenticable, next) {
-                    authenticable
-                        .comparePassword(password, next);
-                }
-            ],
-            function(error, authenticable) {
-                if (error) {
-                    done(error);
-                } else {
-                    expect(authenticable).to.not.be.null;
-                    done();
-                }
-            });
+        async
+            .waterfall(
+                [
+                    function(next) {
+                        user.encryptPassword(next)
+                    },
+                    function(authenticable, next) {
+                        authenticable
+                            .comparePassword(password, next);
+                    }
+                ],
+                function(error, authenticable) {
+                    if (error) {
+                        done(error);
+                    } else {
+                        expect(authenticable).to.not.be.null;
+                        done();
+                    }
+                });
 
     });
 

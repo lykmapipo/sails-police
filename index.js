@@ -7,6 +7,9 @@ var Reset = require('./lib/reset_password.js');
 var Delete = require('./lib/delete_account.js');
 var Validate = require('./lib/validator.js');
 
+//external dependencies
+var _ = require('lodash');
+
 //morphs
 var Authenticable = require('./lib/morphs/authenticable.js');
 var Confirmable = require('./lib/morphs/confirmable.js');
@@ -21,11 +24,37 @@ var Trackable = require('./lib/morphs/trackable.js');
  * @param {object} config - Configuration options for instance.
  */
 
-function Police(config) {
+function Police() {
+    //notification type constant
+    this.NOTIFICATION_TYPES = {
+        REGISTRATION_CONFIRMATON: 'Registration confirmation',
+        REGISTRATION_CONFIRMATON_RESEND: 'Registration confirmation resent',
+        UNLOCK_CONFIRMATON: 'Unlock confirmation',
+        UNLOCK_CONFIRMATON_RESEND: 'Unlock confirmation resent',
+        PASSWORD_RECOVERY_CONFIRMATON: 'Password recovery confirmation',
+        PASSWORD_RECOVERY_CONFIRMATON_RESEND: 'Password recovery confirmation resend'
+    };
 
-    // initialize config
-    this.config = config || {};
+    //add default console notification transport
+    this.transport = function(type, authenticable, done) {
+        console
+            .log(
+                'Notification type: %s.\nAuthenticable: %s \n',
+                type,
+                JSON.stringify(authenticable)
+            );
 
+        done();
+    }
+
+};
+
+Police.prototype.setTransport = function(transport) {
+    //we currently support functional transport
+    if (!_.isFunction(transport)) {
+        throw new Error('Unsupported transport instance type')
+    }
+    this.transport = transport;
 };
 
 /**
@@ -516,4 +545,9 @@ Police.prototype.getAdapter = function() {
     self.config.Adapter.connect(function(err) {});
 };
 
-module.exports = new Police();
+/**
+ * Export default singleton.
+ *
+ * @api public
+ */
+exports = module.exports = new Police();
