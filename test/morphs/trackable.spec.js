@@ -1,4 +1,5 @@
 var expect = require('chai').expect;
+var faker = require('faker');
 
 describe('Trackable', function() {
     
