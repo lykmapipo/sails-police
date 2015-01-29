@@ -77,16 +77,16 @@ Its under development no release yet.
 
 #Transport API
 By default sails-police default police is `console.log`. This is because 
-there are different use case when it came on sendinf notification. Example 
+there are different use case when it came on sending notification. Example 
 you may opt to send you notification through sms, email or any other medium 
-you may like.
+of your choice.
 
 Due to that reason sails-police has the method `setTransport` which accept 
 a function and pass the `type,authentication,done` as it argurments
 
-- type : Refer to the type of notifcation to be sent
-- authenticable : Refer to the model instance that you have mixin police morphs
-- done : Is the callback that you must call after finish sending the notification.
+- `type` : Refer to the type of notifcation to be sent
+- `authenticable` : Refer to the model instance that you have mixin police morphs
+- `done` : Is the callback that you must call after finish sending the notification.
 		 By default this callback will update notification send details based on the
 		 usage.
 
@@ -101,6 +101,7 @@ var police = require('sails-police');
 //you may store this in sails services 
 //and register it on bootstrap.js
 var transport = function(type, authenticable, done) {
+				//your transport implementation
 		        console
 		            .log(
 		                'Notification type: %s.\nAuthenticable: %s \n',
@@ -116,4 +117,4 @@ police.setTransport(transport);
 ```
 ##Transport Issues
 It is recommended to use job queue like [kue](https://github.com/learnboost/kue) 
-when implementing your transport to reduce response time.
+when implementing your transport to reduce your API response time.
