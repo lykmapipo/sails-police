@@ -16,7 +16,7 @@ describe('Authenticable', function() {
 
 
     it('should be able to encrypt password', function(done) {
-        var password = 'password';
+        var password = faker.internet.password();
         var user = User.new({
             password: password
         });
@@ -37,7 +37,7 @@ describe('Authenticable', function() {
     });
 
     it('should be able to compare password with hash', function(done) {
-        var password = 'password';
+        var password = faker.internet.password();
 
         var user = User.new({
             password: password
@@ -45,22 +45,25 @@ describe('Authenticable', function() {
 
         expect(user.comparePassword).to.be.a("function");
 
-        user
-            .encryptPassword(function(error, authenticable) {
+        async.waterfall(
+            [
+                function(next) {
+                    user.encryptPassword(next)
+                },
+                function(authenticable, next) {
+                    authenticable
+                        .comparePassword(password, next);
+                }
+            ],
+            function(error, authenticable) {
                 if (error) {
                     done(error);
                 } else {
-                    authenticable
-                        .comparePassword('password', function(error, result) {
-                            if (error) {
-                                done(error);
-                            } else {
-                                expect(result).to.not.be.null;
-                                done();
-                            }
-                        });
+                    expect(authenticable).to.not.be.null;
+                    done();
                 }
             });
+
     });
 
 
