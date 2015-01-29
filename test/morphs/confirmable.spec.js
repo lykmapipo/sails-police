@@ -1,5 +1,6 @@
 var expect = require('chai').expect;
 var faker = require('faker');
+var async = require('async');
 
 describe('Confirmable', function() {
 
@@ -50,5 +51,29 @@ describe('Confirmable', function() {
                     done();
                 }
             });
+    });
+
+    it('should be able to confirm registration', function(done) {
+        async.waterfall([
+            function(next) {
+                User
+                    .register({
+                        email: faker.internet.email(),
+                        password: faker.internet.password()
+                    }, next);
+            },
+            function(confirmable, next) {
+                User.confirm(confirmable.confirmationToken, next);
+            }
+        ], function(error, confirmable) {
+            if (error) {
+                console.log(error);
+                done(error);
+            } else {
+                console.log(confirmable);
+                expect(confirmable.confirmedAt).to.not.be.null;
+                done();
+            }
+        });
     });
 });
