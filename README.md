@@ -34,8 +34,7 @@ Its under development no release yet.
 - [x] confirmationToken, confirmationTokenExpiryAt, confirmedAt, confirmationSentAt attributes
 - [x] generateConfirmationToken(callback)
 - [x] sendConfirmation(callback)
-- [ ] resendConfirmation(callback)
-- [ ] confirm(confirmationToken,callback)
+- [ ] confirm(confirmationToken,callback(error,confirmable))
 - [ ] beforeConfirm(confirmable,callback)
 - [ ] afterConfirmable(confirmable,callback)
 
