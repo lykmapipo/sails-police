@@ -23,26 +23,26 @@ before(function(done) {
                 migrate: 'drop'
             },
             hooks: {
-                blueprints: false,
-                controllers: false,
-                cors: false,
-                csrf: false,
+                // blueprints: false,
+                // controllers: false,
+                // cors: false,
+                // csrf: false,
                 grunt: false, //we dont need grunt in test
-                http: false,
-                i18n: false,
+                // http: false,
+                // i18n: false,
                 // logger: false,
                 // moduleloader: false,
                 // orm: false,
-                policies: false,
+                // policies: false,
                 pubsub: false,
-                request: false,
-                responses: false,
+                // request: false,
+                // responses: false,
                 // services: false,
-                session: false,
+                // session: false,
                 sockets: false,
                 // userconfig: false,
                 // userhooks: false,
-                views: false
+                // views: false
             }
         }, function(error, sails) {
             if (error) {
