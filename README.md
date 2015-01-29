@@ -76,8 +76,7 @@ Its under development no release yet.
 - [x] add default console transport
 
 #Trackable
-Provide a means of tacking a authenticated request. It adds the following 
-into the model:
+Provide a means of tracking user signin activities. It extend provided model with the followings:
 
 - `signInCount` : Keeps track of number of count a user have been sign in into you API
 
@@ -90,22 +89,24 @@ into the model:
 
 - `lastSignInIpAddress` : Keeps track of the previous IP address user used to log with into your API
 
-- `track(ipAddress,callback(error,trackable))` : This is instance method, which when called with the IP address, it will update user tracking details and set the provided IP address as the `currentSignInIpAddress`. On successfully call it will return the current model instance with its tracking details updated
+- `track(ipAddress,callback(error,trackable))` : This is model instance method, which when called with the IP address, it will update current tracking details and set the provided IP address as the `currentSignInIpAddress`. On successfully callback will be get invoked and provide error if occur and the current updated model instance.
 
 Example
 ```js
 User
-    .findOneByEmail(email)
+    .findOneByEmail('validEmail')
     .exec(function(error,user){
     	if(error){
 	   		console.log(error);
-	   else{
+	   	}
+	   	else{
 	    	user
 	    		.track('validIpAddress',function(error,trackable){
 				    if(error){
 				    	console.log(error);
-				    }else{
-				    console.log(trackable);
+				    }
+				    else{
+				    	console.log(trackable);
 					}
 	    		});
     	}
