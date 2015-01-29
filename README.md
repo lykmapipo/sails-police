@@ -89,7 +89,7 @@ Provide a means of tracking user signin activities. It extend provided model wit
 
 - `lastSignInIpAddress` : Keeps track of the previous IP address user used to log with into your API
 
-- `track(ipAddress,callback(error,trackable))` : This is model instance method, which when called with the IP address, it will update current tracking details and set the provided IP address as the `currentSignInIpAddress`. On successfully callback will be get invoked and provide error if occur and the current updated model instance.
+- `track(ipAddress,callback(error,trackable))` : This is model instance method, which when called with the IP address, it will update current tracking details and set the provided IP address as the `currentSignInIpAddress`. On successfully tracking, a provided `callback` will be get invoked and provided with error if occur and the current updated model instance.
 
 Example
 ```js
