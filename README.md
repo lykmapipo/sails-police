@@ -76,7 +76,7 @@ Its under development no release yet.
 - [x] add default console transport
 
 #Transport API
-By default sails-police default police is `console.log`. This is because 
+By default sails-police default transport is `console.log`. This is because 
 there are different use case when it came on sending notification. Example 
 you may opt to send you notification through sms, email or any other medium 
 of your choice.
@@ -92,7 +92,9 @@ a function and pass the `type,authentication,done` as it argurments
 
 ##How to implement a transport
 Simple and clear way to register a transport is to call `setTrasport(fn)` of 
-sails-police and pass in your transport function.
+sails-police and pass in your transport `function`. It is recommended to implement 
+all your notification send scenario(s) within that function i.e if you are 
+suppose to send both email and sms just implement them together in that single function.
 
 ```js
 var police = require('sails-police');
