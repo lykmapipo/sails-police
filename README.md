@@ -72,6 +72,48 @@ Its under development no release yet.
 - [ ] track(criteria,callback)
 
 ##Transport (Notification Transport)
-- [ ] setTransport(transport)
-- [ ] add default noop transport
-- [ ] send(type,authentication,callback)
+- [x] setTransport(transport)
+- [x] add default console transport
+
+#Transport API
+By default sails-police default police is `console.log`. This is because 
+there are different use case when it came on sendinf notification. Example 
+you may opt to send you notification through sms, email or any other medium 
+you may like.
+
+Due to that reason sails-police has the method `setTransport` which accept 
+a function and pass the `type,authentication,done` as it argurments
+
+- type : Refer to the type of notifcation to be sent
+- authenticable : Refer to the model instance that you have mixin police morphs
+- done : Is the callback that you must call after finish sending the notification.
+		 By default this callback will update notification send details based on the
+		 usage.
+
+##How to implement a transport
+Simple and clear way to register a transport is to call `setTrasport(fn)` of 
+sails-police and pass in your transport function.
+
+```js
+var police = require('sails-police');
+
+//define your transport
+//you may store this in sails services 
+//and register it on bootstrap.js
+var transport = function(type, authenticable, done) {
+		        console
+		            .log(
+		                'Notification type: %s.\nAuthenticable: %s \n',
+		                type,
+		                JSON.stringify(authenticable)
+		            );
+
+		        done();
+    };
+
+//then set the transport
+police.setTransport(transport);
+```
+##Transport Issues
+It is recommended to use job queue like [kue](https://github.com/learnboost/kue) 
+when implementing your transport to reduce response time.
