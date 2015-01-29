@@ -76,14 +76,41 @@ Its under development no release yet.
 - [x] add default console transport
 
 #Trackable
-Provide a means of tacking a authenticated request. It adds:
+Provide a means of tacking a authenticated request. It adds the following 
+into the model:
 
-- `signInCount` :
-- `currentSignInAt` :
-- `urrentSignInIpAddress` :
-- `astSignInAt` :
-- `lastSignInIpAddress` :
-- `track(ipAddress,)
+- `signInCount` : Keeps track of number of count a user have been sign in into you API
+
+- `currentSignInAt` : Keeps track of the latest time when user signed in into you API
+
+- `currentSignInIpAddress` : Keeps track of the latest IP address a user used to
+	to log with into your API
+
+- `lastSignInAt` : Keeps track of the previous sign in time prior to the current sign in.
+
+- `lastSignInIpAddress` : Keeps track of the previous IP address user used to log with into your API
+
+- `track(ipAddress,callback(error,trackable))` : This is instance method, which when called with the IP address, it will update user tracking details and set the provided IP address as the `currentSignInIpAddress`. On successfully call it will return the current model instance with its tracking details updated
+
+Example
+```js
+User
+    .findOneByEmail(email)
+    .exec(function(error,user){
+    	if(error){
+	   		console.log(error);
+	   else{
+	    	user
+	    		.track('validIpAddress',function(error,trackable){
+				    if(error){
+				    	console.log(error);
+				    }else{
+				    console.log(trackable);
+					}
+	    		});
+    	}
+    });
+``` 
 
 #Transport API
 By default sails-police default transport is `console.log`. This is because 
