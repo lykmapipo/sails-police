@@ -1,7 +1,10 @@
 var expect = require('chai').expect;
 var async = require('async');
+var faker = require('faker');
+var email = faker.internet.email();
 
 describe('Registerable', function() {
+    
     it('should have registerable static flag', function(done) {
         expect(User.registerable).to.be.true;
         done();
@@ -19,17 +22,18 @@ describe('Registerable', function() {
     });
 
     it('should be able to register new registerable', function(done) {
-        var user = {
-            email: 'user@example.com',
-            password: 'password'
+        var credentials = {
+            email: email,
+            password: faker.internet.password()
         }
 
         User
-            .register(user, function(error, registerable) {
+            .register(credentials, function(error, registerable) {
                 if (error) {
                     done(error);
                 } else {
                     expect(registerable.registeredAt).to.not.be.null;
+                    expect(registerable.confirmationSentAt).to.not.be.null;
                     done();
                 }
             });
@@ -41,7 +45,7 @@ describe('Registerable', function() {
                 [
                     function(next) {
                         User
-                            .findOneByEmail('user@example.com')
+                            .findOneByEmail(email)
                             .exec(next);
                     },
                     function(registerable, next) {

@@ -1,6 +1,7 @@
 var expect = require('chai').expect;
 
 describe('Lockable', function() {
+    
     it('should have lockable static flag', function(done) {
         expect(User.lockable).to.be.true;
         done();

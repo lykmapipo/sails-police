@@ -1,6 +1,7 @@
 var expect = require('chai').expect;
 
 describe('Recoverable', function() {
+    
     it('should have recoverable static flag', function(done) {
         expect(User.recoverable).to.be.true;
         done();

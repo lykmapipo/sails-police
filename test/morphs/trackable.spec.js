@@ -1,6 +1,7 @@
 var expect = require('chai').expect;
 
 describe('Trackable', function() {
+    
     it('should have trackable static flag', function(done) {
         expect(User.trackable).to.be.true;
         done();

@@ -33,7 +33,7 @@ describe('Police', function() {
 
         police
             .transport(
-                police.NOTIFICATION_TYPES.REGISTRATION_CONFIRMATION,
+                police.NOTIFICATION_TYPES.REGISTRATION_CONFIRMATON,
                 authenticable,
                 done
             );
