@@ -16,7 +16,7 @@ It composed of the following modules:
 Its under development no release yet.
 
 
-##Authenticable
+##Authenticable TODO
 - [x] email and password attributes
 - [x] encryptPassword(callback(error,authenticable))
 - [x] comparePassword(password,callback)
@@ -30,7 +30,7 @@ Its under development no release yet.
 	- [x] compare password
 	- [ ] if no authenticable found create not found error
 
-##Confirmable
+##Confirmable TODO
 - [x] confirmationToken, confirmationTokenExpiryAt, confirmedAt, confirmationSentAt attributes
 - [x] generateConfirmationToken(callback)
 - [x] sendConfirmation(callback)
@@ -39,7 +39,7 @@ Its under development no release yet.
 - [ ] beforeConfirm(confirmable,callback)
 - [ ] afterConfirmable(confirmable,callback)
 
-##Lockable
+##Lockable TODO
 - [x] failedAttempt, lockedAt, unlockToken, unlockTokenSentAt, unlockTokenExpiryAt attributes
 - [ ] generateLockingToken(lockable,callback)
 - [ ] lock(criteria,callback)
@@ -47,7 +47,7 @@ Its under development no release yet.
 - [ ] beforeLock(lockable,callback)
 - [ ] afterLock(lockable,callback)
 
-##Recoverable
+##Recoverable TODO
 - [x] recoveryToken, recoveryTokenExpiryAt, recoveryTokenSentAt attributes
 - [ ] generateRecoveryToken(recoverable,callback)
 - [ ] sendRecovery(recoverable,callback)
@@ -55,7 +55,7 @@ Its under development no release yet.
 - [ ] beforeRecovery(recoverable,callback)
 - [ ] afterRecovery(recoverable,callback)
 
-##Registerable
+##Registerable TODO
 - [x] registeredAt and unregisteredAt datetime attributes
 - [x] register(subject,callback)
 - [x] unregister(callback)
@@ -65,14 +65,25 @@ Its under development no release yet.
 - [ ] afterUnregister(registerable,done)
 - [ ] generateUnregisterToken(registerable,callback)
 
-##Trackable
+##Trackable TODO
 - [x] signInCount, currentSignInAt, currentSignInIpAddress, 
 		lastSignInAt, lastSignInIpAddress attributes
-- [ ] track(currentIpAddress,callback)
+- [x] track(currentIpAddress,callback(error,trackable))
+- [ ] hook trackable into sails request lifecycle
 
 ##Transport (Notification Transport)
 - [x] setTransport(transport)
 - [x] add default console transport
+
+#Trackable
+Provide a means of tacking a authenticated request. It adds:
+
+- `signInCount` :
+- `currentSignInAt` :
+- `urrentSignInIpAddress` :
+- `astSignInAt` :
+- `lastSignInIpAddress` :
+- `track(ipAddress,)
 
 #Transport API
 By default sails-police default transport is `console.log`. This is because 

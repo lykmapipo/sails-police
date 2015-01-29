@@ -37,7 +37,6 @@ describe('Trackable', function() {
                 if (error) {
                     done(error);
                 } else {
-
                     expect(trackable.currentSignInAt).to.not.be.null;
                     expect(trackable.currentSignInIpAddress).to.not.be.null;
                     expect(trackable.currentSignInIpAddress).to.equal(previousIp);
@@ -53,7 +52,9 @@ describe('Trackable', function() {
             .waterfall(
                 [
                     function(next) {
-                        User.findOneByEmail(email, next)
+                        User
+                            .findOneByEmail(email)
+                            .exec(next);
                     },
                     function(trackable, next) {
                         lastSignInAt = trackable.currentSignInAt;
@@ -78,7 +79,7 @@ describe('Trackable', function() {
                         expect(trackable.lastSignInAt).to.not.be.null;
                         expect(trackable.lastSignInAt.getTime())
                             .to.equal(lastSignInAt.getTime());
-                            
+
                         expect(trackable.lastSignInIpAddress).to.not.be.null;
                         expect(trackable.lastSignInIpAddress).to.equal(previousIp);
 
