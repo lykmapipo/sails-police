@@ -51,7 +51,8 @@ Its under development no release yet.
 - [x] recoveryToken, recoveryTokenExpiryAt, recoveryTokenSentAt attributes
 - [x] generateRecoveryToken(callback)
 - [x] sendRecovery(recoverable,callback)
-- [ ] recover(recoveryToken,callback)
+- [x] recover(recoveryToken,callback)
+- [ ] hook recoverable into sails request lifecycle
 
 ##Registerable TODO
 - [x] registeredAt and unregisteredAt datetime attributes

@@ -54,6 +54,44 @@ describe('Recoverable', function() {
     });
 
     it('should be able to recover a password', function(done) {
-        done();
+        var previousPassord;
+
+        async
+            .waterfall(
+                [
+                    function(next) {
+                        User
+                            .register({
+                                email: faker.internet.email(),
+                                password: faker.internet.password()
+                            }, next);
+                    },
+                    function(recoverable, next) {
+                        recoverable.generateRecoveryToken(next);
+                    },
+                    function(recoverable, next) {
+                        recoverable.sendRecovery(next);
+                    },
+                    function(recoverable, next) {
+                        previousPassord = recoverable.password;
+
+                        User
+                            .recover(
+                                recoverable.recoveryToken,
+                                faker.internet.password(),
+                                next
+                            );
+                    }
+                ],
+                function(error, recoverable) {
+                    if (error) {
+                        done(error);
+                    } else {
+                        expect(recoverable.password).to.not.be.null;
+                        expect(recoverable.password).to.not.equal(previousPassord);
+                        expect(recoverable.recoveredAt).to.not.be.null;
+                        done();
+                    }
+                });
     });
 });
