@@ -29,14 +29,13 @@ Its under development no release yet.
 	- [ ] check fail attempts
 	- [x] compare password
 	- [ ] if no authenticable found create not found error
+- [ ] hook authenticate in sails request lifecycle
 
 ##Confirmable TODO
 - [x] confirmationToken, confirmationTokenExpiryAt, confirmedAt, confirmationSentAt attributes
 - [x] generateConfirmationToken(callback)
 - [x] sendConfirmation(callback)
 - [x] confirm(confirmationToken,callback(error,confirmable))
-- [ ] beforeConfirm(confirmable,callback)
-- [ ] afterConfirmable(confirmable,callback)
 - [ ] hook confirmable with sails http request cycle
 
 ##Lockable TODO
