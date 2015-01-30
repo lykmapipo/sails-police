@@ -4,11 +4,16 @@ Simple and flexible authentication workflows for sails inspired by [devise](http
 
 It composed of the following modules:
 
-* [Authenticable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/authenticable.js): encrypts and stores a password in the database to validate the authenticity of a user while signing in. The authentication can be done through POST request.
+* [Authenticable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/authenticable.js): encrypts and stores a password in the database to validate the authenticity of a user while signing in. 
+
 * [Confirmable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/confirmable.js): sends emails with confirmation instructions and verifies whether an account is already confirmed during sign in.
+
 * [Lockable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/lockable.js): locks an account after a specified number of failed sign-in attempts. Can unlock via email or after a specified time period.
+
 * [Recoverable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/recoverable.js): resets the user password and sends reset instructions.
+
 * [Registerable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/registerable.js): handles signing up users through a registration process, also allowing them to edit and destroy their account.
+
 * [Trackable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/trackable.js): tracks sign in count, timestamps and IP address.
 
 
@@ -44,6 +49,7 @@ Its under development no release yet.
 - [ ] sendLock(callback)
 - [ ] lock(callback)
 - [ ] unlock(token,callback)
+- [ ] hook lockable into sails request lifecycle
 
 ##Recoverable TODO
 - [x] recoveryToken, recoveryTokenExpiryAt, recoveryTokenSentAt attributes
