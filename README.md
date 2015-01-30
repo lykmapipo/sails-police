@@ -45,7 +45,7 @@ Its under development no release yet.
 
 ##Lockable TODO
 - [x] failedAttempt, lockedAt, unlockToken, unlockTokenSentAt, unlockTokenExpiryAt attributes
-- [ ] generateLockingToken(lockable,callback)
+- [x] generateLockToken(lockable,callback)
 - [ ] sendLock(callback)
 - [ ] lock(callback)
 - [ ] unlock(token,callback)
