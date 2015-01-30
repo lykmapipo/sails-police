@@ -48,7 +48,7 @@ Its under development no release yet.
 - [x] generateLockToken(lockable,callback)
 - [x] sendLock(callback)
 - [ ] lock(callback)
-- [ ] unlock(token,callback)
+- [x] unlock(token,callback)
 - [ ] hook lockable into sails request lifecycle
 
 ##Recoverable TODO

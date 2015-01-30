@@ -1,5 +1,6 @@
 var expect = require('chai').expect;
 var faker = require('faker');
+var async = require('async');
 
 describe('Lockable', function() {
 
@@ -36,7 +37,7 @@ describe('Lockable', function() {
     });
 
     it('should be able to send unlock instructions', function(done) {
-       var user = User.new({
+        var user = User.new({
             email: faker.internet.email(),
             password: faker.internet.password()
         });
@@ -59,6 +60,38 @@ describe('Lockable', function() {
     });
 
     it('should have unlock ability', function(done) {
-        done();
+
+        async
+            .waterfall(
+                [
+                    function(next) {
+                        User
+                            .register({
+                                email: faker.internet.email(),
+                                password: faker.internet.password()
+                            }, next);
+                    },
+                    function(lockable, next) {
+                        lockable.generateUnlockToken(next);
+                    },
+                    function(lockable, next) {
+                        lockable.sendLock(next);
+                    },
+                    function(lockable, next) {
+                        User
+                            .unlock(
+                                lockable.unlockToken,
+                                next
+                            );
+                    }
+                ],
+                function(error, lockable) {
+                    if (error) {
+                        done(error);
+                    } else {
+                        expect(lockable.unlockedAt).to.not.be.null;
+                        done();
+                    }
+                });
     });
 });
