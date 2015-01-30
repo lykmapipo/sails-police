@@ -34,9 +34,10 @@ Its under development no release yet.
 - [x] confirmationToken, confirmationTokenExpiryAt, confirmedAt, confirmationSentAt attributes
 - [x] generateConfirmationToken(callback)
 - [x] sendConfirmation(callback)
-- [ ] confirm(confirmationToken,callback(error,confirmable))
+- [x] confirm(confirmationToken,callback(error,confirmable))
 - [ ] beforeConfirm(confirmable,callback)
 - [ ] afterConfirmable(confirmable,callback)
+- [ ] hook confirmable with sails http request cycle
 
 ##Lockable TODO
 - [x] failedAttempt, lockedAt, unlockToken, unlockTokenSentAt, unlockTokenExpiryAt attributes
@@ -73,6 +74,66 @@ Its under development no release yet.
 ##Transport (Notification Transport)
 - [x] setTransport(transport)
 - [x] add default console transport
+
+#Confirmable
+Provide a means to confirm user registration. It extend model with the following:
+
+- `confirmationToken` : An attrbute which used to store current user confirmation token.
+
+- `confirmationTokenExpiryAt` : An attribute that Kkeep tracks of when the confirmation token will expiry. Beyond that new confirmation token will be generated and notification will be send.
+
+- `confirmedAt` : An attribute that keep tracks of when user confirm his/her account.
+
+- `confirmationSentAt` : An attribute that keep tracks of when confirmation request is sent.
+
+- `generateConfirmationToken(callback(error,confirmable))` : This instance method will generate confirmation token and confirmation token expiry time. It also update instance and persist it to database before return it.
+
+Example
+```js
+var user = User.new();
+
+user
+    .generateConfirmationToken(function(error, confirmable) {
+        if (error) {
+            console.log(error)
+        } else {
+           console.log(confirmable)
+        }
+    })
+```
+
+- `sendConfirmation(callback(error,confirmable))` : This instance method utilize the configured transport and send the confirmation notification. On successfully send it will uPdate `confirmationSentAt` instance attribute with the current time stamp and persist the instance before return it.
+
+Example
+```js
+ var user = User.new({
+            email: faker.internet.email(),
+            password: faker.internet.password()
+        });
+
+user
+    .sendConfirmation(function(error, confirmable) {
+        if (error) {
+            consle.log(error);
+        } else {
+           consle.log(confirmable);
+        }
+    });
+```
+
+- `confirm(confirmationToken, callback(error,confirmable))` : This static/class method taken the given `confirmationToken` and confirm any un confirmed registration found with that confirmation token. It will update `confirmedAt` instance attribute and persist the instance before return it.
+
+Example
+```js
+ User
+    .confirm('confirmationToken',function(error, confirmable) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log(confirmable);
+                }
+       		});
+```
 
 #Trackable
 Provide a means of tracking user signin activities. It extend provided model with the followings:
@@ -113,7 +174,7 @@ User
 ``` 
 
 #Transport API
-By default sails-police default transport is `console.log`. This is because 
+By default sails-police default transport is `noop`. This is because 
 there are different use case when it came on sending notification. Example 
 you may opt to send you notification through sms, email or any other medium 
 of your choice.

@@ -37,13 +37,6 @@ function Police() {
 
     //add default console notification transport
     this.transport = function(type, authenticable, done) {
-        console
-            .log(
-                'Notification type: %s.\nAuthenticable: %s \n',
-                type,
-                JSON.stringify(authenticable)
-            );
-
         done();
     }
 

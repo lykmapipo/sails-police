@@ -54,7 +54,9 @@ describe('Trackable', function() {
                     function(next) {
                         User
                             .findOneByEmail(email)
-                            .exec(next);
+                            .exec(function(error, trackable) {
+                                next(error, trackable);
+                            });
                     },
                     function(trackable, next) {
                         lastSignInAt = trackable.currentSignInAt;
