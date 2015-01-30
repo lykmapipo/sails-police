@@ -49,21 +49,15 @@ Its under development no release yet.
 
 ##Recoverable TODO
 - [x] recoveryToken, recoveryTokenExpiryAt, recoveryTokenSentAt attributes
-- [ ] generateRecoveryToken(recoverable,callback)
-- [ ] sendRecovery(recoverable,callback)
+- [x] generateRecoveryToken(callback)
+- [x] sendRecovery(recoverable,callback)
 - [ ] recover(recoveryToken,callback)
-- [ ] beforeRecovery(recoverable,callback)
-- [ ] afterRecovery(recoverable,callback)
 
 ##Registerable TODO
 - [x] registeredAt and unregisteredAt datetime attributes
 - [x] register(subject,callback)
 - [x] unregister(callback)
-- [ ] beforeRegister(registerable,done)
-- [ ] afterRegister(registerable,done)
-- [ ] beforeUnregister(registerable,done)
-- [ ] afterUnregister(registerable,done)
-- [ ] generateUnregisterToken(registerable,callback)
+- [ ] hook register and unreister in sails request lifecycle
 
 ##Trackable TODO
 - [x] signInCount, currentSignInAt, currentSignInIpAddress, 
@@ -80,7 +74,7 @@ Provide a means to confirm user registration. It extend model with the following
 
 - `confirmationToken` : An attrbute which used to store current user confirmation token.
 
-- `confirmationTokenExpiryAt` : An attribute that Kkeep tracks of when the confirmation token will expiry. Beyond that new confirmation token will be generated and notification will be send.
+- `confirmationTokenExpiryAt` : An attribute that keep tracks of when the confirmation token will expiry. Beyond that new confirmation token will be generated and notification will be send.
 
 - `confirmedAt` : An attribute that keep tracks of when user confirm his/her account.
 
@@ -102,7 +96,7 @@ user
     })
 ```
 
-- `sendConfirmation(callback(error,confirmable))` : This instance method utilize the configured transport and send the confirmation notification. On successfully send it will uPdate `confirmationSentAt` instance attribute with the current time stamp and persist the instance before return it.
+- `sendConfirmation(callback(error,confirmable))` : This instance method utilize the configured transport and send the confirmation notification. On successfully send it will update `confirmationSentAt` instance attribute with the current time stamp and persist the instance before return it.
 
 Example
 ```js
