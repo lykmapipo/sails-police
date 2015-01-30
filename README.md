@@ -42,15 +42,14 @@ Its under development no release yet.
 ##Lockable TODO
 - [x] failedAttempt, lockedAt, unlockToken, unlockTokenSentAt, unlockTokenExpiryAt attributes
 - [ ] generateLockingToken(lockable,callback)
-- [ ] lock(criteria,callback)
+- [ ] sendLock(callback)
+- [ ] lock(callback)
 - [ ] unlock(token,callback)
-- [ ] beforeLock(lockable,callback)
-- [ ] afterLock(lockable,callback)
 
 ##Recoverable TODO
 - [x] recoveryToken, recoveryTokenExpiryAt, recoveryTokenSentAt attributes
 - [x] generateRecoveryToken(callback)
-- [x] sendRecovery(recoverable,callback)
+- [x] sendRecovery(callback)
 - [x] recover(recoveryToken,callback)
 - [ ] hook recoverable into sails request lifecycle
 
