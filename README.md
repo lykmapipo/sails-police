@@ -46,7 +46,7 @@ Its under development no release yet.
 ##Lockable TODO
 - [x] failedAttempt, lockedAt, unlockToken, unlockTokenSentAt, unlockTokenExpiryAt attributes
 - [x] generateLockToken(lockable,callback)
-- [ ] sendLock(callback)
+- [x] sendLock(callback)
 - [ ] lock(callback)
 - [ ] unlock(token,callback)
 - [ ] hook lockable into sails request lifecycle

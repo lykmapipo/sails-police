@@ -1,4 +1,5 @@
 var expect = require('chai').expect;
+var faker = require('faker');
 
 describe('Lockable', function() {
 
@@ -35,7 +36,22 @@ describe('Lockable', function() {
     });
 
     it('should be able to send unlock instructions', function(done) {
-        done();
+       var user = User.new({
+            email: faker.internet.email(),
+            password: faker.internet.password()
+        });
+
+        expect(user.sendLock).to.be.a('function');
+
+        user
+            .sendLock(function(error, lockable) {
+                if (error) {
+                    done(error);
+                } else {
+                    expect(lockable.unlockTokenSentAt).to.not.be.null;
+                    done();
+                }
+            });
     });
 
     it('should have lock ability', function(done) {
