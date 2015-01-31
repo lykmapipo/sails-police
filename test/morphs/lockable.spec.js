@@ -56,7 +56,23 @@ describe('Lockable', function() {
     });
 
     it('should have lock ability', function(done) {
-        done();
+        var user = User.new({
+            email: faker.internet.email(),
+            password: faker.internet.password(),
+            failedAttempt: 5
+        });
+
+        expect(user.lock).to.be.a('function');
+
+        user
+            .lock(function(error, lockable) {
+                if (error) {
+                    done(error);
+                } else {
+                    expect(lockable.lockedAt).to.not.be.null;
+                    done();
+                }
+            });
     });
 
     it('should have unlock ability', function(done) {
@@ -90,6 +106,7 @@ describe('Lockable', function() {
                         done(error);
                     } else {
                         expect(lockable.unlockedAt).to.not.be.null;
+                        expect(lockable.failedAttempt).to.equal(0)
                         done();
                     }
                 });
