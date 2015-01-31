@@ -3,7 +3,7 @@ var faker = require('faker');
 var async = require('async');
 
 describe('Authenticable', function() {
-    
+
     it('should have authenticable static flag', function(done) {
         expect(User.authenticable).to.be.true;
         done();

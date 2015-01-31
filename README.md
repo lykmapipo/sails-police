@@ -47,7 +47,7 @@ Its under development no release yet.
 - [x] failedAttempt, lockedAt, unlockToken, unlockTokenSentAt, unlockTokenExpiryAt attributes
 - [x] generateLockToken(lockable,callback)
 - [x] sendLock(callback)
-- [ ] lock(callback)
+- [x] lock(callback)
 - [x] unlock(token,callback)
 - [ ] hook lockable into sails request lifecycle
 
@@ -73,6 +73,11 @@ Its under development no release yet.
 ##Transport (Notification Transport)
 - [x] setTransport(transport)
 - [x] add default console transport
+
+##Validations & Error messages TODO
+- [] allow custom validation error messages defenitions
+- [] custome error classes
+
 
 #Confirmable
 Provide a means to confirm user registration. It extend model with the following:
