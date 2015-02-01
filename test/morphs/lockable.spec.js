@@ -10,7 +10,7 @@ describe('Lockable', function() {
     });
 
     it('should do have lockable attributes', function(done) {
-        expect(User._attributes.failedAttempt).to.exist;
+        expect(User._attributes.failedAttempts).to.exist;
         expect(User._attributes.lockedAt).to.exist;
         expect(User._attributes.unlockedAt).to.exist;
         expect(User._attributes.unlockToken).to.exist;
@@ -106,7 +106,7 @@ describe('Lockable', function() {
                         done(error);
                     } else {
                         expect(lockable.unlockedAt).to.not.be.null;
-                        expect(lockable.failedAttempt).to.equal(0)
+                        expect(lockable.failedAttempts).to.equal(0)
                         done();
                     }
                 });

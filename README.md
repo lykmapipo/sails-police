@@ -73,33 +73,18 @@ hash to see if they match.
 Example
 
 ```js
-var async = require('async');
 var faker = require('faker');
 var password = faker.internet.password();
 
-var user = User.new({
-    password: password
+//after having model instance
+user
+    .comparePassword(password,function(error, authenticable) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log(authenticable);
+        }
 });
-
-async
-    .waterfall(
-        [
-            function(next) {
-                user
-                    .encryptPassword(next);
-            },
-            function(authenticable, next) {
-                authenticable
-                    .comparePassword(password, next);
-            }
-        ],
-        function(error, authenticable) {
-            if (error) {
-                console.log(error);
-            } else {
-                console.log(authenticable);
-            }
-        });
 ```
 
 - `authenticate(credentials, callback(error,authenticable))` : A model 
@@ -138,27 +123,19 @@ User
 ```
 
 ## [Confirmable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/confirmable.js)
-Provide a means to confirm user registration. 
-It extend model with the following:
+Provide a means to confirm user registration. It extend model with the following:
 
-- `confirmationToken` : An attrbute which used to store current user 
+- `confirmationToken` : An attribute which used to store current user 
 confirmation token.
 
 - `confirmationTokenExpiryAt` : An attribute that keep tracks of when 
-the confirmation token will expiry. 
-Beyond that new confirmation token will be generated and notification 
-will be send.
+the confirmation token will expiry. Beyond that, new confirmation token will be generated and notification will be send.
 
-- `confirmedAt` : An attribute that keep tracks of when user confirm 
-his/her account.
+- `confirmedAt` : An attribute that keep tracks of when user account is confrimed.
 
-- `confirmationSentAt` : An attribute that keep tracks of when 
-confirmation request is sent.
+- `confirmationSentAt` : An attribute that keep tracks of when confirmation request is sent.
 
-- `generateConfirmationToken(callback(error,confirmable))` : This 
-instance method will generate confirmation token and confirmation 
-token expiry time. It also update instance and persist it to database 
-before return it.
+- `generateConfirmationToken(callback(error,confirmable))` : This instance method will generate `confirmationToken` and `confirmationTokenExpiryAt` time. It also update and persist an instance before return it.
 
 Example
 ```js
@@ -167,18 +144,15 @@ var user = User.new();
 user
     .generateConfirmationToken(function(error, confirmable) {
         if (error) {
-            console.log(error)
+            console.log(error);
         } else {
-           console.log(confirmable)
+           console.log(confirmable);
         }
     })
 ```
 
-- `sendConfirmation(callback(error,confirmable))` : This instance 
-method utilize the configured transport and send the confirmation 
-notification. On successfully send it will update `confirmationSentAt` 
-instance attribute with the current time stamp and persist the instance 
-before return it.
+- `sendConfirmation(callback(error,confirmable))` : This instance method utilize the configured transport and send the confirmation notification. On successfully send it will update `confirmationSentAt` instance attribute with the current time stamp and persist the instance before return it.
+####Note: send confirmation use the transport api provide on [setTranport](#How to implement a transport) configuration.
 
 Example
 ```js
@@ -216,7 +190,51 @@ Example
 ```
 
 ## [Lockable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/lockable.js)
-locks an account after a specified number of failed sign-in attempts. Can unlock account through unlock instructions sent.
+Provide a mean of locks an account after a specified number of failed sign-in attempts(Defaults to 5 attempts). Can unlock account through unlock instructions sent. It extend the model with the following:
+
+- `failedAttempt` : 
+- `lockedAt` : 
+- `unlockedAt` :
+- `unlockToken` :
+- `unlockTokenSentAt` :
+- `unlockTokenExpiryAt` :
+- `generateUnlockToken(callback(error,lockable))` : 
+- `sendLock(callback(error,lockable))` : 
+- `lock(callback(error,lockable))` : An instance method that used to lock an account. when called it will check if the number of `failedAttempts` is greater that the configured maximum login attempts, if so the account will get locked by setting `lockedAt` to the current timestamp of `lock` invocation. Instance will get persisted before returned otherwise corresponding errors will get returned.
+
+Example
+```js
+var faker = require('faker');
+var user = User.new({
+            email: faker.internet.email(),
+            password: faker.internet.password(),
+            failedAttempt: 5
+        });
+
+user
+    .lock(function(error, lockable) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log(lockable);
+        }
+    });
+```
+
+- `unlock(unlockToken, callback(error,lockable))` : A model static method which unlock a locked account with the provided `unlockToken`. If the token expired the new `unlockToken` will get generated. If token is valid, locked account will get unlocked and `unlockedAt` attribute will be set to current timestamp and `failedAttempts` will get set to 0. Instance unlcoked will get persisted before returned otherwise corrensponding errors will get returned.
+
+Example
+```js
+User
+    .unlock(unlockToken,
+       function(error, lockable) {
+            if (error) {
+                console.log(error);
+            } else {
+                  console.log(lockable);
+            }
+    });
+```
 
 ## [Recoverable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/recoverable.js)
 resets the user password and sends reset instructions.
