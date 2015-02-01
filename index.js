@@ -1,5 +1,4 @@
 /** @module police */
-
 var Signup = require('./lib/signup.js');
 var Login = require('./lib/login.js');
 var Verify = require('./lib/verify_email.js');
@@ -42,68 +41,39 @@ function Police() {
 
 };
 
+/**
+ * @descriptio Mixin whole of police morphs into the given model
+ * @param  {Object} model a sails model to mix in police morphs
+ * @return {Object}       a sails model mixed with police morphs
+ */
+Police.prototype.mixin = function(model) {
+    //mixin authenticable
+    model = new Authenticable(model);
+
+    //mixin confrimable
+    model = new Confirmable(model);
+
+    //mixin lockable
+    model = new Lockable(model);
+
+    //mixin recoverable
+    model = new Recoverable(model);
+
+    //mixin registerable
+    model = new Registerable(model);
+
+    //mixin trackble
+    model = new Trackable(model);
+
+    return model;
+};
+
 Police.prototype.setTransport = function(transport) {
     //we currently support functional transport
     if (!_.isFunction(transport)) {
         throw new Error('Unsupported transport instance type')
     }
     this.transport = transport;
-};
-
-/**
- * @description morph a model to be authenticable
- * @param  {Object} model a sails|waterline model definition
- * @return {Object} a sails model morphed with authentication ability
- */
-Police.prototype.morphAuthenticable = function(model) {
-    return new Authenticable(model);
-};
-
-
-/**
- * @description morph a model to be confirmable
- * @param  {Object} model a sails|waterline model definition
- * @return {Object} a sails model morphed with confirmation ability
- */
-Police.prototype.morphConfirmable = function(model) {
-    return new Confirmable(model);
-};
-
-
-/**
- * @description morph a model to be lockable
- * @param  {Object} model a sails|waterline model definition
- * @return {Object} a sails model morphed with locking ability
- */
-Police.prototype.morphLockable = function(model) {
-    return new Lockable(model);
-};
-
-/**
- * @description morph a model to be recorable
- * @param  {Object} model a sails|waterline model definition
- * @return {Object} a sails model morphed with authentication recovery ability
- */
-Police.prototype.morphRecoverable = function(model) {
-    return new Recoverable(model);
-};
-
-/**
- * @description morph a model to be registerable
- * @param  {Object} model a sails|waterline model definition
- * @return {Object} a sails model morphed with authentication registration ability
- */
-Police.prototype.morphRegisterable = function(model) {
-    return new Registerable(model);
-};
-
-/**
- * @description morph a model to be trackable
- * @param  {Object} model a sails|waterline model definition
- * @return {Object} a sails model morphed with authentication track ability
- */
-Police.prototype.morphTrackable = function(model) {
-    return new Trackable(model);
 };
 
 

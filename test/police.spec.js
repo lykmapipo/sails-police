@@ -15,11 +15,11 @@ describe('Police', function() {
             PASSWORD_RECOVERY_CONFIRMATON: 'Password recovery confirmation',
             PASSWORD_RECOVERY_CONFIRMATON_RESEND: 'Password recovery confirmation resend'
         });
-        
+
         done();
     });
 
-    it('should have a default console notification transport', function(done) {
+    it('should have a default noop notification transport', function(done) {
         expect(police.transport).to.exist;
         expect(police).to.respondTo('transport');
         done();
@@ -38,6 +38,21 @@ describe('Police', function() {
                 done
             );
 
+    });
+
+    it('should be able to mixin its morphs to a given model', function(done) {
+        var User = {}
+
+        police.mixin(User);
+
+        expect(User.authenticable).to.be.true;
+        expect(User.confirmable).to.be.true;
+        expect(User.lockable).to.be.true;
+        expect(User.recoverable).to.be.true;
+        expect(User.registerable).to.be.true;
+        expect(User.trackable).to.be.true;
+
+        done();
     });
 
 });
