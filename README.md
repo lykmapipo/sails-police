@@ -381,5 +381,5 @@ lastSignInAt, lastSignInIpAddress attributes
 - [x] add default console transport
 
 ## Validations & Error messages TODO
-- [] allow custom validation error messages defenitions
-- [] custome error classes
+- [ ] allow custom validation error messages defenitions
+- [ ] custome error classes
