@@ -41,7 +41,7 @@ It lays down the infrastructure for authenticating a user in `sails-police` appl
 - `email` : An attribute used to store user email address. `sails-police` 
 opt to use email address but in future we will add support to custom attribute.
 
-- `password` : An attribute which is used to store user pasword hash.
+- `password` : An attribute which is used to store user password hash.
 
 - `encryptPassword(callback(error,authenticable))` : An instance method 
 which encrypt the current model instance password using [bcryptjs](https://github.com/dcodeIO/bcrypt.js).
@@ -192,13 +192,13 @@ Example
 ```
 
 ## [Lockable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/lockable.js)
-Provide a mean of locks an account after a specified number of failed sign-in attempts(Defaults to 5 attempts). Can unlock account through unlock instructions sent. It extend the model with the following:
+Provide a means of locking an account after a specified number of failed sign-in attempts `(defaults to 5 attempts)`. Can unlock account through unlock instructions sent. It extend the model with the following:
 
-- `failedAttempt` : An attribute which keep track of failed login attempts.
+- `failedAttempt` : An attribute which keeps track of failed login attempts.
 
-- `lockedAt` : An attribute which keep track of when account is locked.
+- `lockedAt` : An attribute which keeps track of when account is locked.
 
-- `unlockedAt` : An attribute which keep track of when and account is unlocked.
+- `unlockedAt` : An attribute which keeps track of when and account is unlocked.
 
 - `unlockToken` : An attribute which store the current unlock token of the locked account.
 
@@ -206,7 +206,7 @@ Provide a mean of locks an account after a specified number of failed sign-in at
 
 - `unlockTokenExpiryAt` : An attribute which keep track of `unlockToken` expiration. If `unlockToken` is expired new will get generated and set.
 
-- `generateUnlockToken(callback(error,lockable))` : An instance method that generate `unlockToken` an `unlockTokenExpiryAt`. Instance willl get persisted before returned otherwise corresponding errors will get returned.
+- `generateUnlockToken(callback(error,lockable))` : An instance method that generate `unlockToken` and `unlockTokenExpiryAt`. Instance will get persisted before returned otherwise corresponding errors will get returned.
 
 Example
 ```js
@@ -222,7 +222,7 @@ user
 });
 ```
  
-- `sendLock(callback(error,lockable))` : An instance method which send account locked notification to the owner. It will set `unlockTokenSentAt` to track when the lock notification is sent. Instnce will get update before returned otherwise corresponding errors will get returned.
+- `sendLock(callback(error,lockable))` : An instance method which send account locked notification to the owner. It will set `unlockTokenSentAt` to track when the lock notification is sent. Instance will get update before returned otherwise corresponding errors will get returned.
 
 Example
 ```js
