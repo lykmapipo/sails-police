@@ -10,12 +10,12 @@ $ npm install sails-police
 ```
 
 ## Usage
-sails-police expose a single `mixin` function that accept a `model` 
-and return a `extended model` with all sails-police `morphs` applied.
+`sails-police` expose a single `mixin` function that accept a `model` 
+and return a `extended model` with all `sails-police morphs` applied.
 
-Before hand you have to choose a model that will be used for sails-police, 
-which is `User` most of the time. After choosing the sails-police model 
-your have to mix sails-police into it. 
+Before hand, you have to choose a model that will be used for `sails-police`, 
+which is `User` most of the time. After choosing the `sails-police` model 
+your have to mix `sails-police` into it. 
 
 ```js
 //require sails-police
@@ -32,29 +32,17 @@ module.exports = User;
 
 It composed of the following modules:
 
-* [Authenticable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/authenticable.js): encrypts and stores a password in the database to validate the authenticity of a user while signing in. 
-
-* [Confirmable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/confirmable.js): sends emails with confirmation instructions and verifies whether an account is already confirmed during sign in.
-
-* [Lockable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/lockable.js): locks an account after a specified number of failed sign-in attempts. Can unlock account through unlock instructions sent.
-
-* [Recoverable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/recoverable.js): resets the user password and sends reset instructions.
-
-* [Registerable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/registerable.js): handles signing up users through a registration process, also allowing them to edit and destroy their account.
-
-* [Trackable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/trackable.js): tracks sign in count, timestamps and IP address.
 
 ## [Authenticable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/authenticable.js)
-It lays down the infrastructure for authenticating a user.
-It extend model with the following:
+It lays down the infrastructure for authenticating a user in `sails-police` application. It extend model supplied to it with the following:
 
-- `email` : An attribute used to store user email address. sails-police 
+- `email` : An attribute used to store user email address. `sails-police` 
 opt to use email address but in future we will add support to custom attribute.
 
 - `password` : An attribute which is used to store user pasword hash.
 
 - `encryptPassword(callback(error,authenticable))` : An instance method 
-which encrypt the current instance password using [bcryptjs](https://github.com/dcodeIO/bcrypt.js).
+which encrypt the current model instance password using [bcryptjs](https://github.com/dcodeIO/bcrypt.js).
 
 Example
 
@@ -125,7 +113,7 @@ var credentials = {
         };
 ```
 where `email` is valid email and `password` is valid password of 
-already registered user.
+already registered user. It will then authenticate the given credentials. If they are valid credential a user with the supplied credentials will be returned otherwise corresponding errors will be returned.
 
 Example
 
@@ -149,7 +137,7 @@ User
     });
 ```
 
-## Confirmable
+## [Confirmable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/confirmable.js)
 Provide a means to confirm user registration. 
 It extend model with the following:
 
@@ -227,7 +215,16 @@ Example
        		});
 ```
 
-## Trackable
+## [Lockable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/lockable.js)
+locks an account after a specified number of failed sign-in attempts. Can unlock account through unlock instructions sent.
+
+## [Recoverable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/recoverable.js)
+resets the user password and sends reset instructions.
+
+## [Registerable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/registerable.js)
+handles signing up users through a registration process, also allowing them to edit and destroy their account.
+
+## [Trackable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/trackable.js)
 Provide a means of tracking user signin activities. It extend provided 
 model with the followings:
 
