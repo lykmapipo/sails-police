@@ -30,9 +30,10 @@ police.mixin(User);
 module.exports = User;
 ```
 
-## Modules
+Modules
+========
 
-### [Authenticable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/authenticable.js)
+## [Authenticable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/authenticable.js)
 It lays down the infrastructure for authenticating a user in `sails-police` application. It extend model supplied to it with the following:
 
 - `email` : An attribute used to store user email address. `sails-police` 
@@ -136,7 +137,7 @@ User
     });
 ```
 
-### [Confirmable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/confirmable.js)
+## [Confirmable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/confirmable.js)
 Provide a means to confirm user registration. 
 It extend model with the following:
 
@@ -214,13 +215,13 @@ Example
        		});
 ```
 
-### [Lockable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/lockable.js)
+## [Lockable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/lockable.js)
 locks an account after a specified number of failed sign-in attempts. Can unlock account through unlock instructions sent.
 
-### [Recoverable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/recoverable.js)
+## [Recoverable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/recoverable.js)
 resets the user password and sends reset instructions.
 
-### [Registerable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/registerable.js)
+## [Registerable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/registerable.js)
 handles signing up users through a registration process, also allowing them to edit and destroy their account.
 
 ## [Trackable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/trackable.js)
@@ -271,7 +272,7 @@ User
     });
 ``` 
 
-### Transport API
+## Transport API
 By default sails-police default transport is `noop`. This is because 
 there are different use case when it came on sending notification. Example 
 you may opt to send you notification through sms, email or any other medium 
@@ -288,7 +289,7 @@ police morphs
 the notification. By default this callback will update notification 
 send details based on the usage.
 
-#### How to implement a transport
+## How to implement a transport
 Simple and clear way to register a transport is to call `setTrasport(fn)` of 
 sails-police and pass in your transport `function`. It is recommended to implement 
 all your notification send scenario(s) within that function i.e if you are 
@@ -314,14 +315,14 @@ var transport = function(type, authenticable, done) {
 //then set the transport
 police.setTransport(transport);
 ```
-#### Transport Issues
+### Transport Issues
 It is recommended to use job queue like [kue](https://github.com/learnboost/kue) 
 when implementing your transport to reduce your API response time.
 
 
 # TODO'S
 
-#### Authenticable
+## Authenticable
 - [x] email and password attributes
 - [x] encryptPassword(callback(error,authenticable))
 - [x] comparePassword(password,callback)
@@ -336,7 +337,7 @@ when implementing your transport to reduce your API response time.
 	- [ ] if no authenticable found create not found error
 - [ ] hook authenticate in sails request lifecycle
 
-#### Confirmable
+## Confirmable
 - [x] confirmationToken, confirmationTokenExpiryAt, confirmedAt, 
 confirmationSentAt attributes
 
@@ -345,7 +346,7 @@ confirmationSentAt attributes
 - [x] confirm(confirmationToken,callback(error,confirmable))
 - [ ] hook confirmable with sails http request cycle
 
-#### Lockable
+## Lockable
 - [x] failedAttempt, lockedAt, unlockToken, unlockTokenSentAt, 
 unlockTokenExpiryAt attributes
 
@@ -355,29 +356,29 @@ unlockTokenExpiryAt attributes
 - [x] unlock(token,callback)
 - [ ] hook lockable into sails request lifecycle
 
-#### Recoverable
+## Recoverable
 - [x] recoveryToken, recoveryTokenExpiryAt, recoveryTokenSentAt attributes
 - [x] generateRecoveryToken(callback)
 - [x] sendRecovery(callback)
 - [x] recover(recoveryToken,callback)
 - [ ] hook recoverable into sails request lifecycle
 
-#### Registerable
+## Registerable
 - [x] registeredAt and unregisteredAt datetime attributes
 - [x] register(subject,callback)
 - [x] unregister(callback)
 - [ ] hook register and unreister in sails request lifecycle
 
-#### Trackable
+## Trackable
 - [x] signInCount, currentSignInAt, currentSignInIpAddress, 
 lastSignInAt, lastSignInIpAddress attributes
 - [x] track(currentIpAddress,callback(error,trackable))
 - [ ] hook trackable into sails request lifecycle
 
-#### Transport (Notification Transport)
+## Transport (Notification Transport)
 - [x] setTransport(transport)
 - [x] add default console transport
 
-#### Validations & Error messages
+## Validations & Error messages
 - [ ] allow custom validation error messages defenitions
 - [ ] custome error classes
