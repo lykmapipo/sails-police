@@ -1,5 +1,7 @@
 sails-police(development)
 =========================
+[![Build Status](https://travis-ci.org/lykmapipo/sails-police.svg?branch=master)](https://travis-ci.org/lykmapipo/sails-police)
+
 Simple and flexible authentication workflows for sails inspired by 
 [devise](https://github.com/plataformatec/devise) and [passportjs](https://github.com/jaredhanson/passport).
 
