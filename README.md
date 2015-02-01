@@ -282,7 +282,46 @@ User
 resets the user password and sends reset instructions.
 
 ## [Registerable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/registerable.js)
-handles signing up users through a registration process, also allowing them to edit and destroy their account.
+Handles signing up users through a registration process, also allowing them to edit and destroy their account. It extend model with the following:
+
+- `registeredAt` : An attribute which keeps track of whn an account is registered.
+
+- `unregisteredAt` : An attribute which keep tracks of when an account is unregistered.
+
+- `register(credentials, callback(error,registerable))` : A model static method which is used to register provided credentials. It takes care of checking if email is taken and validating credentials. It will return registered user otherwise corresponding registration errors.
+
+Example
+```js
+var faker = require('faker');
+var credentials = {
+            email: faker.internet.email(),
+            password: faker.internet.password()
+        }
+
+User
+    .register(credentials, function(error, registerable) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log(registerable);
+        }
+    });
+```
+
+- `unregister(callback(error,registerable))` : An instance method which allow to unregister(destroy a user). The currently implementation is to set 
+`unregiesteredAt` to current timestamp of the invocation. Instance will get persisted before returned otherwise corresponding errors will be returned.
+
+Example:
+```js
+use
+    .unregister(function(error, registerable) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log(registerable);
+                    }
+                });
+```
 
 ## [Trackable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/trackable.js)
 Provide a means of tracking user signin activities. It extend provided 
