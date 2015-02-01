@@ -30,8 +30,8 @@ police.mixin(User);
 module.exports = User;
 ```
 
-It composed of the following modules:
-
+Modules
+========
 
 ## [Authenticable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/authenticable.js)
 It lays down the infrastructure for authenticating a user in `sails-police` application. It extend model supplied to it with the following:
