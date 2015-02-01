@@ -279,7 +279,71 @@ User
 ```
 
 ## [Recoverable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/recoverable.js)
-resets the user password and sends reset instructions.
+Lays out infrastructure of resets the user password and sends reset instructions. It extend model with the following:
+
+- `recoveryToken` : An attribute that store recovery token
+
+- `recoveryTokenExpiryAt` : An attribute that track when the recoverable token is expiring.
+
+- `recoverySentAt` : An attribute that keep track as of when the recovery notification is sent.
+
+- `recoveredAt` : An attribute which keeps track of when the password was recovered.
+
+- `generateRecoveryToken(callback(error,recoverable))` : An instance method which used to generate `recoveryToken` and set `recoveryTokenExpiryAt` timestamp. Instance will get persisted before returned othewise corresponding errors will get returned.
+
+Example
+```js
+var user = User.new();
+
+user
+    .generateRecoveryToken(function(error, recoverable) {
+        if (error) {
+            console.log(error)
+        } else {
+            console.log(recoverable);
+        }
+    });
+```
+
+- `sendRecovery(callback(error,recoverable))` : An instance method which is used to send recovery notification to the user. It will set `recoveryTokenSentAt` timestamp. Instance will get persisted before returned othewise corresponding errors will get returned.
+
+Example
+```js
+var faker = require('faker');
+
+var user = User.new({
+            email: faker.internet.email(),
+            password: faker.internet.password()
+        });
+
+user
+    .sendRecovery(function(error, recoverable) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log(recoverable);
+        }
+    });
+```
+
+- `recover(recoveryToken, newPassword, callback(error,recoverable))` : A model static method which is used to recover an account with the matched `recoverToken`. The `newPassword` provided will get encrypted before set as user password. It will set `recoveredAt` before persist the model. 
+
+Example
+```js
+var faker = require('faker');
+
+User
+    .recover(
+        recoveryToken,
+        faker.internet.password(),
+        function(error, recoverable) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log(recoverable);
+            }
+        });
+```
 
 ## [Registerable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/registerable.js)
 Handles signing up users through a registration process, also allowing them to edit and destroy their account. It extend model with the following:
