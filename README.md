@@ -309,7 +309,6 @@ var transport = function(type, authenticable, done) {
 		                type,
 		                JSON.stringify(authenticable)
 		            );
-
 		        done();
     };
 
@@ -323,7 +322,7 @@ when implementing your transport to reduce your API response time.
 
 # TODO'S
 
-## Authenticable TODO
+#### Authenticable
 - [x] email and password attributes
 - [x] encryptPassword(callback(error,authenticable))
 - [x] comparePassword(password,callback)
@@ -338,7 +337,7 @@ when implementing your transport to reduce your API response time.
 	- [ ] if no authenticable found create not found error
 - [ ] hook authenticate in sails request lifecycle
 
-## Confirmable TODO
+#### Confirmable
 - [x] confirmationToken, confirmationTokenExpiryAt, confirmedAt, 
 confirmationSentAt attributes
 
@@ -347,7 +346,7 @@ confirmationSentAt attributes
 - [x] confirm(confirmationToken,callback(error,confirmable))
 - [ ] hook confirmable with sails http request cycle
 
-## Lockable TODO
+#### Lockable
 - [x] failedAttempt, lockedAt, unlockToken, unlockTokenSentAt, 
 unlockTokenExpiryAt attributes
 
@@ -357,29 +356,29 @@ unlockTokenExpiryAt attributes
 - [x] unlock(token,callback)
 - [ ] hook lockable into sails request lifecycle
 
-## Recoverable TODO
+#### Recoverable
 - [x] recoveryToken, recoveryTokenExpiryAt, recoveryTokenSentAt attributes
 - [x] generateRecoveryToken(callback)
 - [x] sendRecovery(callback)
 - [x] recover(recoveryToken,callback)
 - [ ] hook recoverable into sails request lifecycle
 
-## Registerable TODO
+#### Registerable
 - [x] registeredAt and unregisteredAt datetime attributes
 - [x] register(subject,callback)
 - [x] unregister(callback)
 - [ ] hook register and unreister in sails request lifecycle
 
-## Trackable TODO
+#### Trackable
 - [x] signInCount, currentSignInAt, currentSignInIpAddress, 
 lastSignInAt, lastSignInIpAddress attributes
 - [x] track(currentIpAddress,callback(error,trackable))
 - [ ] hook trackable into sails request lifecycle
 
-## Transport (Notification Transport)
+#### Transport (Notification Transport)
 - [x] setTransport(transport)
 - [x] add default console transport
 
-## Validations & Error messages TODO
+#### Validations & Error messages
 - [ ] allow custom validation error messages defenitions
 - [ ] custome error classes
