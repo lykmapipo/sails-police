@@ -194,14 +194,54 @@ Example
 ## [Lockable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/lockable.js)
 Provide a mean of locks an account after a specified number of failed sign-in attempts(Defaults to 5 attempts). Can unlock account through unlock instructions sent. It extend the model with the following:
 
-- `failedAttempt` : 
-- `lockedAt` : 
-- `unlockedAt` :
-- `unlockToken` :
-- `unlockTokenSentAt` :
-- `unlockTokenExpiryAt` :
-- `generateUnlockToken(callback(error,lockable))` : 
-- `sendLock(callback(error,lockable))` : 
+- `failedAttempt` : An attribute which keep track of failed login attempts.
+
+- `lockedAt` : An attribute which keep track of when account is locked.
+
+- `unlockedAt` : An attribute which keep track of when and account is unlocked.
+
+- `unlockToken` : An attribute which store the current unlock token of the locked account.
+
+- `unlockTokenSentAt` : An attribute which keeps track of when the unlock token notification sent.
+
+- `unlockTokenExpiryAt` : An attribute which keep track of `unlockToken` expiration. If `unlockToken` is expired new will get generated and set.
+
+- `generateUnlockToken(callback(error,lockable))` : An instance method that generate `unlockToken` an `unlockTokenExpiryAt`. Instance willl get persisted before returned otherwise corresponding errors will get returned.
+
+Example
+```js
+var user = User.new();
+
+user
+    .generateUnlockToken(function(error, lockable) {
+        if (error) {
+            console.log(error)
+        } else {
+           console.log(lockable)
+        }
+});
+```
+ 
+- `sendLock(callback(error,lockable))` : An instance method which send account locked notification to the owner. It will set `unlockTokenSentAt` to track when the lock notification is sent. Instnce will get update before returned otherwise corresponding errors will get returned.
+
+Example
+```js
+var faker = require('faker');
+var user = User.new({
+            email: faker.internet.email(),
+            password: faker.internet.password()
+        });
+
+user
+    .sendLock(function(error, lockable) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log(lockable);
+        }
+    });
+```
+
 - `lock(callback(error,lockable))` : An instance method that used to lock an account. when called it will check if the number of `failedAttempts` is greater that the configured maximum login attempts, if so the account will get locked by setting `lockedAt` to the current timestamp of `lock` invocation. Instance will get persisted before returned otherwise corresponding errors will get returned.
 
 Example
