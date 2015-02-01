@@ -1,6 +1,34 @@
-sails-police
-=============
-Simple and flexible authentication workflows for sails inspired by [devise](https://github.com/plataformatec/devise)
+sails-police(development)
+=========================
+Simple and flexible authentication workflows for sails inspired by 
+[devise](https://github.com/plataformatec/devise) and [passportjs](https://github.com/jaredhanson/passport).
+
+## Install
+
+```sh
+$ npm install sails-police
+```
+
+## Usage
+sails-police expose a single `mixin` function that accept a `model` 
+and return a `extended model` with all sails-police `morphs` applied.
+
+Before hand you have to choose a model that will be used for sails-police, 
+which is `User` most of the time. After choosing the sails-police model 
+your have to mix sails-police into it. 
+
+```js
+//require sails-police
+var police = require('sails-police');
+
+//the model
+var User = {};
+
+//mixin sails-police
+police.mixin(User);
+
+module.exports = User;
+```
 
 It composed of the following modules:
 
@@ -16,81 +44,133 @@ It composed of the following modules:
 
 * [Trackable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/trackable.js): tracks sign in count, timestamps and IP address.
 
+## [Authenticable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/authenticable.js)
+It lays down the infrastructure for authenticating a user.
+It extend model with the following:
 
-#NOTE
-Its under development no release yet.
+- `email` : An attribute used to store user email address. sails-police 
+opt to use email address but in future we will add support to custom attribute.
 
+- `password` : An attribute which is used to store user pasword hash.
 
-##Authenticable TODO
-- [x] email and password attributes
-- [x] encryptPassword(callback(error,authenticable))
-- [x] comparePassword(password,callback)
-- [ ] authenticate(credentials,callback)
-	- [ ] validate credentials
-	- [x] findOneByEmail
-	- [ ] check if authenticable found/exist
-	- [ ] check if already confirmed/verified
-	- [ ] check if account locked
-	- [ ] check fail attempts
-	- [x] compare password
-	- [ ] if no authenticable found create not found error
-- [ ] hook authenticate in sails request lifecycle
+- `encryptPassword(callback(error,authenticable))` : An instance method 
+which encrypt the current instance password using [bcryptjs](https://github.com/dcodeIO/bcrypt.js).
 
-##Confirmable TODO
-- [x] confirmationToken, confirmationTokenExpiryAt, confirmedAt, confirmationSentAt attributes
-- [x] generateConfirmationToken(callback)
-- [x] sendConfirmation(callback)
-- [x] confirm(confirmationToken,callback(error,confirmable))
-- [ ] hook confirmable with sails http request cycle
+Example
 
-##Lockable TODO
-- [x] failedAttempt, lockedAt, unlockToken, unlockTokenSentAt, unlockTokenExpiryAt attributes
-- [x] generateLockToken(lockable,callback)
-- [x] sendLock(callback)
-- [x] lock(callback)
-- [x] unlock(token,callback)
-- [ ] hook lockable into sails request lifecycle
+```js
+var faker = require('faker');
+var password = faker.internet.password();
 
-##Recoverable TODO
-- [x] recoveryToken, recoveryTokenExpiryAt, recoveryTokenSentAt attributes
-- [x] generateRecoveryToken(callback)
-- [x] sendRecovery(callback)
-- [x] recover(recoveryToken,callback)
-- [ ] hook recoverable into sails request lifecycle
+//create new user instance
+var user = User.new({
+    password: password
+});
 
-##Registerable TODO
-- [x] registeredAt and unregisteredAt datetime attributes
-- [x] register(subject,callback)
-- [x] unregister(callback)
-- [ ] hook register and unreister in sails request lifecycle
+//encypt instance password
+user
+    .encryptPassword(function(error, authenticable) {
+        if (error) {
+            console.log(error);
+        } else {
+ 			console.log(authenticable);
+        }
+    });
+```
 
-##Trackable TODO
-- [x] signInCount, currentSignInAt, currentSignInIpAddress, 
-		lastSignInAt, lastSignInIpAddress attributes
-- [x] track(currentIpAddress,callback(error,trackable))
-- [ ] hook trackable into sails request lifecycle
+- `comparePassword(password, callback(error,authenticable))` : An instance 
+method which takes in a `password` and compare with the instance password 
+hash to see if they match.
 
-##Transport (Notification Transport)
-- [x] setTransport(transport)
-- [x] add default console transport
+Example
 
-##Validations & Error messages TODO
-- [] allow custom validation error messages defenitions
-- [] custome error classes
+```js
+var async = require('async');
+var faker = require('faker');
+var password = faker.internet.password();
 
+var user = User.new({
+    password: password
+});
 
-#Confirmable
-Provide a means to confirm user registration. It extend model with the following:
+async
+    .waterfall(
+        [
+            function(next) {
+                user
+                    .encryptPassword(next);
+            },
+            function(authenticable, next) {
+                authenticable
+                    .comparePassword(password, next);
+            }
+        ],
+        function(error, authenticable) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log(authenticable);
+            }
+        });
+```
 
-- `confirmationToken` : An attrbute which used to store current user confirmation token.
+- `authenticate(credentials, callback(error,authenticable))` : A model 
+static method which takes in credentials in the format of : 
 
-- `confirmationTokenExpiryAt` : An attribute that keep tracks of when the confirmation token will expiry. Beyond that new confirmation token will be generated and notification will be send.
+```js
+var faker = require('faker');
+var credentials = {
+            email: faker.internet.email(),
+            password: faker.internet.password()
+        };
+```
+where `email` is valid email and `password` is valid password of 
+already registered user.
 
-- `confirmedAt` : An attribute that keep tracks of when user confirm his/her account.
+Example
 
-- `confirmationSentAt` : An attribute that keep tracks of when confirmation request is sent.
+```js
+var faker = require('faker');
 
-- `generateConfirmationToken(callback(error,confirmable))` : This instance method will generate confirmation token and confirmation token expiry time. It also update instance and persist it to database before return it.
+//you may obtain this credentials from anywhere
+//this is just a demostration for how credential must
+var credentials = {
+            email: faker.internet.email(),
+            password: faker.internet.password()
+        };
+
+User
+    .authenticate(function(error, authenticable) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log(authenticable);
+            }
+    });
+```
+
+## Confirmable
+Provide a means to confirm user registration. 
+It extend model with the following:
+
+- `confirmationToken` : An attrbute which used to store current user 
+confirmation token.
+
+- `confirmationTokenExpiryAt` : An attribute that keep tracks of when 
+the confirmation token will expiry. 
+Beyond that new confirmation token will be generated and notification 
+will be send.
+
+- `confirmedAt` : An attribute that keep tracks of when user confirm 
+his/her account.
+
+- `confirmationSentAt` : An attribute that keep tracks of when 
+confirmation request is sent.
+
+- `generateConfirmationToken(callback(error,confirmable))` : This 
+instance method will generate confirmation token and confirmation 
+token expiry time. It also update instance and persist it to database 
+before return it.
 
 Example
 ```js
@@ -106,7 +186,11 @@ user
     })
 ```
 
-- `sendConfirmation(callback(error,confirmable))` : This instance method utilize the configured transport and send the confirmation notification. On successfully send it will update `confirmationSentAt` instance attribute with the current time stamp and persist the instance before return it.
+- `sendConfirmation(callback(error,confirmable))` : This instance 
+method utilize the configured transport and send the confirmation 
+notification. On successfully send it will update `confirmationSentAt` 
+instance attribute with the current time stamp and persist the instance 
+before return it.
 
 Example
 ```js
@@ -125,7 +209,11 @@ user
     });
 ```
 
-- `confirm(confirmationToken, callback(error,confirmable))` : This static/class method taken the given `confirmationToken` and confirm any un confirmed registration found with that confirmation token. It will update `confirmedAt` instance attribute and persist the instance before return it.
+- `confirm(confirmationToken, callback(error,confirmable))` : This 
+static/class method taken the given `confirmationToken` and confirm 
+any un confirmed registration found with that confirmation token. It 
+will update `confirmedAt` instance attribute and persist the instance 
+before return it.
 
 Example
 ```js
@@ -139,21 +227,31 @@ Example
        		});
 ```
 
-#Trackable
-Provide a means of tracking user signin activities. It extend provided model with the followings:
+## Trackable
+Provide a means of tracking user signin activities. It extend provided 
+model with the followings:
 
-- `signInCount` : Keeps track of number of count a user have been sign in into you API
+- `signInCount` : Keeps track of number of count a user have been sign 
+in into you API
 
-- `currentSignInAt` : Keeps track of the latest time when user signed in into you API
+- `currentSignInAt` : Keeps track of the latest time when user signed 
+in into you API
 
-- `currentSignInIpAddress` : Keeps track of the latest IP address a user used to
-	to log with into your API
+- `currentSignInIpAddress` : Keeps track of the latest IP address a 
+user used to log with into your API
 
-- `lastSignInAt` : Keeps track of the previous sign in time prior to the current sign in.
+- `lastSignInAt` : Keeps track of the previous sign in time prior to 
+the current sign in.
 
-- `lastSignInIpAddress` : Keeps track of the previous IP address user used to log with into your API
+- `lastSignInIpAddress` : Keeps track of the previous IP address 
+user used to log with into your API
 
-- `track(ipAddress,callback(error,trackable))` : This is model instance method, which when called with the IP address, it will update current tracking details and set the provided IP address as the `currentSignInIpAddress`. On successfully tracking, a provided `callback` will be get invoked and provided with error if occur and the current updated model instance.
+- `track(ipAddress,callback(error,trackable))` : This is model instance 
+method, which when called with the IP address, it will update current 
+tracking details and set the provided IP address as the 
+`currentSignInIpAddress`. On successfully tracking, a provided `callback` 
+will be get invoked and provided with error if occur and the current 
+updated model instance.
 
 Example
 ```js
@@ -177,7 +275,7 @@ User
     });
 ``` 
 
-#Transport API
+## Transport API
 By default sails-police default transport is `noop`. This is because 
 there are different use case when it came on sending notification. Example 
 you may opt to send you notification through sms, email or any other medium 
@@ -187,10 +285,12 @@ Due to that reason sails-police has the method `setTransport` which accept
 a function and pass the `type,authentication,done` as it argurments
 
 - `type` : Refer to the type of notifcation to be sent
-- `authenticable` : Refer to the model instance that you have mixin police morphs
-- `done` : Is the callback that you must call after finish sending the notification.
-		 By default this callback will update notification send details based on the
-		 usage.
+- `authenticable` : Refer to the model instance that you have mixin 
+police morphs
+
+- `done` : Is the callback that you must call after finish sending 
+the notification. By default this callback will update notification 
+send details based on the usage.
 
 ##How to implement a transport
 Simple and clear way to register a transport is to call `setTrasport(fn)` of 
@@ -219,6 +319,70 @@ var transport = function(type, authenticable, done) {
 //then set the transport
 police.setTransport(transport);
 ```
-##Transport Issues
+### Transport Issues
 It is recommended to use job queue like [kue](https://github.com/learnboost/kue) 
 when implementing your transport to reduce your API response time.
+
+
+# TODO'S
+
+## Authenticable TODO
+- [x] email and password attributes
+- [x] encryptPassword(callback(error,authenticable))
+- [x] comparePassword(password,callback)
+- [ ] authenticate(credentials,callback)
+	- [ ] validate credentials
+	- [x] findOneByEmail
+	- [ ] check if authenticable found/exist
+	- [ ] check if already confirmed/verified
+	- [ ] check if account locked
+	- [ ] check fail attempts
+	- [x] compare password
+	- [ ] if no authenticable found create not found error
+- [ ] hook authenticate in sails request lifecycle
+
+## Confirmable TODO
+- [x] confirmationToken, confirmationTokenExpiryAt, confirmedAt, 
+confirmationSentAt attributes
+
+- [x] generateConfirmationToken(callback)
+- [x] sendConfirmation(callback)
+- [x] confirm(confirmationToken,callback(error,confirmable))
+- [ ] hook confirmable with sails http request cycle
+
+## Lockable TODO
+- [x] failedAttempt, lockedAt, unlockToken, unlockTokenSentAt, 
+unlockTokenExpiryAt attributes
+
+- [x] generateLockToken(lockable,callback)
+- [x] sendLock(callback)
+- [x] lock(callback)
+- [x] unlock(token,callback)
+- [ ] hook lockable into sails request lifecycle
+
+## Recoverable TODO
+- [x] recoveryToken, recoveryTokenExpiryAt, recoveryTokenSentAt attributes
+- [x] generateRecoveryToken(callback)
+- [x] sendRecovery(callback)
+- [x] recover(recoveryToken,callback)
+- [ ] hook recoverable into sails request lifecycle
+
+## Registerable TODO
+- [x] registeredAt and unregisteredAt datetime attributes
+- [x] register(subject,callback)
+- [x] unregister(callback)
+- [ ] hook register and unreister in sails request lifecycle
+
+## Trackable TODO
+- [x] signInCount, currentSignInAt, currentSignInIpAddress, 
+lastSignInAt, lastSignInIpAddress attributes
+- [x] track(currentIpAddress,callback(error,trackable))
+- [ ] hook trackable into sails request lifecycle
+
+## Transport (Notification Transport)
+- [x] setTransport(transport)
+- [x] add default console transport
+
+## Validations & Error messages TODO
+- [] allow custom validation error messages defenitions
+- [] custome error classes
