@@ -30,10 +30,9 @@ police.mixin(User);
 module.exports = User;
 ```
 
-Modules
-========
+## Modules
 
-## [Authenticable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/authenticable.js)
+### [Authenticable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/authenticable.js)
 It lays down the infrastructure for authenticating a user in `sails-police` application. It extend model supplied to it with the following:
 
 - `email` : An attribute used to store user email address. `sails-police` 
@@ -137,7 +136,7 @@ User
     });
 ```
 
-## [Confirmable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/confirmable.js)
+### [Confirmable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/confirmable.js)
 Provide a means to confirm user registration. 
 It extend model with the following:
 
@@ -215,13 +214,13 @@ Example
        		});
 ```
 
-## [Lockable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/lockable.js)
+### [Lockable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/lockable.js)
 locks an account after a specified number of failed sign-in attempts. Can unlock account through unlock instructions sent.
 
-## [Recoverable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/recoverable.js)
+### [Recoverable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/recoverable.js)
 resets the user password and sends reset instructions.
 
-## [Registerable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/registerable.js)
+### [Registerable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/registerable.js)
 handles signing up users through a registration process, also allowing them to edit and destroy their account.
 
 ## [Trackable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/trackable.js)
@@ -272,7 +271,7 @@ User
     });
 ``` 
 
-## Transport API
+### Transport API
 By default sails-police default transport is `noop`. This is because 
 there are different use case when it came on sending notification. Example 
 you may opt to send you notification through sms, email or any other medium 
@@ -289,7 +288,7 @@ police morphs
 the notification. By default this callback will update notification 
 send details based on the usage.
 
-##How to implement a transport
+#### How to implement a transport
 Simple and clear way to register a transport is to call `setTrasport(fn)` of 
 sails-police and pass in your transport `function`. It is recommended to implement 
 all your notification send scenario(s) within that function i.e if you are 
@@ -315,7 +314,7 @@ var transport = function(type, authenticable, done) {
 //then set the transport
 police.setTransport(transport);
 ```
-### Transport Issues
+#### Transport Issues
 It is recommended to use job queue like [kue](https://github.com/learnboost/kue) 
 when implementing your transport to reduce your API response time.
 
