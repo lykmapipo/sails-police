@@ -31,3 +31,6 @@ startup.sh
 
 #Development sails
 api
+views
+config
+public

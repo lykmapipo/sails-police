@@ -8,6 +8,7 @@ var Validate = require('./lib/validator.js');
 
 //external dependencies
 var _ = require('lodash');
+var passport = require('passport');
 
 //morphs
 var Authenticable = require('./lib/morphs/authenticable.js');
@@ -16,6 +17,7 @@ var Lockable = require('./lib/morphs/lockable.js');
 var Recoverable = require('./lib/morphs/recoverable.js');
 var Registerable = require('./lib/morphs/registerable.js');
 var Trackable = require('./lib/morphs/trackable.js');
+var Passport = require('./lib/http/passport.js');
 
 /**
  * Represents a new Police instance.
@@ -37,7 +39,7 @@ function Police() {
     //add default console notification transport
     this.transport = function(type, authenticable, done) {
         done();
-    }
+    };
 
 };
 
@@ -68,6 +70,22 @@ Police.prototype.mixin = function(model) {
     return model;
 };
 
+/**
+ * @description Lazy evaluate User model used by sails-police
+ * @return {Object} current User model sails-police is using
+ */
+Police.prototype.getUser = function() {
+    //return default user model
+    if (!this.User) {
+        this.User = User || sails.models.user;
+    }
+    return this.User;
+};
+
+/**
+ * @description Set transport to use when send notifications
+ * @param {Function} transport a function that implemented custom send notification
+ */
 Police.prototype.setTransport = function(transport) {
     //we currently support functional transport
     if (!_.isFunction(transport)) {
@@ -76,6 +94,22 @@ Police.prototype.setTransport = function(transport) {
     this.transport = transport;
 };
 
+Police.prototype.setUser = function(User) {
+    this.User = User;
+};
+
+//initialize passport
+Police.prototype.initialize = function() {
+    //initialize police passports
+    new Passport();
+    
+    //return passportjs initialize
+    //so that it can be added to sails middlewares
+    return passport.initialize();
+}
+
+//initialize passport session
+Police.prototype.session = passport.session();
 
 /**
  * Signup function exposed to user.

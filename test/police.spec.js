@@ -55,4 +55,10 @@ describe('Police', function() {
         done();
     });
 
+    it('should have default sails model to use', function(done) {
+        var Model = police.getUser();
+        expect(Model).to.not.be.null;
+        done();
+    });
+
 });
