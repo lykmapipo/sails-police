@@ -9,7 +9,8 @@
                                 <h3>Sign In</h3>
                             </div>
                             <div class="form-main">
-                                <form>
+                                <form action="/signin" method="POST" autocomplete="off">
+                                    <input type="hidden" name="_csrf" value="<%=_csrf%>" />
                                     <div class="form-group">
                                         <div class="un-wrap"><i class="fa fa-user"></i>
                                             <input type="text" name="email" class="form-control" placeholder="Email" required autofocus>
@@ -34,7 +35,7 @@
                             <div class="top-buffer bottom-wrap">
                                 <div class="row">
                                     <div class="col-xs-6 col-md-5 col-md-offset-1">
-                                        <a href="#" id="forgot_from_2">Forgot password</a>
+                                        <a href="/forgot" id="forgot_from_2">Forgot password</a>
                                     </div>
                                     <div class="col-xs-6 col-md-6">
                                         <a href="/signup" id="signup_from_2">Sign Up</a>

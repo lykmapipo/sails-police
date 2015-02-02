@@ -102,7 +102,7 @@ Police.prototype.setUser = function(User) {
 Police.prototype.initialize = function() {
     //initialize police passports
     new Passport();
-    
+
     //return passportjs initialize
     //so that it can be added to sails middlewares
     return passport.initialize();
@@ -110,6 +110,26 @@ Police.prototype.initialize = function() {
 
 //initialize passport session
 Police.prototype.session = passport.session();
+
+
+Police.prototype.mixinRoutes = function(routes) {
+    return _.extend(routes, {
+        'get /signin': 'AuthController.getSignin',
+        // 'post /login': 'AuthController.postLogin',
+        // 'get /logout': 'AuthController.getLogout',
+        'get /signup': 'AuthController.getSignup',
+        'post /signup': 'AuthController.postSignup',
+        'get /confirm/:token': 'AuthController.getConfirm',
+        // 'post /resend_verification': 'AuthController.getResendVerification',
+        // 'get /verification/:token': 'AuthController.getVerification',
+        // 'get /delete_account': 'AuthController.getDelete',
+        // 'post /delete_account': 'AuthController.postDelete',
+        'get /forgot': 'AuthController.getForgot',
+        // 'post /forgot_password': 'AuthController.postForgotPassword',
+        // 'get /forgot_password/:token': 'AuthController.getForgotPasswordToken',
+        // 'post /forgot_password/:token': 'AuthController.postForgotPasswordToken'});
+    });
+};
 
 /**
  * Signup function exposed to user.

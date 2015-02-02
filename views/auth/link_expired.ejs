@@ -10,7 +10,7 @@
                 <label for="email">Email</label>
                 <input class="form-control" type="email" id="email" name="email" placeholder="Your email" required/>
             </div>
-            <%=i f (error){%>
+            <%if(error){%>
                 <div class="alert alert-warning">
                     <%=error%>
                 </div>

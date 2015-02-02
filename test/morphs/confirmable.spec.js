@@ -18,7 +18,10 @@ describe('Confirmable', function() {
     });
 
     it('should be able to generate confirmation token and set confirmation expriry at date', function(done) {
-        var user = User.new();
+        var user = User.new({
+            email: faker.internet.email(),
+            password: faker.internet.password()
+        });
 
         expect(user.generateConfirmationToken).to.be.a('function');
 

@@ -17,7 +17,10 @@ describe('Recoverable', function() {
     });
 
     it('should be able to generate recovery token', function(done) {
-        var user = User.new();
+        var user = User.new({
+            email: faker.internet.email(),
+            password: faker.internet.password()
+        });
 
         expect(user.generateRecoveryToken).to.be.a('function');
 

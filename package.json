@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "test": "npm link && npm link sails-police && ./node_modules/.bin/mocha test --recursive --timeout 10000",
-        "develop": "nodemon ./api/app.js"
+        "dev": "nodemon ./api/app.js"
     },
     "repository": {
         "type": "git",
@@ -39,7 +39,6 @@
         "lodash": "^2.4.1",
         "mocha": "^2.1.0",
         "moment": "^2.8.4",
-        "p": "^0.2.0",
         "passport": "^0.2.1",
         "passport-local": "^1.0.0",
         "passport-remember-me": "0.0.1",

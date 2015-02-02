@@ -20,7 +20,10 @@ describe('Lockable', function() {
     });
 
     it('should be able to generate lock token', function(done) {
-        var user = User.new();
+        var user = User.new({
+            email: faker.internet.email(),
+            password: faker.internet.password()
+        });
 
         expect(user.generateUnlockToken).to.be.a('function');
 

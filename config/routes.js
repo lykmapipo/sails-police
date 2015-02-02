@@ -19,8 +19,8 @@
  * For more information on configuring custom routes, check out:
  * http://sailsjs.org/#/documentation/concepts/Routes/RouteTargetSyntax.html
  */
-
-module.exports.routes = {
+var police = require('sails-police');
+module.exports.routes = police.mixinRoutes({
 
     /***************************************************************************
      *                                                                          *
@@ -32,25 +32,9 @@ module.exports.routes = {
      *                                                                          *
      ***************************************************************************/
 
-    '/': 'HomeController.index',
+    '/': 'HomeController.index'
 
-    /**
-     * Device specific routes
-     */
-    'get /signin': 'AuthController.getSignin',
-    // 'post /login': 'AuthController.postLogin',
-    // 'get /logout': 'AuthController.getLogout',
-    // 'get /signup': 'AuthController.getSignup',
-    // 'post /signup': 'AuthController.postSignup',
-    // 'get /resend_verification': 'AuthController.getResendVerification',
-    // 'post /resend_verification': 'AuthController.getResendVerification',
-    // 'get /verification/:token': 'AuthController.getVerification',
-    // 'get /delete_account': 'AuthController.getDelete',
-    // 'post /delete_account': 'AuthController.postDelete',
-    // 'get /forgot_password': 'AuthController.getForgotPassword',
-    // 'post /forgot_password': 'AuthController.postForgotPassword',
-    // 'get /forgot_password/:token': 'AuthController.getForgotPasswordToken',
-    // 'post /forgot_password/:token': 'AuthController.postForgotPasswordToken'
+
 
     /***************************************************************************
      *                                                                          *
@@ -62,4 +46,4 @@ module.exports.routes = {
      *                                                                          *
      ***************************************************************************/
 
-};
+});
