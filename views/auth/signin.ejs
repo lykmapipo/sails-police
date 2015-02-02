@@ -12,11 +12,11 @@
                                 <form action="/signin" method="POST" autocomplete="off">
                                     <input type="hidden" name="_csrf" value="<%=_csrf%>" />
                                     <div class="form-group">
-                                        <div class="un-wrap"><i class="fa fa-user"></i>
-                                            <input type="text" name="email" class="form-control" placeholder="Email" required autofocus>
+                                        <div class="un-wrap"><i class="fa fa-envelope"></i>
+                                            <input type="email" name="email" class="form-control" placeholder="Email" required autofocus>
                                         </div>
                                         <div class="pw-wrap"><i class="fa fa-lock"></i>
-                                            <input type="password" class="form-control" placeholder="Password" required>
+                                            <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">

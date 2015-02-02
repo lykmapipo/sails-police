@@ -42,8 +42,9 @@ module.exports.http = {
             'methodOverride',
             'poweredBy',
             '$custom',
-            police.initialize,
-            police.session,
+            'locally',
+            'policeInit',
+            'policeSession',
             'router',
             'www',
             'favicon',
@@ -57,11 +58,17 @@ module.exports.http = {
          *                                                                           *
          ****************************************************************************/
 
-        myRequestLogger: function(req, res, next) {
-            console.log(req.body);
+        locally: function(req, res, next) {
+            res.locals.error = null;
+            res.locals.warning = null;
+            res.locals.success = null;
             // console.log("Requested i got it :: ", req.method, req.url);
             return next();
-        }
+        },
+
+        policeInit: police.initialize(),
+
+        policeSession: police.session(),
 
 
         /***************************************************************************

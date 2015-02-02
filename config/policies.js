@@ -16,8 +16,9 @@
  * http://sailsjs.org/#/documentation/reference/sails.config/sails.config.policies.html
  */
 
+var police = require('sails-police');
 
-module.exports.policies = {
+module.exports.policies = police.policies.mixin({
 
     /***************************************************************************
      *                                                                          *
@@ -27,20 +28,8 @@ module.exports.policies = {
      ***************************************************************************/
 
     // '*': true,
-    // 'AuthController': {
-    //     getLogin: true,
-    //     postLogin: true,
-    //     getSignup: true,
-    //     postSignup: true,
-    //     getForgotPassword: true,
-    //     postForgotPassword: true,
-    //     getForgotPasswordToken: true,
-    //     postForgotPasswordToken: true,
-    //     getResendVerification: true,
-    //     postResendVerification: true,
-    //     getVerification: true
-    // },
-    // '*': 'Auth'
+
+    '*': 'Auth'
 
     /***************************************************************************
      *                                                                          *
@@ -62,4 +51,4 @@ module.exports.policies = {
     // before letting any users feed our rabbits
     // feed : ['isNiceToAnimals', 'hasRabbitFood']
     // }
-};
+});

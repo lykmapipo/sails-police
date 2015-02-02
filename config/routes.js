@@ -20,7 +20,7 @@
  * http://sailsjs.org/#/documentation/concepts/Routes/RouteTargetSyntax.html
  */
 var police = require('sails-police');
-module.exports.routes = police.mixinRoutes({
+module.exports.routes = police.routes.mixin({
 
     /***************************************************************************
      *                                                                          *

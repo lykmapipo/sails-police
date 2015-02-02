@@ -109,26 +109,60 @@ Police.prototype.initialize = function() {
 }
 
 //initialize passport session
-Police.prototype.session = passport.session();
+Police.prototype.session = function() {
+    return passport.session();
+}
+
+Police.prototype.policies = {
+    isAuthenticated: function isAuthenticated(request, response, next) {
+        var loginRoute = '/signin';
+
+        if (request.isAuthenticated()) {
+            next();
+        } else {
+            response.redirect(loginRoute);
+        }
+    },
+
+    mixin: function(policies) {
+        return _.extend(policies, {
+            'AuthController': {
+                getSignin: true,
+                postSignin: true,
+                getSignup: true,
+                postSignup: true,
+                getConfirm: true,
+                getForgot: true,
+                // postForgotPassword: true,
+                // getForgotPasswordToken: true,
+                // postForgotPasswordToken: true,
+                // getResendVerification: true,
+                // postResendVerification: true,
+            }
+        });
+    }
+};
 
 
-Police.prototype.mixinRoutes = function(routes) {
-    return _.extend(routes, {
-        'get /signin': 'AuthController.getSignin',
-        // 'post /login': 'AuthController.postLogin',
-        // 'get /logout': 'AuthController.getLogout',
-        'get /signup': 'AuthController.getSignup',
-        'post /signup': 'AuthController.postSignup',
-        'get /confirm/:token': 'AuthController.getConfirm',
-        // 'post /resend_verification': 'AuthController.getResendVerification',
-        // 'get /verification/:token': 'AuthController.getVerification',
-        // 'get /delete_account': 'AuthController.getDelete',
-        // 'post /delete_account': 'AuthController.postDelete',
-        'get /forgot': 'AuthController.getForgot',
-        // 'post /forgot_password': 'AuthController.postForgotPassword',
-        // 'get /forgot_password/:token': 'AuthController.getForgotPasswordToken',
-        // 'post /forgot_password/:token': 'AuthController.postForgotPasswordToken'});
-    });
+Police.prototype.routes = {
+    mixin: function(routes) {
+        return _.extend(routes, {
+            'get /signin': 'AuthController.getSignin',
+            'post /signin': 'AuthController.postSignin',
+            // 'get /logout': 'AuthController.getLogout',
+            'get /signup': 'AuthController.getSignup',
+            'post /signup': 'AuthController.postSignup',
+            'get /confirm/:token': 'AuthController.getConfirm',
+            // 'post /resend_verification': 'AuthController.getResendVerification',
+            // 'get /verification/:token': 'AuthController.getVerification',
+            // 'get /delete_account': 'AuthController.getDelete',
+            // 'post /delete_account': 'AuthController.postDelete',
+            'get /forgot': 'AuthController.getForgot',
+            // 'post /forgot_password': 'AuthController.postForgotPassword',
+            // 'get /forgot_password/:token': 'AuthController.getForgotPasswordToken',
+            // 'post /forgot_password/:token': 'AuthController.postForgotPasswordToken'});
+        });
+    }
 };
 
 /**

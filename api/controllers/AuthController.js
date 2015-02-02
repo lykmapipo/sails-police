@@ -1,17 +1,83 @@
 var async = require('async');
+var passport = require('passport');
+var async = require('async');
+var _ = require('lodash');
 
 module.exports = {
+    /**
+     * @description GET /signin
+     * @param  {HttpRequest} request
+     * @param  {HttpResponse} response
+     */
     getSignin: function(request, response) {
         // save redirect url
         var suffix = request.query.redirect ? '?redirect=' + request.query.redirect : '';
 
+        var error = request.flash('error');
+        var success = request.flash('success');
+        var warning = request.flash('warning');
+
         // render view
-        response.view('auth/signin', {
-            title: 'Signin',
-            error: '',
-            login: '',
-            action: sails.config.devise.login.route + suffix || '/login'
-        });
+        response
+            .view('auth/signin', {
+                title: 'Signin',
+                error: _.isEmpty(error) ? null : error,
+                warning: _.isEmpty(warning) ? null : warning,
+                success: _.isEmpty(success) ? null : success
+            });
+    },
+
+    postSignin: function(request, response) {
+
+        //custom passport authenticate
+        async
+            .waterfall(
+                [
+                    function(next) {
+                        //authenticate authenticable
+                        passport
+                            .authenticate(
+                                'police-local',
+                                function(error, authenticable) {
+                                    if (error) {
+                                        next(error);
+                                    } else {
+                                        next(null, authenticable);
+                                    }
+                                })(request, response, next);
+                    },
+                    function(authenticable, next) {
+                        //login authenticable
+                        request
+                            .logIn(authenticable, function(error) {
+                                if (error) {
+                                    next(error);
+                                } else {
+                                    next(null, authenticable);
+                                }
+                            });
+                    }
+                ],
+                function(error, authenticable) {
+                    if (error) {
+                        console.log(error);
+
+                        sails.emit('signin:error', error);
+
+                        request.flash('error', error.message);
+
+                        response.redirect('/signin');
+
+                    } else {
+                        console.log(authenticable);
+                        // emit 'login' event
+                        sails.emit('authenticale::signin', authenticable);
+
+                        request.flash('success', 'Login successfully')
+
+                        response.redirect('/');
+                    }
+                });
     },
 
     /**
@@ -50,22 +116,18 @@ module.exports = {
                 if (error) {
                     sails.emit('signup::post::error', error);
                     // render template with error message
-                    response.status(403);
-                    response
-                        .view('auth/get_signup', _.extend({
-                            title: 'Sign up',
-                            error: error,
-                        }, credentials));
+                    request.flash('error', error.message);
+
+                    response.redirect('/signup');
                 } else {
                     // emit event
                     sails.emit('signup::post', registerable);
-                    //TODO redirect to login with flash message
+
                     console.log(registerable);
 
-                    response
-                        .view('auth/post_signup', {
-                            title: 'Sign up - Email sent'
-                        });
+                    request.flash('success', 'Signup successfully. Check your email for confirmation');
+
+                    response.redirect('/signin');
                 }
             });
     },
@@ -79,26 +141,25 @@ module.exports = {
     getConfirm: function(request, response) {
         var token = request.params.token;
 
-        console.log(token)
-
         require('sails-police')
             .getUser()
             .confirm(token, function(error, confirmable) {
                 if (error) {
+                    console.log(error);
+
                     sails.emit('confirmable::confirm::error', error);
 
-                    response
-                        .view('auth/link_expired', {
-                            title: 'Sign up - Email verification link expired',
-                            error: error
-                        });
+                    request.flash('error', error.message);
+
+                    response.redirect('/signin');
                 } else {
+                    console.log(confirmable);
+
                     sails.emit('confirmable:confirm', confirmable);
 
-                    response
-                        .view('auth/email_verification_succeed', {
-                            title: 'Sign up success'
-                        });
+                    request.flash('success', 'Account cconfirmed successfully.');
+
+                    response.redirect('/signin');
                 }
             });
     },
