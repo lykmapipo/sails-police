@@ -19,13 +19,14 @@ $ npm install --save sails-police
 ## Setup
 `sails-police` expose `mixins` that will extend different parts of sails flow and easy your setup. It expose the following `mixins`:
 
-- ###`model.mixin` : It extend valid sails model with sails-police [morphs](#Modules) to make it a viable canditate to be used in `sails-police`.
+### model.mixin 
+It extend valid sails model with sails-police [morphs](#Modules) to make it a viable canditate to be used in `sails-police`. 
 
 Before hand, you have to choose a model that will be used for `sails-police`, 
 which is `User` most of the time. After choosing the `sails-police` model 
 your have to mix `sails-police morphs` into it. 
 
-To setup your model for `sails-police` to as bellow:
+To setup your model for `sails-police` do as bellow:
 ```js
 //in model/User.js
 var police = require('sails-police');
@@ -46,7 +47,8 @@ module.exports = User;
 ```
 The model mixed with `sails-police morphs` will have all required `attributes` and `methods` to make it work out of the box with `sails-police`. To know what `attributes` and `methods` added please consult [Modules](#Modules) section.
 
-- `routes.mixin` : Its extend sails `routes` to setup all required `sails-police` routes. Currently there is no option of providing alternative routes, be patient its on go.
+### routes.mixin
+Its extend sails `routes` to setup all required `sails-police` routes. Currently there is no option of providing alternative routes, be patient its on go.
 
 To mix `sails-police` routes in your `routes` do as bellow:
 
@@ -75,7 +77,8 @@ After `mixin sails-police routes` your will have the following routes at your di
 ```
 Other `routes` are coming...
 
-- `policies.mixin` : It extend your `policies` with the requires `sails-police` polices to make it work out of box.
+### policies.mixin
+It extend your `policies` with the requires `sails-police` polices to make it work out of box.
 
 To mixin `sails-police` into your policies do as bellow:
 ```js
@@ -102,7 +105,8 @@ After `sails-police policies mixin` the following `policies` will be added into 
 ```
 Other `policies` are comming....
 
-- `middlewares.mixin`: It extend `sails http config` with policies middlewares and patch the middleware `order` so that `sails-police` can achieve its intended purpose.
+### middlewares.mixin
+It extend `sails http config` with policies middlewares and patch the middleware `order` so that `sails-police` can achieve its intended purpose.
 
 To `mixin sails-police middlewares` do as bellow:
 ```js
