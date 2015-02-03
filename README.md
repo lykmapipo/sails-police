@@ -130,7 +130,7 @@ module.exports.http = police.middlewares.mixin({
 
 - `policeSession`: Which is the wrapper around [passportjs session](http://passportjs.org/guide/configure). And what it does is to add passportjs session initialization into `sails middlewares` as `policeSession` and `middlewares order` as `policeSession`.
 
-All of the above `middlewares` are injected before `sails router middleware`. So in cas of any issue please lets discuss.
+All of the above `middlewares` are injected before `sails router middleware`, in case of any issue please lets discuss.
 
 ##Sample
 To have a clear picture of the setup please check on this repo 
