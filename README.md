@@ -13,13 +13,13 @@ Simple and flexible authentication workflows for [sails](https://github.com/bald
 ## Installation
 
 ```sh
-$ npm install sails-police
+$ npm install --save sails-police
 ```
 
 ## Setup
 `sails-police` expose `mixins` that will extend different parts of sails flow and easy your setup. It expose the following `mixins`:
 
-- `model.mixin` : It extend valid sails model with sails-police [morphs](#Modules) to make it a viable canditate to be used in `sails-police`.
+- ###`model.mixin` : It extend valid sails model with sails-police [morphs](#Modules) to make it a viable canditate to be used in `sails-police`.
 
 Before hand, you have to choose a model that will be used for `sails-police`, 
 which is `User` most of the time. After choosing the `sails-police` model 
