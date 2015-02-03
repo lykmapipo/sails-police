@@ -32,7 +32,8 @@ module.exports.routes = police.routes.mixin({
      *                                                                          *
      ***************************************************************************/
 
-    '/': 'HomeController.index'
+    '/': 'HomeController.index',
+    'put /home': 'HomeController.update'
 
 
 

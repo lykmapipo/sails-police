@@ -10,6 +10,8 @@
  */
 var police = require('sails-police');
 
+var override = require('method-override');
+
 module.exports.http = police.middlewares.mixin({
 
     /****************************************************************************
@@ -55,10 +57,11 @@ module.exports.http = police.middlewares.mixin({
          *                                                                           *
          ****************************************************************************/
 
-        myRequestLogger: function(req, res, next) {
-            console.log("Requested i got it :: ", req.method, req.url);
-            return next();
-        },
+        // myRequestLogger: function(req, res, next) {
+        //     console.log("Requested i got it :: ", req.method, req.url);
+        //     return next();
+        // },
+        methodOverride: override('_method', ['POST'])
 
         /***************************************************************************
          *                                                                          *

@@ -1,5 +1,8 @@
 module.exports = {
     index: function(request, response) {
-        response.view('welcome')
+        response
+            .view('home/index', {
+                title: 'Home'
+            });
     }
 }

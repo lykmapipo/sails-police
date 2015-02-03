@@ -133,6 +133,7 @@ Police.prototype.policies = {
                 postSignup: true,
                 getConfirm: true,
                 getForgot: true,
+                deleteSignout: true,
                 // postForgotPassword: true,
                 // getForgotPasswordToken: true,
                 // postForgotPasswordToken: true,
@@ -149,7 +150,7 @@ Police.prototype.routes = {
         return _.extend(routes, {
             'get /signin': 'AuthController.getSignin',
             'post /signin': 'AuthController.postSignin',
-            // 'get /logout': 'AuthController.getLogout',
+            'delete /signout': 'AuthController.deleteSignout',
             'get /signup': 'AuthController.getSignup',
             'post /signup': 'AuthController.postSignup',
             'get /confirm/:token': 'AuthController.getConfirm',
@@ -176,8 +177,14 @@ Police.prototype.middlewares = {
      * @return {Object}             sailsjs middlewares extended with police middlewares
      */
     mixin: function(middlewares) {
+        //remember current sails http config object
         var previousMiddlewares = middlewares;
+
+        //remember current sails http middlewares
         var previousOrder = middlewares.middleware.order;
+
+        //grab the current index of the sails router middleware
+        //from sails middleware order
         var indexOfRouter = previousOrder.indexOf('router');
 
         //patching sails middleware and
@@ -208,7 +215,7 @@ Police.prototype.middlewares = {
         previousOrder.splice(indexOfRouter, 0, 'policeLocals', 'policeInit', 'policeSession');
         middlewares.middleware.order = previousOrder;
 
-        //return patched middlewares
+        //return patched sails http config object
         return middlewares;
     }
 };

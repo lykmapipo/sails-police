@@ -28,3 +28,6 @@ build/Release
 node_modules
 doc
 startup.sh
+
+#Development sails
+config/email.js

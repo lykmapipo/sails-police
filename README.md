@@ -1,7 +1,6 @@
 ![sails-police](https://github.com/lykmapipo/sails-police/blob/master/police-hat-md.png "sails-police") 
 
-sails-police(development)
-=========================
+==============================================
 
 [![Build Status](https://travis-ci.org/lykmapipo/sails-police.svg?branch=master)](https://travis-ci.org/lykmapipo/sails-police)
 

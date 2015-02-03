@@ -170,4 +170,22 @@ module.exports = {
             error: ''
         });
     },
+
+    /**
+     * @description DELETE /signout
+     *
+     * @param {HttpRequest} request
+     * @param {HttpResponse} response
+     */
+    deleteSignout: function(request, response) {
+        var user = request.user;
+
+        request.logout();
+
+        sails.emit('signout', user);
+
+        request.flash('success', 'Signout successfully.');
+
+        response.redirect('/login');
+    }
 }
