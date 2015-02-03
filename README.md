@@ -20,7 +20,7 @@ $ npm install --save sails-police
 `sails-police` expose `mixins` that will extend different parts of sails flow and easy your setup. It expose the following `mixins`:
 
 ### model.mixin 
-It extend valid sails model with sails-police [morphs](#Modules) to make it a viable canditate to be used in `sails-police`. 
+It extend valid sails model with sails-police [morphs](https://github.com/lykmapipo/sails-police#modules) to make it a viable canditate to be used in `sails-police`. 
 
 Before hand, you have to choose a model that will be used for `sails-police`, 
 which is `User` most of the time. After choosing the `sails-police` model 
@@ -45,7 +45,7 @@ police.model.mixin(User);
 //export your model
 module.exports = User;
 ```
-The model mixed with `sails-police morphs` will have all required `attributes` and `methods` to make it work out of the box with `sails-police`. To know what `attributes` and `methods` added please consult [Modules](#Modules) section.
+The model mixed with `sails-police morphs` will have all required `attributes` and `methods` to make it work out of the box with `sails-police`. To know what `attributes` and `methods` added please consult [Modules](https://github.com/lykmapipo/sails-police#modules) section.
 
 ### routes.mixin
 Its extend sails `routes` to setup all required `sails-police` routes. Currently there is no option of providing alternative routes, be patient its on go.
