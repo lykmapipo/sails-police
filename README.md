@@ -10,13 +10,17 @@
 Simple and flexible authentication workflows for [sails](https://github.com/balderdashy/sails) inspired by 
 [devise](https://github.com/plataformatec/devise) and [passportjs](https://github.com/jaredhanson/passport).
 
-## Install
+## Installation
 
 ```sh
 $ npm install sails-police
 ```
 
 ## Usage
+`sails-police` expose `mixins` that will extend different parts of sails flow and easy you setup. It expose the following `mixins`:
+
+- `model.mixin`
+
 `sails-police` expose a single `mixin` function that accept a `model` 
 and return a `extended model` with all `sails-police morphs` applied.
 

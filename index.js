@@ -48,26 +48,33 @@ function Police() {
  * @param  {Object} model a sails model to mix in police morphs
  * @return {Object}       a sails model mixed with police morphs
  */
-Police.prototype.mixin = function(model) {
-    //mixin authenticable
-    model = new Authenticable(model);
+Police.prototype.model = {
+    /**
+     * @description mixin all sails-police morps into a model and extend it
+     * @param  {Object} model valid sails model to be mixed with sails-police morphs
+     * @return {Object}       valid sails model extended with sails-police morphs
+     */
+    mixin: function(model) {
+        //mixin authenticable
+        model = new Authenticable(model);
 
-    //mixin confrimable
-    model = new Confirmable(model);
+        //mixin confrimable
+        model = new Confirmable(model);
 
-    //mixin lockable
-    model = new Lockable(model);
+        //mixin lockable
+        model = new Lockable(model);
 
-    //mixin recoverable
-    model = new Recoverable(model);
+        //mixin recoverable
+        model = new Recoverable(model);
 
-    //mixin registerable
-    model = new Registerable(model);
+        //mixin registerable
+        model = new Registerable(model);
 
-    //mixin trackble
-    model = new Trackable(model);
+        //mixin trackble
+        model = new Trackable(model);
 
-    return model;
+        return model;
+    }
 };
 
 /**
@@ -150,10 +157,10 @@ Police.prototype.routes = {
         return _.extend(routes, {
             'get /signin': 'AuthController.getSignin',
             'post /signin': 'AuthController.postSignin',
-            'get /signout': 'AuthController.deleteSignout',//TODO make use of DELETE
+            'get /signout': 'AuthController.deleteSignout', //TODO make use of DELETE
             'get /signup': 'AuthController.getSignup',
             'post /signup': 'AuthController.postSignup',
-            'get /confirm/:token': 'AuthController.getConfirm',//TODO make use of PUT
+            'get /confirm/:token': 'AuthController.getConfirm', //TODO make use of PUT
             // 'post /resend_verification': 'AuthController.getResendVerification',
             // 'get /verification/:token': 'AuthController.getVerification',
             // 'get /delete_account': 'AuthController.getDelete',

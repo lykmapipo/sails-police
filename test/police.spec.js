@@ -40,10 +40,10 @@ describe('Police', function() {
 
     });
 
-    it('should be able to mixin its morphs to a given model', function(done) {
+    it('should be able to mixin its morphs to a given sails model', function(done) {
         var User = {}
 
-        police.mixin(User);
+        police.model.mixin(User);
 
         expect(User.authenticable).to.be.true;
         expect(User.confirmable).to.be.true;
