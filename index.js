@@ -166,6 +166,54 @@ Police.prototype.routes = {
 };
 
 /**
+ * @description expose police middlewares populator
+ * @type {Object}
+ */
+Police.prototype.middlewares = {
+    /**
+     * @description mixin police middlewares into sails middlewares
+     * @param  {Object} middlewares sails js middlewares
+     * @return {Object}             sailsjs middlewares extended with police middlewares
+     */
+    mixin: function(middlewares) {
+        var previousMiddlewares = middlewares;
+        var previousOrder = middlewares.middleware.order;
+        var indexOfRouter = previousOrder.indexOf('router');
+
+        //patching sails middleware and
+        //adding police middlewares
+        middlewares.middleware = _.extend(previousMiddlewares.middleware, {
+            //police middleware to inject locals
+            //which will store errors, warnings and success messages
+            //they are heavily used in default views if police
+            //to constitute messages
+            policeLocals: function(request, response, next) {
+                response.locals.error = null;
+                response.locals.warning = null;
+                response.locals.success = null;
+                return next();
+            },
+
+            //police middleare to initialize passport police
+            //and passportjs
+            policeInit: exports.initialize(),
+
+            //police middleware to inialize
+            //passportjs session
+            policeSession: exports.session()
+        });
+
+        //patching sails middleware order and add
+        //police middlewares before router in the middleware order
+        previousOrder.splice(indexOfRouter, 0, 'policeLocals', 'policeInit', 'policeSession');
+        middlewares.middleware.order = previousOrder;
+
+        //return patched middlewares
+        return middlewares;
+    }
+};
+
+/**
  * Signup function exposed to user.
  * @param {Object} signup - User object to be persisted to database
  * @param {signUpCallback} callback - Run callback when finished if it exists
