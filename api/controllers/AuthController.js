@@ -91,9 +91,8 @@ module.exports = {
             email: '',
             password: ''
         };
-        response.view('auth/get_signup', _.extend({
+        response.view('auth/signup', _.extend({
             title: 'Sign up',
-            error: ''
         }, credentials));
     },
 
@@ -169,7 +168,7 @@ module.exports = {
      * @param {HttpResponse} response
      */
     getForgot: function(reguest, response) {
-        response.view('auth/get_forget_password', {
+        response.view('auth/forgot', {
             title: 'Forgot password',
         });
     },

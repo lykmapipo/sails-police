@@ -140,7 +140,7 @@ Police.prototype.policies = {
                 postSignup: true,
                 getConfirm: true,
                 getForgot: true,
-                deleteSignout: true,
+                // deleteSignout: true,
                 // postForgotPassword: true,
                 // getForgotPasswordToken: true,
                 // postForgotPasswordToken: true,
