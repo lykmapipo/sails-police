@@ -16,30 +16,140 @@ Simple and flexible authentication workflows for [sails](https://github.com/bald
 $ npm install sails-police
 ```
 
-## Usage
-`sails-police` expose `mixins` that will extend different parts of sails flow and easy you setup. It expose the following `mixins`:
+## Setup
+`sails-police` expose `mixins` that will extend different parts of sails flow and easy your setup. It expose the following `mixins`:
 
-- `model.mixin`
-
-`sails-police` expose a single `mixin` function that accept a `model` 
-and return a `extended model` with all `sails-police morphs` applied.
+- `model.mixin` : It extend valid sails model with sails-police [morphs](#Modules) to make it a viable canditate to be used in `sails-police`.
 
 Before hand, you have to choose a model that will be used for `sails-police`, 
 which is `User` most of the time. After choosing the `sails-police` model 
-your have to mix `sails-police` into it. 
+your have to mix `sails-police morphs` into it. 
 
+To setup your model for `sails-police` to as bellow:
 ```js
-//require sails-police
+//in model/User.js
 var police = require('sails-police');
 
-//the model
-var User = {};
+//your User model definition
+var User = {
+    //your user attributes
+    //please check which attributes you want to
+    //add before, cause sails-police add some for you
+};
 
-//mixin sails-police
-police.mixin(User);
+//then mixin sails-police morphs
+police.model.mixin(User);
 
+//done
+//export your model
 module.exports = User;
 ```
+The model mixed with `sails-police morphs` will have all required `attributes` and `methods` to make it work out of the box with `sails-police`. To know what `attributes` and `methods` added please consult [Modules](#Modules) section.
+
+- `routes.mixin` : Its extend sails `routes` to setup all required `sails-police` routes. Currently there is no option of providing alternative routes, be patient its on go.
+
+To mix `sails-police` routes in your `routes` do as bellow:
+
+```js
+//in your config/routes,js
+var police = require('sails-police');
+
+//then use routes.mixin to add
+//sails-police routes
+module.exports.routes = police.routes.mixin({
+    //then continue adding your routes
+    //as you normally do
+    //with sails routes
+    '/': 'HomeController.index'
+});
+```
+After `mixin sails-police routes` your will have the following routes at your disposal:
+```js
+'get /signin': 'AuthController.getSignin',
+'post /signin': 'AuthController.postSignin',
+'get /signout': 'AuthController.deleteSignout', //TODO make use of DELETE
+'get /signup': 'AuthController.getSignup',
+'post /signup': 'AuthController.postSignup',
+'get /confirm/:token': 'AuthController.getConfirm', //TODO make use of PUT
+'get /forgot': 'AuthController.getForgot',
+```
+Other `routes` are coming...
+
+- `policies.mixin` : It extend your `policies` with the requires `sails-police` polices to make it work out of box.
+
+To mixin `sails-police` into your policies do as bellow:
+```js
+//in your config/policies.js
+var police = require('sails-police');
+
+//then use policies.mixin
+//to add sails-police mixins
+module.exports.policies = police.policies.mixin({
+   //continue define your policies 
+   //as you do with sails police normally 
+});
+```
+After `sails-police policies mixin` the following `policies` will be added into your policies definition:
+```js
+'AuthController': {
+                getSignin: true,
+                postSignin: true,
+                getSignup: true,
+                postSignup: true,
+                getConfirm: true,
+                getForgot: true
+            }
+```
+Other `policies` are comming....
+
+- `middlewares.mixin`: It extend `sails http config` with policies middlewares and patch the middleware `order` so that `sails-police` can achieve its intended purpose.
+
+To `mixin sails-police middlewares` do as bellow:
+```js
+//in your config/http.js
+//uncomment the exports
+//then
+var police = require('sails-police');
+
+//the use middlewares.mixin
+//to add require sails-police middlewares
+//which wrap the initial module.exports.http
+module.exports.http = police.middlewares.mixin({
+    //initial sails http exports definition goes here
+});
+```
+`sails-police middleware mixins` are divided into:
+
+- `policeLocals`: Which extends `request,locals` with `error`, `warning` and `success` key so that at any time if you assing a value to them they will get displayed in the view.
+
+- `policeInit`: Which is the wrapper around [passportjs initialize](http://passportjs.org/guide/configure) but also provide a hook point where `sails-police` setup its passportjs. And what it does is to add passportjs initialize into `sails middlewares` as `policeInit` and `middlewares order` as `policeInit`.
+
+- `policeSession`: Which is the wrapper around [passportjs session](http://passportjs.org/guide/configure). And what it does is to add passportjs session initialization into `sails middlewares` as `policeSession` and `middlewares order` as `policeSession`.
+
+All of the above `middlewares` are injected before `sails router middleware`. So in cas of any issue please lets discuss.
+
+##Sample
+To have a clear picture of the setup please check on this repo 
+
+- [api/AuthController.js](https://github.com/lykmapipo/sails-police/blob/master/api/controllers/AuthController.js)
+
+- [config/policies.js](https://github.com/lykmapipo/sails-police/blob/master/config/policies.js)
+
+- [config/routes.js](https://github.com/lykmapipo/sails-police/blob/master/config/routes.js)
+
+- [api/User.js](https://github.com/lykmapipo/sails-police/blob/master/api/models/User.js)
+
+- [config/http.js](https://github.com/lykmapipo/sails-police/blob/master/config/http.js)
+
+- [config/bootstrap.js](https://github.com/lykmapipo/sails-police/blob/master/config/bootstrap.js)
+
+- [api/hooks/email.js](https://github.com/lykmapipo/sails-police/blob/master/api/hooks/email.js)
+
+- [config/paths.js](https://github.com/lykmapipo/sails-police/blob/master/config/paths.js)
+
+- [views](https://github.com/lykmapipo/sails-police/tree/master/views)
+
+And finally the `starter-app` is on todo.
 
 Modules
 ========
@@ -49,6 +159,8 @@ It lays down the infrastructure for authenticating a user in `sails-police` appl
 
 - `email` : An attribute used to store user email address. `sails-police` 
 opt to use email address but in future we will add support to custom attribute.
+
+- `username`: An attribute which used to store username.
 
 - `password` : An attribute which is used to store user password hash.
 
