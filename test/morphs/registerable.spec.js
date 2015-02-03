@@ -4,7 +4,7 @@ var faker = require('faker');
 var email = faker.internet.email();
 
 describe('Registerable', function() {
-    
+
     it('should have registerable static flag', function(done) {
         expect(User.registerable).to.be.true;
         done();
@@ -47,7 +47,9 @@ describe('Registerable', function() {
                     function(next) {
                         User
                             .findOneByEmail(email)
-                            .exec(next);
+                            .exec(function(error, authenticable) {
+                                next(error, authenticable);
+                            });
                     },
                     function(registerable, next) {
                         expect(registerable.unregister).to.be.a('function');

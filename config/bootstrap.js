@@ -22,13 +22,13 @@ module.exports.bootstrap = function(cb) {
                     .hooks
                     .email
                     .send(
-                        "confirm", {
-                            recipientName: user.email,
-                            senderName: "Sails Police",
+                        'confirm', {
+                            recipientName: user.username,
+                            senderName: 'Sails Police',
                             token: user.confirmationToken
                         }, {
                             to: user.email,
-                            subject: "Account confirmation"
+                            subject: 'Account confirmation'
                         },
                         function(error) {
                             done();
@@ -41,12 +41,13 @@ module.exports.bootstrap = function(cb) {
                     .hooks
                     .email
                     .send(
-                        "recover", {
-                            recipientName: "Joe",
-                            senderName: "Sue"
+                        'recover', {
+                            recipientName: user.username,
+                            senderName: 'Sails Police',
+                            token: user.recoveryToken
                         }, {
-                            to: "joe@example.com",
-                            subject: "Hi there"
+                            to: 'juser.email',
+                            subject: 'Account Recovery'
                         },
                         function(error) {
                             done();
@@ -59,12 +60,12 @@ module.exports.bootstrap = function(cb) {
                     .hooks
                     .email
                     .send(
-                        "unlock", {
-                            recipientName: "Joe",
-                            senderName: "Sue"
+                        'unlock', {
+                            recipientName: 'Joe',
+                            senderName: 'Sue'
                         }, {
-                            to: "joe@example.com",
-                            subject: "Hi there"
+                            to: 'joe@example.com',
+                            subject: 'Hi there'
                         },
                         function(error) {
                             done();

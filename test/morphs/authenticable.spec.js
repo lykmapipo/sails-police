@@ -92,6 +92,10 @@ describe('Authenticable', function() {
                     },
                     function(registerable, next) {
                         User
+                            .confirm(registerable.confirmationToken, next);
+                    },
+                    function(registerable, next) {
+                        User
                             .authenticate(credentials, next);
                     },
                     function(registerable, next) {

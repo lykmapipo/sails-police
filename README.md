@@ -279,7 +279,8 @@ user
 ```
 
 - `sendConfirmation(callback(error,confirmable))` : This instance method utilize the configured transport and send the confirmation notification. On successfully send it will update `confirmationSentAt` instance attribute with the current time stamp and persist the instance before return it.
-####Note: send confirmation use the transport api provide on [setTranport](#How to implement a transport) configuration.
+
+Note: send confirmation use the transport api provide on [setTranport](https://github.com/lykmapipo/sails-police#how-to-implement-a-transport) configuration.
 
 Example
 ```js
@@ -561,28 +562,24 @@ User
 ``` 
 
 ## Transport API
-By default sails-police default transport is `noop`. This is because 
+By default `sails-police` default transport is `noop`. This is because 
 there are different use case when it came on sending notification. Example 
 you may opt to send you notification through sms, email or any other medium 
 of your choice.
 
 Due to that reason sails-police has the method `setTransport` which accept 
-a function and pass the `type,authentication,done` as it argurments
+a function and pass the `type, authentication, done` as it argurments
 
-- `type` : Refer to the type of notifcation to be sent
+- `type` : Refer to the type of notifcation to be sent.
 - `authenticable` : Refer to the model instance that you have mixin 
-police morphs
-
+`sails-police morphs`.
 - `done` : Is the callback that you must call after finish sending 
 the notification. By default this callback will update notification 
 send details based on the usage.
 
 ## How to implement a transport
 Simple and clear way to register a transport is to call `setTrasport(fn)` of 
-sails-police and pass in your transport `function`. It is recommended to implement 
-all your notification send scenario(s) within that function i.e if you are 
-suppose to send both email and sms just implement them together in that single function.
-
+`sails-police` and pass in your transport `function`. It is recommended to implement all your notification send scenario(s) within that function i.e if you are suppose to send both email and sms just implement them together in that single function.
 ```js
 var police = require('sails-police');
 

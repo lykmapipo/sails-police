@@ -140,6 +140,9 @@ Police.prototype.policies = {
                 postSignup: true,
                 getConfirm: true,
                 getForgot: true,
+                postForgot: true,
+                getRecover: true,
+                postRecover: true,
                 // deleteSignout: true,
                 // postForgotPassword: true,
                 // getForgotPasswordToken: true,
@@ -166,7 +169,9 @@ Police.prototype.routes = {
             // 'get /delete_account': 'AuthController.getDelete',
             // 'post /delete_account': 'AuthController.postDelete',
             'get /forgot': 'AuthController.getForgot',
-            // 'post /forgot_password': 'AuthController.postForgotPassword',
+            'post /forgot': 'AuthController.postForgot',
+            'get /recover/:token': 'AuthController.getRecover',
+            'post /recover': 'AuthController.postRecover',
             // 'get /forgot_password/:token': 'AuthController.getForgotPasswordToken',
             // 'post /forgot_password/:token': 'AuthController.postForgotPasswordToken'});
         });

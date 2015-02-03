@@ -5,14 +5,14 @@
 - [x] encryptPassword(callback(error,authenticable))
 - [x] comparePassword(password,callback)
 - [ ] authenticate(credentials,callback)
-    - [ ] validate credentials
+    - [x] validate credentials
     - [x] findOneByEmail
-    - [ ] check if authenticable found/exist
-    - [ ] check if already confirmed/verified
-    - [ ] check if account locked
-    - [ ] check fail attempts
+    - [x] check if authenticable found/exist
+    - [x] check if already confirmed/verified
+    - [x] check if account locked
     - [x] compare password
-    - [ ] if no authenticable found create not found error
+    - [ ] if password dont match update failedAttempts
+    - [ ] track user on successfully signin
 - [ ] hook authenticate in sails request lifecycle
 
 ## Confirmable
@@ -39,6 +39,8 @@ unlockTokenExpiryAt attributes
 - [x] generateRecoveryToken(callback)
 - [x] sendRecovery(callback)
 - [x] recover(recoveryToken,callback)
+- [ ] allow recovery request for confirmed account other wise tell user to confirm account first or regenerate confirmation token and signal user to confirm first?
+- [ ] validate presence of token and password in post recovery
 - [ ] hook recoverable into sails request lifecycle
 
 ## Registerable
@@ -65,6 +67,18 @@ lastSignInAt, lastSignInIpAddress attributes
 - [ ] createing starter app
 - [ ] creating detailing tutorials on how to use sails police
 
-## REST
+## Controller
+- [ ] log all errors and any request data
+- [x] implement signup
+- [x] implement confirm
+- [x] implement signin
+- [x] implement signout
+- [ ] implement forgot password
 - [ ] Make controller rest aware
 - [ ] Use method-override on some of controllers method
+
+
+##Next Gen
+- [ ] last seen at (Seenable)
+- [ ] change password (Changeable)
+- [ ] remember me (Rememberable)

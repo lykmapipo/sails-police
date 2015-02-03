@@ -3,6 +3,19 @@ var passport = require('passport');
 var async = require('async');
 var _ = require('lodash');
 
+function messages(request) {
+    var error = request.flash('error');
+    var success = request.flash('success');
+    var warning = request.flash('warning');
+
+    return {
+        error: _.isEmpty(error) ? null : error,
+        warning: _.isEmpty(warning) ? null : warning,
+        success: _.isEmpty(success) ? null : success
+    }
+}
+
+//TODO add logs
 module.exports = {
     /**
      * @description GET /signin
@@ -13,18 +26,13 @@ module.exports = {
         // save redirect url
         var suffix = request.query.redirect ? '?redirect=' + request.query.redirect : '';
 
-        var error = request.flash('error');
-        var success = request.flash('success');
-        var warning = request.flash('warning');
+        var data = _.extend({
+            title: 'Signin'
+        }, messages(request));
 
         // render view
         response
-            .view('auth/signin', {
-                title: 'Signin',
-                error: _.isEmpty(error) ? null : error,
-                warning: _.isEmpty(warning) ? null : warning,
-                success: _.isEmpty(success) ? null : success
-            });
+            .view('auth/signin', data);
     },
 
     postSignin: function(request, response) {
@@ -60,7 +68,7 @@ module.exports = {
                 ],
                 function(error, authenticable) {
                     if (error) {
-                        console.log(error);
+                        sails.log(error);
 
                         sails.emit('signin:error', error);
 
@@ -69,7 +77,7 @@ module.exports = {
                         response.redirect('/signin');
 
                     } else {
-                        console.log(authenticable);
+                        sails.log(authenticable);
                         // emit 'login' event
                         sails.emit('authenticale::signin', authenticable);
 
@@ -114,12 +122,15 @@ module.exports = {
             .getUser()
             .register(credentials, function(error, registerable) {
                 if (error) {
+                    sails.log(error);
+
                     sails.emit('registerable::register::error', error);
 
                     request.flash('error', error.message);
 
                     response.redirect('/signup');
                 } else {
+                    sails.log(registerable);
                     // emit event
                     sails.emit('registerable::register::success', registerable);
 
@@ -143,7 +154,7 @@ module.exports = {
             .getUser()
             .confirm(token, function(error, confirmable) {
                 if (error) {
-                    console.log(error);
+                    sails.log(error);
 
                     sails.emit('confirmable::confirm::error', error);
 
@@ -151,6 +162,7 @@ module.exports = {
 
                     response.redirect('/signin');
                 } else {
+                    sails.log(confirmable);
 
                     sails.emit('confirmable:confirm::success', confirmable);
 
@@ -167,10 +179,121 @@ module.exports = {
      * @param {HttpRequest} request
      * @param {HttpResponse} response
      */
-    getForgot: function(reguest, response) {
-        response.view('auth/forgot', {
-            title: 'Forgot password',
-        });
+    getForgot: function(request, response) {
+
+        var data = _.extend({
+            title: 'Forgot password'
+        }, messages(request));
+
+        response.view('auth/forgot', data);
+    },
+
+    /**
+     * @description POST /forgot
+     *
+     * @param {HttpRequest} request
+     * @param {HttpResponse} response
+     */
+    postForgot: function(request, response) {
+        var email = request.body.email;
+
+        async.waterfall(
+            [
+                function(next) {
+                    require('sails-police')
+                        .getUser()
+                        .findOneByEmail(email)
+                        .exec(function(error, recoverable) {
+                            next(error, recoverable);
+                        });
+                },
+                //check if there recoverable found
+                function(recoverable, next) {
+                    if (_.isUndefined(recoverable) ||
+                        _.isNull(recoverable)) {
+                        next(new Error('Incorrect email. No account found.'));
+                    } else {
+                        next(null, recoverable);
+                    }
+                },
+                function(recoverable, next) {
+                    recoverable
+                        .generateRecoveryToken(next);
+                },
+                function(recoverable, next) {
+                    recoverable
+                        .sendRecovery(next);
+                }
+            ],
+            function(error, recoverable) {
+                if (error) {
+                    sails.log(error);
+
+                    sails.emit('recoverable::request:error', error);
+
+                    request.flash('error', error.message);
+
+                    response.redirect('/forgot');
+                } else {
+                    sails.log(recoverable);
+
+                    sails.emit('recoverable::request::success', recoverable);
+
+                    request.flash('success', 'Check your email for recovery instructions.');
+
+                    response.redirect('/signin');
+                }
+            });
+    },
+
+    /**
+     * @description GET /recover/:token
+     *
+     * @param {HttpRequest} request
+     * @param {HttpResponse} response
+     */
+    getRecover: function(request, response) {
+        var token = request.params.token;
+
+        var data = _.extend({
+            title: 'Recover password',
+            token: token,
+        }, messages(request));
+
+        response.view('auth/recover', data);
+    },
+
+    /**
+     * @description POST /recover
+     *
+     * @param {HttpRequest} request
+     * @param {HttpResponse} response
+     */
+    postRecover: function(request, response) {
+        var token = request.body._token;
+        var password = request.body.password;
+
+        require('sails-police')
+            .getUser()
+            .recover(token, password, function(error, recoverable) {
+                if (error) {
+                    sails.log(error);
+
+                    sails.emit('recoverable::recover::error', error);
+
+                    request.flash('error', error.message);
+
+                    response.redirect('/signin');
+                } else {
+                    sails.log(recoverable);
+
+                    sails.emit('recoverable::recover::success', recoverable);
+
+                    request.flash('success', 'Account recovered successfully');
+
+                    response.redirect('/signin');
+                }
+            });
     },
 
     /**
@@ -185,6 +308,8 @@ module.exports = {
         request.logout();
 
         sails.emit('authenticable::signout', user);
+
+        sails.log(user);
 
         request.flash('success', 'Signout successfully.');
 

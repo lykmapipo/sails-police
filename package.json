@@ -43,7 +43,7 @@
     "passport-local": "^1.0.0",
     "passport-remember-me": "0.0.1",
     "sails-hook-email": "^0.10.3",
-    "sails-model-new": "^0.1.3",
+    "sails-model-new": "^0.1.4",
     "sails-validation-messages": "0.0.0",
     "validate.js": "^0.2.0",
     "validator": "^3.28.0"
