@@ -8,7 +8,7 @@
 [![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.svg)](https://gratipay.com/lykmapipo/)
 
 Simple and flexible authentication workflows for [sails](https://github.com/balderdashy/sails) inspired by 
-[devise](https://github.com/plataformatec/devise) and heavily lifted from [passportjs](https://github.com/jaredhanson/passport).
+[devise](https://github.com/plataformatec/devise) and [passportjs](https://github.com/jaredhanson/passport).
 
 ## Install
 
