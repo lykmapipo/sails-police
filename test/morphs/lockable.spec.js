@@ -22,6 +22,7 @@ describe('Lockable', function() {
     it('should be able to generate lock token', function(done) {
         var user = User.new({
             email: faker.internet.email(),
+            username: faker.internet.userName(),
             password: faker.internet.password()
         });
 
@@ -42,6 +43,7 @@ describe('Lockable', function() {
     it('should be able to send unlock instructions', function(done) {
         var user = User.new({
             email: faker.internet.email(),
+            username: faker.internet.userName(),
             password: faker.internet.password()
         });
 
@@ -61,6 +63,7 @@ describe('Lockable', function() {
     it('should have lock ability', function(done) {
         var user = User.new({
             email: faker.internet.email(),
+            username: faker.internet.userName(),
             password: faker.internet.password(),
             failedAttempt: 5
         });
@@ -87,6 +90,7 @@ describe('Lockable', function() {
                         User
                             .register({
                                 email: faker.internet.email(),
+                                username: faker.internet.userName(),
                                 password: faker.internet.password()
                             }, next);
                     },

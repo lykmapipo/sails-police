@@ -106,6 +106,7 @@ module.exports = {
         //extract credentials from the request
         var credentials = {
             email: request.body.email,
+            username: request.body.username,
             password: request.body.password
         };
 
@@ -114,16 +115,14 @@ module.exports = {
             .getUser()
             .register(credentials, function(error, registerable) {
                 if (error) {
-                    sails.emit('signup::post::error', error);
-                    // render template with error message
+                    sails.emit('registerable::register::error', error);
+
                     request.flash('error', error.message);
 
                     response.redirect('/signup');
                 } else {
                     // emit event
-                    sails.emit('signup::post', registerable);
-
-                    console.log(registerable);
+                    sails.emit('registerable::register::success', registerable);
 
                     request.flash('success', 'Signup successfully. Check your email for confirmation');
 
@@ -153,9 +152,8 @@ module.exports = {
 
                     response.redirect('/signin');
                 } else {
-                    console.log(confirmable);
 
-                    sails.emit('confirmable:confirm', confirmable);
+                    sails.emit('confirmable:confirm::success', confirmable);
 
                     request.flash('success', 'Account cconfirmed successfully.');
 
@@ -164,10 +162,15 @@ module.exports = {
             });
     },
 
+    /**
+     * @description GET /forgot
+     *
+     * @param {HttpRequest} request
+     * @param {HttpResponse} response
+     */
     getForgot: function(reguest, response) {
         response.view('auth/get_forget_password', {
             title: 'Forgot password',
-            error: ''
         });
     },
 
@@ -182,10 +185,10 @@ module.exports = {
 
         request.logout();
 
-        sails.emit('signout', user);
+        sails.emit('authenticable::signout', user);
 
         request.flash('success', 'Signout successfully.');
 
-        response.redirect('/login');
+        response.redirect('/signin');
     }
 }

@@ -24,6 +24,7 @@ describe('Registerable', function() {
     it('should be able to register new registerable', function(done) {
         var credentials = {
             email: email,
+            username: faker.internet.userName(),
             password: faker.internet.password()
         }
 

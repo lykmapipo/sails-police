@@ -9,21 +9,14 @@
                                 <h3>Welcome</h3>
                             </div>
                             <div class="form-main">
-                                <form action="/signout?_method=DELETE" method="POST" autocomplete="off">
-                                    <input type="hidden" name="_csrf" value="<%=_csrf%>" />
-                                    <div class="form-group">
-                                        <div class="row top-buffer">
-                                            <div class="col-md-4 col-md-offset-8">
-                                                <button type="submit" class="btn btn-block signin">Sign out</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+                                <div class="col-md-4 col-md-offset-8">
+                                    <a href="/signout" class="btn btn-block signin">Sign out</a>
+                                </div>
                             </div>
                         </div>
+                        </form>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

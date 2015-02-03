@@ -150,10 +150,10 @@ Police.prototype.routes = {
         return _.extend(routes, {
             'get /signin': 'AuthController.getSignin',
             'post /signin': 'AuthController.postSignin',
-            'delete /signout': 'AuthController.deleteSignout',
+            'get /signout': 'AuthController.deleteSignout',//TODO make use of DELETE
             'get /signup': 'AuthController.getSignup',
             'post /signup': 'AuthController.postSignup',
-            'get /confirm/:token': 'AuthController.getConfirm',
+            'get /confirm/:token': 'AuthController.getConfirm',//TODO make use of PUT
             // 'post /resend_verification': 'AuthController.getResendVerification',
             // 'get /verification/:token': 'AuthController.getVerification',
             // 'get /delete_account': 'AuthController.getDelete',

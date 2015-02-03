@@ -11,6 +11,7 @@ describe('Authenticable', function() {
 
     it('should have username and password attributes', function(done) {
         expect(User._attributes.email).to.exist;
+        expect(User._attributes.username).to.exist;
         expect(User._attributes.password).to.exist;
         done();
     });
@@ -78,6 +79,7 @@ describe('Authenticable', function() {
     it('should be able to authenticate registerable', function(done) {
         var credentials = {
             email: faker.internet.email(),
+            username: faker.internet.userName(),
             password: faker.internet.password()
         }
 

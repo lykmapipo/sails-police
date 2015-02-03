@@ -26,6 +26,7 @@ describe('Trackable', function() {
 
         var trackable = User.new({
             email: email,
+            username: faker.internet.userName(),
             password: faker.internet.password()
         });
 

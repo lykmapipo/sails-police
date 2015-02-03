@@ -20,6 +20,7 @@ describe('Confirmable', function() {
     it('should be able to generate confirmation token and set confirmation expriry at date', function(done) {
         var user = User.new({
             email: faker.internet.email(),
+            username: faker.internet.userName(),
             password: faker.internet.password()
         });
 
@@ -40,6 +41,7 @@ describe('Confirmable', function() {
     it('should be able to send confirmation', function(done) {
         var user = User.new({
             email: faker.internet.email(),
+            username: faker.internet.userName(),
             password: faker.internet.password()
         });
 
@@ -64,6 +66,7 @@ describe('Confirmable', function() {
                         User
                             .register({
                                 email: faker.internet.email(),
+                                username: faker.internet.userName(),
                                 password: faker.internet.password()
                             }, next);
                     },

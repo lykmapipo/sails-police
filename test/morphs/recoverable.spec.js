@@ -19,6 +19,7 @@ describe('Recoverable', function() {
     it('should be able to generate recovery token', function(done) {
         var user = User.new({
             email: faker.internet.email(),
+            username: faker.internet.userName(),
             password: faker.internet.password()
         });
 
@@ -40,6 +41,7 @@ describe('Recoverable', function() {
     it('should be able to send recovery notification', function(done) {
         var user = User.new({
             email: faker.internet.email(),
+            username: faker.internet.userName(),
             password: faker.internet.password()
         });
 
@@ -66,6 +68,7 @@ describe('Recoverable', function() {
                         User
                             .register({
                                 email: faker.internet.email(),
+                                username: faker.internet.userName(),
                                 password: faker.internet.password()
                             }, next);
                     },

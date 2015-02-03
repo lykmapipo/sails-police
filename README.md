@@ -555,6 +555,10 @@ lastSignInAt, lastSignInIpAddress attributes
 - [ ] createing starter app
 - [ ] creating detailing tutorials on how to use sails police
 
+## REST
+- [ ] Make controller rest aware
+- [ ] Use method-override on some of controllers method
+
 ## Testing
 
 * Clone this repository
