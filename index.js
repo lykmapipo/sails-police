@@ -4,7 +4,7 @@ var passport = require('passport');
 
 //morphs
 var Authenticable = require('./lib/morphs/authenticable.js');
-var Confirmable = require('./lib/morphs/confirmable.js');
+var confirmable = require('./lib/morphs/confirmable.js');
 var Lockable = require('./lib/morphs/lockable.js');
 var Recoverable = require('./lib/morphs/recoverable.js');
 var Registerable = require('./lib/morphs/registerable.js');
@@ -50,8 +50,8 @@ Police.prototype.model = {
         //mixin authenticable
         model = new Authenticable(model);
 
-        //mixin confrimable
-        model = new Confirmable(model);
+        //apply confirmable
+        model = confirmable.apply(model);
 
         //mixin lockable
         model = new Lockable(model);
