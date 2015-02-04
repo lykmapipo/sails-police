@@ -64,6 +64,10 @@ module.exports = {
                                     next(null, authenticable);
                                 }
                             });
+                    },
+                    function(authenticable, next) {
+                        //track authenticable
+                        authenticable.track(request.ip, next);
                     }
                 ],
                 function(error, authenticable) {
