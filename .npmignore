@@ -3,7 +3,10 @@ logs
 *.log
 
 #Temporary data
+.DS_STORE
 .tmp
+.idea
+nbproject
 
 # Runtime data
 pids
@@ -35,3 +38,18 @@ views
 config
 public
 doc.html
+TODO.md
+test
+.travis.yml
+police-hat-sm.png
+police-hat-md.png
+police-hat-lg.png
+
+
+#Git
+.git
+.gitignore
+
+#jshint
+.jshintrc
+.jshintignore

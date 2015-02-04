@@ -4,11 +4,6 @@ var async = require('async');
 
 describe('Authenticable', function() {
 
-    it('should have authenticable static flag', function(done) {
-        expect(User.authenticable).to.be.true;
-        done();
-    });
-
     it('should have username and password attributes', function(done) {
         expect(User._attributes.email).to.exist;
         expect(User._attributes.username).to.exist;

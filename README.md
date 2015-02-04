@@ -627,6 +627,9 @@ Do not forget to add a bit of test(s) of what value you adding.
 It will be nice, if you add it as an issue so that we can know what is going on.Also I have some form of todo, [check it](https://github.com/lykmapipo/sails-police/blob/master/TODO.md) before start working on your brilliant idea or feature.
 
 ## Licence
+The MIT License (MIT)
+
+Copyright (c) 2014 sails-police
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
