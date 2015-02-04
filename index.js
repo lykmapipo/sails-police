@@ -135,12 +135,8 @@ Police.prototype.policies = {
                 postForgot: true,
                 getRecover: true,
                 postRecover: true,
-                // deleteSignout: true,
-                // postForgotPassword: true,
-                // getForgotPasswordToken: true,
-                // postForgotPasswordToken: true,
-                // getResendVerification: true,
-                // postResendVerification: true,
+                getLocked: true,
+                postLocked: true
             }
         });
     }
@@ -156,16 +152,12 @@ Police.prototype.routes = {
             'get /signup': 'AuthController.getSignup',
             'post /signup': 'AuthController.postSignup',
             'get /confirm/:token': 'AuthController.getConfirm', //TODO make use of PUT
-            // 'post /resend_verification': 'AuthController.getResendVerification',
-            // 'get /verification/:token': 'AuthController.getVerification',
-            // 'get /delete_account': 'AuthController.getDelete',
-            // 'post /delete_account': 'AuthController.postDelete',
             'get /forgot': 'AuthController.getForgot',
             'post /forgot': 'AuthController.postForgot',
             'get /recover/:token': 'AuthController.getRecover',
             'post /recover': 'AuthController.postRecover',
-            // 'get /forgot_password/:token': 'AuthController.getForgotPasswordToken',
-            // 'post /forgot_password/:token': 'AuthController.postForgotPasswordToken'});
+            'get /locked': 'AuthController.getLocked',
+            'post /locked': 'AuthController.postLocked'
         });
     }
 };

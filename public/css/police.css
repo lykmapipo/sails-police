@@ -2,78 +2,78 @@ html {
     background-color: #373746;
     color: #eaeaea;
 }
-.authenty {
+.police {
     font-family: 'Open Sans', sans-serif;
     background-color: #eaeaea;
 }
-.authenty[data-animation] {
+.police[data-animation] {
     opacity: 0;
 }
-.authenty ul {
+.police ul {
     list-style-type: none;
 }
-.authenty h1, .authenty h2, .authenty h3, .authenty h4, .authenty h5, .authenty h6 {
+.police h1, .police h2, .police h3, .police h4, .police h5, .police h6 {
     font-weight: 400;
 }
-.authenty h1 {
+.police h1 {
     font-weight: 700;
     letter-spacing: -1px;
 }
-.authenty a:hover {
+.police a:hover {
     text-decoration: none;
 }
-.authenty .btn {
+.police .btn {
     border-radius: 0;
 }
-.authenty .btn:active {
+.police .btn:active {
     box-shadow: none;
     border-radius: 0px!important;
 }
-.authenty .btn:focus {
+.police .btn:focus {
     outline: thin dotted #FFFFFF;
     outline-offset: 0;
 }
-.authenty .btn:hover, .authenty .btn:focus {
+.police .btn:hover, .police .btn:focus {
     color: #fff;
 }
-.authenty .form-control:focus {
+.police .form-control:focus {
     border-color: #ff7000;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 112, 0, 0.6);
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 122, 0, 0.6);
     transition: border-color 0.7s, box-shadow 0.7s;
     -webkit-transition: border-color 0.7s, box-shadow 0.7s;
 }
-.authenty .wrap {
+.police .wrap {
     width: 100%;
 }
-.authenty .top-buffer {
+.police .top-buffer {
     margin-top: 20px;
 }
-.authenty.signin-main {
+.police.signin-main {
     background-color: #eaeaea;
 }
-.authenty.signin-main .title {
+.police.signin-main .title {
     text-align: center;
     margin-bottom: 70px;
 }
-.authenty.signin-main .title h1 {
+.police.signin-main .title h1 {
     font-size: 40pt;
 }
-.authenty.signin-main .wrap {
+.police.signin-main .wrap {
     padding-top: 80px;
 }
-.authenty.signin-main .form-wrap {
+.police.signin-main .form-wrap {
     width: 100%;
     margin: 0 auto;
     max-width: 400px;
 }
-.authenty.signin-main .form-header {
+.police.signin-main .form-header {
     padding: 20px 0;
     text-align: center;
     border-radius: 10px 10px 0 0;
     background-color: #ffffff;
 }
-.authenty.signin-main .form-header .fa-user {
+.police.signin-main .form-header .fa-user {
     font-size: 50px;
     color: #ffffff;
     border-radius: 50%;
@@ -81,22 +81,29 @@ html {
     padding: 15px 20px;
     background: #f6f8f9;
     /* Old browsers */
+    
     background: -moz-linear-gradient(-45deg, #f6f8f9 0%, #e5ebee 50%, #d7dee3 51%, #f5f7f9 100%);
     /* FF3.6+ */
+    
     background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #f6f8f9), color-stop(50%, #e5ebee), color-stop(51%, #d7dee3), color-stop(100%, #f5f7f9));
     /* Chrome,Safari4+ */
+    
     background: -webkit-linear-gradient(-45deg, #f6f8f9 0%, #e5ebee 50%, #d7dee3 51%, #f5f7f9 100%);
     /* Chrome10+,Safari5.1+ */
+    
     background: -o-linear-gradient(-45deg, #f6f8f9 0%, #e5ebee 50%, #d7dee3 51%, #f5f7f9 100%);
     /* Opera 11.10+ */
+    
     background: -ms-linear-gradient(-45deg, #f6f8f9 0%, #e5ebee 50%, #d7dee3 51%, #f5f7f9 100%);
     /* IE10+ */
+    
     background: linear-gradient(135deg, #f6f8f9 0%, #e5ebee 50%, #d7dee3 51%, #f5f7f9 100%);
     /* W3C */
+    
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#f6f8f9', endColorstr='#f5f7f9', GradientType=1);
     /* IE6-9 fallback on horizontal gradient */
 }
-.authenty.signin-main .form-header .fa-user.fail {
+.police.signin-main .form-header .fa-user.fail {
     color: #FF8479;
     border: 3px solid #FF8479;
     -webkit-transition: color 200ms linear;
@@ -105,7 +112,7 @@ html {
     -ms-transition: color 200ms linear;
     transition: color 200ms linear;
 }
-.authenty.signin-main .form-header .fa-user.success {
+.police.signin-main .form-header .fa-user.success {
     color: #98CA4D;
     border: 3px solid #98CA4D;
     -webkit-transition: color 700ms linear;
@@ -114,22 +121,22 @@ html {
     -ms-transition: color 700ms linear;
     transition: color 700ms linear;
 }
-.authenty.signin-main .form-main {
+.police.signin-main .form-main {
     background-color: #505050;
     padding: 40px 50px;
 }
-.authenty.signin-main .form-footer {
+.police.signin-main .form-footer {
     background-color: #404040;
     padding: 20px 50px;
 }
-.authenty.signin-main .form-footer a {
+.police.signin-main .form-footer a {
     color: #999999;
     font-size: 10pt;
 }
-.authenty.signin-main .form-footer a:hover {
+.police.signin-main .form-footer a:hover {
     text-decoration: none;
 }
-.authenty.signin-main .form-footer .fa-unlock-alt {
+.police.signin-main .form-footer .fa-unlock-alt {
     font-size: 10pt;
     color: #6f6f6f;
     border-radius: 50%;
@@ -137,7 +144,7 @@ html {
     padding: 5px 8px;
     margin-right: 7px;
 }
-.authenty.signin-main .form-footer .fa-check {
+.police.signin-main .form-footer .fa-check {
     font-size: 10pt;
     color: #6f6f6f;
     border-radius: 50%;
@@ -145,7 +152,7 @@ html {
     padding: 5px;
     margin-right: 7px;
 }
-.authenty.signin-main .signin {
+.police.signin-main .signin {
     padding-top: 10px;
     padding-bottom: 10px;
     background-color: #FF8627;
@@ -156,10 +163,10 @@ html {
     -ms-transition: background-color 300ms linear;
     transition: background-color 300ms linear;
 }
-.authenty.signin-main .signin:hover {
+.police.signin-main .signin:hover {
     background-color: #ff6610;
 }
-.authenty.signin-main input[type="text"], .authenty.signin-main input[type="password"] {
+.police.signin-main input[type="text"], .police.signin-main input[type="password"] {
     background-color: #404040;
     padding-left: 20px;
     border-radius: 0;
@@ -168,55 +175,57 @@ html {
     color: #cccccc;
     height: 43px;
 }
-.authenty.signin-main .bounceIn {
+.police.signin-main .bounceIn {
     opacity: 1;
 }
-.authenty.signin-main .fail {
+.police.signin-main .fail {
     animation: shake .5s linear;
     -webkit-animation: shake .5s linear;
     -moz-animation: shake .5s linear;
 }
 @media (max-width: 991px) {
-    .authenty.signin-main .wrap {
+    .police.signin-main .wrap {
         padding-left: 0;
         padding-right: 0;
     }
 }
 @media (max-width: 767px) {
-    .authenty.signin-main .form-main {
+    .police.signin-main .form-main {
         padding: 40px 30px;
     }
-    .authenty.signin-main .form-footer {
+    .police.signin-main .form-footer {
         padding: 20px 30px;
     }
 }
-.authenty.signin-alt {
+.police.signin-alt {
     background-color: #373746;
     color: #eaeaea;
 }
-.authenty.signin-alt .section-content {
+.police.signin-alt .section-content {
     padding: 0;
 }
-.authenty.signin-alt .title {
+.police.signin-alt .title {
     margin-bottom: 50px;
     text-align: left;
 }
-.authenty.signin-alt label {
+.police.signin-alt label {
     font-weight: normal;
 }
-.authenty.signin-alt .wrap {
+.police.signin-alt .wrap {
     /*padding-top: 250px;*/
+    
     padding-top: 150px;
 }
-.authenty.signin-alt .bottom-wrap {
+.police.signin-alt .bottom-wrap {
     padding-top: 30px;
     border-top: 1px solid #7A8086;
 }
-.authenty.signin-alt .bottom-wrap.top-buffer {
+.police.signin-alt .bottom-wrap.top-buffer {
     /*margin-top: 130px;*/
+    
     margin-top: 50px;
 }
-.authenty.signin-alt .bottom-wrap.top-buffer a {
+.police.signin-alt .bottom-wrap.top-buffer a {
     color: #ffffff;
     -webkit-transition: color 300ms linear;
     -moz-transition: color 300ms linear;
@@ -224,13 +233,13 @@ html {
     -ms-transition: color 300ms linear;
     transition: color 300ms linear;
 }
-.authenty.signin-alt .bottom-wrap.top-buffer a:hover {
+.police.signin-alt .bottom-wrap.top-buffer a:hover {
     color: #ff7000;
 }
-.authenty.signin-alt .normal-signin .un-wrap {
+.police.signin-alt .normal-signin .un-wrap {
     position: relative;
 }
-.authenty.signin-alt .normal-signin .un-wrap .fa-user {
+.police.signin-alt .normal-signin .un-wrap .fa-user {
     position: absolute;
     top: 2px;
     left: 1px;
@@ -239,7 +248,7 @@ html {
     padding: 10px 14px;
     background-color: #1C1F25;
 }
-.authenty.signin-alt .normal-signin .un-wrap .fa-envelope {
+.police.signin-alt .normal-signin .un-wrap .fa-envelope {
     position: absolute;
     top: 2px;
     left: 1px;
@@ -248,10 +257,10 @@ html {
     padding: 10px 14px;
     background-color: #1C1F25;
 }
-.authenty.signin-alt .normal-signin .pw-wrap {
+.police.signin-alt .normal-signin .pw-wrap {
     position: relative;
 }
-.authenty.signin-alt .normal-signin .pw-wrap .fa-lock {
+.police.signin-alt .normal-signin .pw-wrap .fa-lock {
     position: absolute;
     top: 2px;
     left: 1px;
@@ -260,9 +269,7 @@ html {
     padding: 10px 16px;
     background-color: #1C1F25;
 }
-.authenty.signin-alt .normal-signin input[type="text"], 
-.authenty.signin-alt .normal-signin input[type="email"], 
-.authenty.signin-alt .normal-signin input[type="password"] {
+.police.signin-alt .normal-signin input[type="text"], .police.signin-alt .normal-signin input[type="email"], .police.signin-alt .normal-signin input[type="password"] {
     padding-left: 60px;
     border-radius: 0;
     border: 1px solid #7A8086;
@@ -271,7 +278,7 @@ html {
     background-color: #282A38;
     height: 42px;
 }
-.authenty.signin-alt .normal-signin .signin {
+.police.signin-alt .normal-signin .signin {
     padding: 10px 15px;
     background-color: #3e4764;
     border: 1px solid #7A8086;
@@ -282,17 +289,17 @@ html {
     -ms-transition: background-color 300ms linear;
     transition: background-color 300ms linear;
 }
-.authenty.signin-alt .normal-signin .signin:hover {
+.police.signin-alt .normal-signin .signin:hover {
     background-color: #1E2B46;
 }
-.authenty.signin-alt .horizontal-divider {
+.police.signin-alt .horizontal-divider {
     margin: 0 auto;
     position: relative;
     width: 0px;
     top: 0;
     background-color: #ffffff;
 }
-.authenty.signin-alt .horizontal-divider:before {
+.police.signin-alt .horizontal-divider:before {
     content: 'OR';
     position: absolute;
     top: 110px;
@@ -303,18 +310,18 @@ html {
     border-radius: 50%;
     color: #ffffff;
 }
-.authenty.signin-alt .sns-signin {
+.police.signin-alt .sns-signin {
     margin-top: 94px;
 }
-.authenty.signin-alt .sns-signin a {
+.police.signin-alt .sns-signin a {
     margin-bottom: 22px;
     display: block;
     color: #ffffff;
 }
-.authenty.signin-alt .sns-signin a span {
+.police.signin-alt .sns-signin a span {
     margin-left: 30px;
 }
-.authenty.signin-alt .sns-signin .facebook {
+.police.signin-alt .sns-signin .facebook {
     background-color: #3e4764;
     -webkit-transition: background-color 300ms linear;
     -moz-transition: background-color 300ms linear;
@@ -322,15 +329,15 @@ html {
     -ms-transition: background-color 300ms linear;
     transition: background-color 300ms linear;
 }
-.authenty.signin-alt .sns-signin .facebook:hover {
+.police.signin-alt .sns-signin .facebook:hover {
     background-color: #235B97;
 }
-.authenty.signin-alt .sns-signin .facebook .fa-facebook {
+.police.signin-alt .sns-signin .facebook .fa-facebook {
     color: #505050;
     background-color: #eaeaea;
     padding: 15px 19px 15px 18px;
 }
-.authenty.signin-alt .sns-signin .google-plus {
+.police.signin-alt .sns-signin .google-plus {
     background-color: #e66060;
     -webkit-transition: background-color 300ms linear;
     -moz-transition: background-color 300ms linear;
@@ -338,57 +345,57 @@ html {
     -ms-transition: background-color 300ms linear;
     transition: background-color 300ms linear;
 }
-.authenty.signin-alt .sns-signin .google-plus:hover {
+.police.signin-alt .sns-signin .google-plus:hover {
     background-color: #EC574B;
 }
-.authenty.signin-alt .sns-signin .google-plus .fa-google-plus {
+.police.signin-alt .sns-signin .google-plus .fa-google-plus {
     color: #505050;
     background-color: #eaeaea;
     padding: 15px;
 }
 @media (max-width: 991px) {
-    .authenty.signin-alt .horizontal-divider:before {
+    .police.signin-alt .horizontal-divider:before {
         top: 10px;
         left: -30px;
         padding: 20px;
         font-size: 16px;
     }
-    .authenty.signin-alt .bottom-wrap.top-buffer {
+    .police.signin-alt .bottom-wrap.top-buffer {
         margin-top: 50px;
     }
-    .authenty.signin-alt .container {
+    .police.signin-alt .container {
         padding-right: 30px;
         padding-left: 30px;
     }
 }
-.authenty.signup-window {
+.police.signup-window {
     background-color: #eaeaea;
 }
-.authenty.signup-window .title {
+.police.signup-window .title {
     text-align: left;
     color: #cccccc;
 }
-.authenty.signup-window .wrap {
+.police.signup-window .wrap {
     padding-top: 250px;
 }
-.authenty.signup-window .form-wrap {
+.police.signup-window .form-wrap {
     background-color: #333333;
     padding: 50px 50px 100px 50px;
     position: relative;
 }
-.authenty.signup-window .form-wrap .fa-times-circle {
+.police.signup-window .form-wrap .fa-times-circle {
     position: absolute;
     top: 15px;
     right: 20px;
     font-size: 30px;
     color: #000000;
 }
-.authenty.signup-window .form-control:focus {
+.police.signup-window .form-control:focus {
     border: none;
     border-bottom: 1px solid #505050;
     box-shadow: 0 0 5px #cccccc;
 }
-.authenty.signup-window input[type="text"], .authenty.signup-window input[type="password"], .authenty.signup-window input[type="email"] {
+.police.signup-window input[type="text"], .police.signup-window input[type="password"], .police.signup-window input[type="email"] {
     background: none;
     border: none;
     border-bottom: 1px solid #505050;
@@ -398,14 +405,14 @@ html {
     margin-bottom: 20px;
     color: #cccccc;
 }
-.authenty.signup-window .checkbox label {
+.police.signup-window .checkbox label {
     color: #505050;
     font-size: 10pt;
 }
-.authenty.signup-window .sns-signin {
+.police.signup-window .sns-signin {
     margin-top: 100px;
 }
-.authenty.signup-window .sns-signin a {
+.police.signup-window .sns-signin a {
     display: block;
     text-align: left;
     border-radius: 50px;
@@ -415,7 +422,7 @@ html {
     -ms-transition: background-color 300ms linear;
     transition: background-color 300ms linear;
 }
-.authenty.signup-window .sns-signin a .fa-facebook {
+.police.signup-window .sns-signin a .fa-facebook {
     color: #ffffff;
     padding: 7px 15px 7px 10px;
     font-size: 16px;
@@ -423,14 +430,14 @@ html {
     margin-left: 10px;
     border-right: 1px solid #ffffff;
 }
-.authenty.signup-window .horizontal-divider {
+.police.signup-window .horizontal-divider {
     margin: 0 auto;
     position: relative;
     width: 1px;
     height: 250px;
     background-color: #505050;
 }
-.authenty.signup-window .horizontal-divider:before {
+.police.signup-window .horizontal-divider:before {
     content: 'OR';
     position: absolute;
     top: 40%;
@@ -440,10 +447,10 @@ html {
     background: #333333;
     color: #cccccc;
 }
-.authenty.signup-window .normal-signup {
+.police.signup-window .normal-signup {
     margin-top: 30px;
 }
-.authenty.signup-window .normal-signup a {
+.police.signup-window .normal-signup a {
     line-height: 2.5;
     color: #cccccc;
     -webkit-transition: color 300ms linear;
@@ -452,10 +459,10 @@ html {
     -ms-transition: color 300ms linear;
     transition: color 300ms linear;
 }
-.authenty.signup-window .normal-signup a:hover {
+.police.signup-window .normal-signup a:hover {
     color: #78b310;
 }
-.authenty.signup-window .normal-signup .signup {
+.police.signup-window .normal-signup .signup {
     padding: 8px 15px;
     background-color: #78b310;
     color: #ffffff;
@@ -465,52 +472,52 @@ html {
     -ms-transition: background-color 300ms linear;
     transition: background-color 300ms linear;
 }
-.authenty.signup-window .normal-signup .signup:hover {
+.police.signup-window .normal-signup .signup:hover {
     background-color: #5b910c;
 }
 @media (max-width: 767px) {
-    .authenty.signup-window .title {
+    .police.signup-window .title {
         margin-left: 15px;
     }
-    .authenty.signup-window .form-wrap {
+    .police.signup-window .form-wrap {
         padding: 30px 20px 60px 20px;
     }
-    .authenty.signup-window .sns-signin {
+    .police.signup-window .sns-signin {
         margin-top: 40px;
     }
-    .authenty.signup-window .sns-signin a {
+    .police.signup-window .sns-signin a {
         font-size: 13px;
     }
-    .authenty.signup-window .sns-signin a .fa-facebook {
+    .police.signup-window .sns-signin a .fa-facebook {
         padding: 7px 10px 7px 10px;
         margin-right: 10px;
         margin-left: 5px;
     }
-    .authenty.signup-window .horizontal-divider {
+    .police.signup-window .horizontal-divider {
         width: 100%;
         height: 1px;
         margin-top: 40px;
         margin-bottom: 40px;
     }
-    .authenty.signup-window .horizontal-divider:before {
+    .police.signup-window .horizontal-divider:before {
         content: 'OR';
         top: -11px;
         left: 46%;
         padding: 0 5px;
     }
 }
-.authenty.signup-wizard {
+.police.signup-wizard {
     background-color: #ede06b;
 }
-.authenty.signup-wizard .wrap {
+.police.signup-wizard .wrap {
     padding-top: 250px;
 }
-.authenty.signup-wizard .form-wrap {
+.police.signup-wizard .form-wrap {
     width: 100%;
     max-width: 400px;
     margin: 0 auto;
 }
-.authenty.signup-wizard input[type="text"], .authenty.signup-wizard input[type="password"], .authenty.signup-wizard input[type="email"] {
+.police.signup-wizard input[type="text"], .police.signup-wizard input[type="password"], .police.signup-wizard input[type="email"] {
     background-color: #333333;
     border: none;
     box-shadow: none;
@@ -519,14 +526,14 @@ html {
     margin-bottom: 20px;
     color: #eaeaea;
 }
-.authenty.signup-wizard .form-control:focus {
+.police.signup-wizard .form-control:focus {
     border: none;
     box-shadow: 0 0 5px #ede06b;
 }
-.authenty.signup-wizard .nav-step {
+.police.signup-wizard .nav-step {
     margin-bottom: 10px;
 }
-.authenty.signup-wizard .nav-step > div > span {
+.police.signup-wizard .nav-step > div > span {
     display: block;
     margin: 0 auto;
     background-color: #505050;
@@ -534,11 +541,11 @@ html {
     height: 10px;
     width: 10px;
 }
-.authenty.signup-wizard .nav-step-label {
+.police.signup-wizard .nav-step-label {
     text-align: center;
     margin-bottom: 20px;
 }
-.authenty.signup-wizard .nav-step > .active > span {
+.police.signup-wizard .nav-step > .active > span {
     background-color: #ffffff;
     -webkit-transition: background-color 300ms linear;
     -moz-transition: background-color 300ms linear;
@@ -546,14 +553,14 @@ html {
     -ms-transition: background-color 300ms linear;
     transition: background-color 300ms linear;
 }
-.authenty.signup-wizard .current {
+.police.signup-wizard .current {
     z-index: 100;
     -webkit-animation-name: fadeInLeft;
     -moz-animation-name: fadeInLeft;
     -o-animation-name: fadeInLeft;
     animation-name: fadeInLeft;
 }
-.authenty.signup-wizard .page-container {
+.police.signup-wizard .page-container {
     padding: 60px;
     background-color: #444444;
     height: 250px;
@@ -561,118 +568,118 @@ html {
     margin: 0;
     color: #cccccc;
 }
-.authenty.signup-wizard .page-footer {
+.police.signup-wizard .page-footer {
     text-align: center;
 }
-.authenty.signup-wizard .step-confirm {
+.police.signup-wizard .step-confirm {
     text-align: left;
     padding: 10px;
     margin-top: 13px;
     border: 1px solid #505050;
     background-color: #333333;
 }
-.authenty.signup-wizard .step-confirm div {
+.police.signup-wizard .step-confirm div {
     font-size: 13px;
     margin: 5px;
 }
-.authenty.signup-wizard .step-confirm div div:first-child {
+.police.signup-wizard .step-confirm div div:first-child {
     color: #999999;
 }
-.authenty.signup-wizard .step-wrap {
+.police.signup-wizard .step-wrap {
     padding: 20px;
     background-color: #444444;
 }
-.authenty.signup-wizard .step-wrap span {
+.police.signup-wizard .step-wrap span {
     color: #999999;
 }
-.authenty.signup-wizard .btn-wrap div {
+.police.signup-wizard .btn-wrap div {
     padding: 0;
 }
-.authenty.signup-wizard .nav-step-btn {
+.police.signup-wizard .nav-step-btn {
     background-color: #2b2b2b;
     padding: 15px;
     color: #cccccc;
 }
-.authenty.signup-wizard .nav-step-btn:active {
+.police.signup-wizard .nav-step-btn:active {
     outline: none;
 }
-.authenty.signup-wizard .nav-step-btn:focus {
+.police.signup-wizard .nav-step-btn:focus {
     outline: none;
 }
-.authenty.signup-wizard #prev button {
+.police.signup-wizard #prev button {
     background-color: #333333;
 }
-.authenty.signup-wizard .invisible {
+.police.signup-wizard .invisible {
     visibility: hidden;
 }
-.authenty.signup-wizard .remove {
+.police.signup-wizard .remove {
     display: none;
 }
-.authenty.signup-wizard .visible {
+.police.signup-wizard .visible {
     visibility: visible;
 }
 @media (max-width: 767px) {
-    .authenty.signup-wizard .page-container {
+    .police.signup-wizard .page-container {
         padding: 60px 30px;
     }
-    .authenty.signup-wizard .step-confirm {
+    .police.signup-wizard .step-confirm {
         padding: 5px;
         margin-top: 13px;
     }
-    .authenty.signup-wizard .step-confirm div {
+    .police.signup-wizard .step-confirm div {
         margin: 5px 2px;
     }
 }
-.authenty.password-recovery {
+.police.password-recovery {
     background-color: #e9e8da;
 }
-.authenty.password-recovery .wrap {
+.police.password-recovery .wrap {
     padding-top: 250px;
 }
-.authenty.password-recovery .form-wrap {
+.police.password-recovery .form-wrap {
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
 }
-.authenty.password-recovery .form-control:focus {
+.police.password-recovery .form-control:focus {
     border: none;
     box-shadow: 0 0 5px #78b310;
 }
-.authenty.password-recovery input[type="email"] {
+.police.password-recovery input[type="email"] {
     box-shadow: none;
     padding-left: 10px;
     margin-bottom: 20px;
     height: 45px;
     color: #505050;
 }
-.authenty.password-recovery .brand {
+.police.password-recovery .brand {
     text-align: center;
     margin-top: 40px;
 }
-.authenty.password-recovery .brand h2 {
+.police.password-recovery .brand h2 {
     font-size: 30px;
     font-weight: 700;
     color: #C0BFB5;
 }
-.authenty.password-recovery .brand p {
+.police.password-recovery .brand p {
     color: #C0BDB0;
     font-size: 13px;
 }
-.authenty.password-recovery .main h2 {
+.police.password-recovery .main h2 {
     font-size: 40px;
     margin-bottom: 20px;
 }
-.authenty.password-recovery .main form {
+.police.password-recovery .main form {
     margin-top: 30px;
 }
-.authenty.password-recovery .horizontal-divider {
+.police.password-recovery .horizontal-divider {
     margin: 0 auto;
     position: relative;
     width: 1px;
     height: 250px;
     background-color: #cccccc;
 }
-.authenty.password-recovery .reset {
+.police.password-recovery .reset {
     padding: 10px 15px;
     border-radius: 3px;
     background-color: #78b310;
@@ -683,20 +690,20 @@ html {
     -ms-transition: background-color 300ms linear;
     transition: background-color 300ms linear;
 }
-.authenty.password-recovery .reset:hover {
+.police.password-recovery .reset:hover {
     background-color: #8cc735;
 }
-.authenty.password-recovery .reset:active {
+.police.password-recovery .reset:active {
     border-radius: 3px!important;
 }
 @media (max-width: 767px) {
-    .authenty.password-recovery .brand {
+    .police.password-recovery .brand {
         text-align: right;
     }
-    .authenty.password-recovery .brand h2 {
+    .police.password-recovery .brand h2 {
         margin-bottom: 0;
     }
-    .authenty.password-recovery .main {
+    .police.password-recovery .main {
         margin-top: 50px;
     }
 }

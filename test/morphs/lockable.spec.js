@@ -65,7 +65,7 @@ describe('Lockable', function() {
             email: faker.internet.email(),
             username: faker.internet.userName(),
             password: faker.internet.password(),
-            failedAttempt: 5
+            failedAttempts: 5
         });
 
         expect(user.lock).to.be.a('function');

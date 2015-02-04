@@ -301,6 +301,79 @@ module.exports = {
     },
 
     /**
+     * @description GET /locked
+     *
+     * @param {HttpRequest} request
+     * @param {HttpResponse} response
+     */
+    getLocked: function(request, response) {
+
+        var data = _.extend({
+            title: 'Unlock account'
+        }, messages(request));
+
+        response.view('auth/locked', data);
+    },
+
+    /**
+     * @description POST /locked
+     *
+     * @param {HttpRequest} request
+     * @param {HttpResponse} response
+     */
+    postLocked: function(request, response) {
+        var email = request.body.email;
+
+        async.waterfall(
+            [
+                function(next) {
+                    require('sails-police')
+                        .getUser()
+                        .findOneByEmail(email)
+                        .exec(function(error, lockable) {
+                            next(error, lockable);
+                        });
+                },
+                //check if there lockable found
+                function(lockable, next) {
+                    if (_.isUndefined(lockable) ||
+                        _.isNull(lockable)) {
+                        next(new Error('Incorrect email. No account found.'));
+                    } else {
+                        next(null, lockable);
+                    }
+                },
+                function(lockable, next) {
+                    lockable
+                        .generateUnlockToken(next);
+                },
+                function(lockable, next) {
+                    lockable
+                        .sendLock(next);
+                }
+            ],
+            function(error, lockable) {
+                if (error) {
+                    sails.log(error);
+
+                    sails.emit('lockable::request:error', error);
+
+                    request.flash('error', error.message);
+
+                    response.redirect('/locked');
+                } else {
+                    sails.log(lockable);
+
+                    sails.emit('lockable::request::success', lockable);
+
+                    request.flash('success', 'Check your email for unlock instructions.');
+
+                    response.redirect('/signin');
+                }
+            });
+    },
+
+    /**
      * @description DELETE /signout
      *
      * @param {HttpRequest} request
