@@ -8,11 +8,6 @@ var email = faker.internet.email();
 
 describe('Trackable', function() {
 
-    it('should have trackable static flag', function(done) {
-        expect(User.trackable).to.be.true;
-        done();
-    });
-
     it('should do have trackable attributes', function(done) {
         expect(User._attributes.signInCount).to.exist;
         expect(User._attributes.currentSignInAt).to.exist;

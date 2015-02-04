@@ -8,7 +8,7 @@ var confirmable = require('./lib/morphs/confirmable.js');
 var Lockable = require('./lib/morphs/lockable.js');
 var Recoverable = require('./lib/morphs/recoverable.js');
 var Registerable = require('./lib/morphs/registerable.js');
-var Trackable = require('./lib/morphs/trackable.js');
+var trackable = require('./lib/morphs/trackable.js');
 var Passport = require('./lib/http/passport.js');
 
 /**
@@ -63,7 +63,7 @@ Police.prototype.model = {
         model = new Registerable(model);
 
         //mixin trackble
-        model = new Trackable(model);
+        model = trackable.mixin(model);
 
         return model;
     }
