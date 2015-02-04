@@ -5,11 +5,6 @@ var email = faker.internet.email();
 
 describe('Registerable', function() {
 
-    it('should have registerable static flag', function(done) {
-        expect(User.registerable).to.be.true;
-        done();
-    });
-
     it('should have registerable attributes', function(done) {
         expect(User._attributes.registeredAt).to.exist;
         done();
