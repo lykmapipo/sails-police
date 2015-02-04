@@ -12,7 +12,7 @@
     - [x] check if account locked
     - [x] compare password
     - [ ] if password dont match update failedAttempts
-    - [ ] track user on successfully signin
+    - [x] track user on successfully signin
 - [ ] hook authenticate in sails request lifecycle
 
 ## Confirmable
