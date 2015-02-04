@@ -51,7 +51,7 @@ Police.prototype.model = {
         model = new Authenticable(model);
 
         //apply confirmable
-        model = confirmable.apply(model);
+        model = confirmable.mixin(model);
 
         //mixin lockable
         model = new Lockable(model);

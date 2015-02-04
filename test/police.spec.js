@@ -1,6 +1,7 @@
 var expect = require('chai').expect;
 var faker = require('faker');
-var police = require('sails-police')
+var police = require('sails-police');
+var _ = require('lodash');
 
 describe('Police', function() {
 
@@ -45,12 +46,7 @@ describe('Police', function() {
 
         police.model.mixin(User);
 
-        expect(User.authenticable).to.be.true;
-        expect(User.confirmable).to.be.true;
-        expect(User.lockable).to.be.true;
-        expect(User.recoverable).to.be.true;
-        expect(User.registerable).to.be.true;
-        expect(User.trackable).to.be.true;
+        expect(_.keys(User)).to.include.members(['new','confirm']);
 
         done();
     });

@@ -4,11 +4,6 @@ var async = require('async');
 
 describe('Confirmable', function() {
 
-    it('should have confirmable static flag', function(done) {
-        expect(User.confirmable).to.be.true;
-        done();
-    });
-
     it('should have confirmable attributes', function(done) {
         expect(User._attributes.confirmationToken).to.exist;
         expect(User._attributes.confirmationTokenExpiryAt).to.exist;
@@ -38,17 +33,17 @@ describe('Confirmable', function() {
             })
     });
 
-    it('should be able to send confirmation', function(done) {
+    it('should be able to send confirmation email', function(done) {
         var user = User.new({
             email: faker.internet.email(),
             username: faker.internet.userName(),
             password: faker.internet.password()
         });
 
-        expect(user.sendConfirmation).to.be.a('function');
+        expect(user.sendConfirmationEmail).to.be.a('function');
 
         user
-            .sendConfirmation(function(error, confirmable) {
+            .sendConfirmationEmail(function(error, confirmable) {
                 if (error) {
                     done(error);
                 } else {
