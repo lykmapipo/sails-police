@@ -3,11 +3,6 @@ var faker = require('faker');
 
 describe('Recoverable', function() {
 
-    it('should have recoverable static flag', function(done) {
-        expect(User.recoverable).to.be.true;
-        done();
-    });
-
     it('should have recoverable attributes', function(done) {
         expect(User._attributes.recoveryToken).to.exist;
         expect(User._attributes.recoveryTokenExpiryAt).to.exist;
@@ -45,10 +40,10 @@ describe('Recoverable', function() {
             password: faker.internet.password()
         });
 
-        expect(user.sendRecovery).to.be.a('function');
+        expect(user.sendRecoveryEmail).to.be.a('function');
 
         user
-            .sendRecovery(function(error, recoverable) {
+            .sendRecoveryEmail(function(error, recoverable) {
                 if (error) {
                     done(error);
                 } else {
@@ -76,7 +71,7 @@ describe('Recoverable', function() {
                         recoverable.generateRecoveryToken(next);
                     },
                     function(recoverable, next) {
-                        recoverable.sendRecovery(next);
+                        recoverable.sendRecoveryEmail(next);
                     },
                     function(recoverable, next) {
                         previousPassord = recoverable.password;
