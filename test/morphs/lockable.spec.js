@@ -4,22 +4,17 @@ var async = require('async');
 
 describe('Lockable', function() {
 
-    it('should have lockable static flag', function(done) {
-        expect(User.lockable).to.be.true;
-        done();
-    });
-
     it('should do have lockable attributes', function(done) {
         expect(User._attributes.failedAttempts).to.exist;
         expect(User._attributes.lockedAt).to.exist;
         expect(User._attributes.unlockedAt).to.exist;
         expect(User._attributes.unlockToken).to.exist;
-        expect(User._attributes.unlockTokenSentAt).to.exist;
+        expect(User._attributes.unlockSentAt).to.exist;
         expect(User._attributes.unlockTokenExpiryAt).to.exist;
         done();
     });
 
-    it('should be able to generate lock token', function(done) {
+    it('should be able to generate unlock token', function(done) {
         var user = User.new({
             email: faker.internet.email(),
             username: faker.internet.userName(),
@@ -31,6 +26,7 @@ describe('Lockable', function() {
         user
             .generateUnlockToken(function(error, lockable) {
                 if (error) {
+                    console.log(error)
                     done(error)
                 } else {
                     expect(lockable.unlockToken).to.not.be.null;
@@ -47,11 +43,12 @@ describe('Lockable', function() {
             password: faker.internet.password()
         });
 
-        expect(user.sendLock).to.be.a('function');
+        expect(user.sendUnLockEmail).to.be.a('function');
 
         user
-            .sendLock(function(error, lockable) {
+            .sendUnLockEmail(function(error, lockable) {
                 if (error) {
+                    console.log(error)
                     done(error);
                 } else {
                     expect(lockable.unlockTokenSentAt).to.not.be.null;
@@ -98,7 +95,7 @@ describe('Lockable', function() {
                         lockable.generateUnlockToken(next);
                     },
                     function(lockable, next) {
-                        lockable.sendLock(next);
+                        lockable.sendUnLockEmail(next);
                     },
                     function(lockable, next) {
                         User
