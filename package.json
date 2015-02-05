@@ -1,54 +1,59 @@
 {
-  "name": "sails-police",
-  "version": "0.1.0",
-  "description": "Simple and flexible authentication workflows for sails",
-  "main": "index.js",
-  "scripts": {
-    "test": "npm link && npm link sails-police && ./node_modules/.bin/mocha test --recursive --timeout 10000",
-    "dev": "nodemon ./api/app.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/lykmapipo/sails-police.git"
-  },
-  "keywords": [
-    "authenticable",
-    "confirmable",
-    "lockable",
-    "recoverable",
-    "registerable",
-    "trackable",
-    "authentication",
-    "security",
-    "signup",
-    "login",
-    "password"
-  ],
-  "author": "Lally Elias",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/lykmapipo/sails-police/issues"
-  },
-  "homepage": "https://github.com/lykmapipo/sails-police",
-  "dependencies": {
-    "async": "~0.9.0",
-    "bcryptjs": "^2.1.0",
-    "lodash": "^2.4.1",
-    "moment": "^2.8.4",
-    "passport": "^0.2.1",
-    "passport-local": "^1.0.0",
-    "passport-remember-me": "0.0.1",
-    "sails-hook-email": "^0.10.3",
-    "sails-model-new": "^0.1.4",
-    "sails-validation-messages": "0.0.0",
-    "validator": "^3.28.0"
-  },
-  "devDependencies": {
-    "chai": "^1.10.0",
-    "faker": "^2.1.2",
-    "mocha": "^2.1.0",
-    "sails": "^0.10.5",
-    "sails-disk": "^0.10.7",
-    "supertest": "^0.15.0"
-  }
+    "name": "sails-police",
+    "version": "0.1.0",
+    "description": "Simple and flexible authentication workflows for sails",
+    "main": "index.js",
+    "scripts": {
+        "test": "npm link && npm link sails-police && ./node_modules/.bin/mocha test --recursive --timeout 10000",
+        "dev": "nodemon ./api/app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/lykmapipo/sails-police.git"
+    },
+    "keywords": [
+        "sails",
+        "auth",
+        "user management",
+        "account",
+        "authenticable",
+        "confirmable",
+        "lockable",
+        "recoverable",
+        "registerable",
+        "trackable",
+        "authentication",
+        "rememberable",
+        "remember me",
+        "security",
+        "signup",
+        "login",
+        "password"
+    ],
+    "author": "Lally Elias",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/lykmapipo/sails-police/issues"
+    },
+    "homepage": "https://github.com/lykmapipo/sails-police",
+    "dependencies": {
+        "async": "~0.9.0",
+        "bcryptjs": "^2.1.0",
+        "lodash": "^2.4.1",
+        "moment": "^2.8.4",
+        "passport": "^0.2.1",
+        "passport-local": "^1.0.0",
+        "passport-remember-me": "0.0.1",
+        "sails-model-new": "^0.1.4",
+        "validator": "^3.28.0"
+    },
+    "devDependencies": {
+        "chai": "^1.10.0",
+        "faker": "^2.1.2",
+        "mocha": "^2.1.0",
+        "sails": "^0.10.5",
+        "sails-disk": "^0.10.7",
+        "sails-hook-email": "^0.10.3",
+        "supertest": "^0.15.0"
+    }
 }
