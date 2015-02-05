@@ -36,6 +36,7 @@ module.exports = {
     },
 
     postSignin: function(request, response) {
+        var rememberMe = request.body.remember_me;
 
         //custom passport authenticate
         async
@@ -68,6 +69,31 @@ module.exports = {
                     function(authenticable, next) {
                         //track authenticable
                         authenticable.track(request.ip, next);
+                    },
+                    function(authenticate, next) {
+                        //setting initial remember me token
+                        if (!rememberMe) {
+                            next(null, authenticable);
+                        } else {
+                            authenticable
+                                .generateRememberMeToken(function(error, authenticable) {
+                                    if (error) {
+                                        next(error);
+                                    } else {
+                                        //set remember me cookie
+                                        response
+                                            .cookie(
+                                                'remember_me',
+                                                authenticable.rememberMeToken, {
+                                                    path: '/',
+                                                    httpOnly: true,
+                                                    maxAge: 60000
+                                                });
+
+                                        next(null, authenticable);
+                                    }
+                                });
+                        }
                     }
                 ],
                 function(error, authenticable) {
