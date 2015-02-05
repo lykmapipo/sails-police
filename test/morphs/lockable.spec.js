@@ -110,6 +110,7 @@ describe('Lockable', function() {
                         done(error);
                     } else {
                         expect(lockable.unlockedAt).to.not.be.null;
+                        expect(lockable.lockedAt).to.be.null;
                         expect(lockable.failedAttempts).to.equal(0)
                         done();
                     }

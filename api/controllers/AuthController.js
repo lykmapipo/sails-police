@@ -226,7 +226,7 @@ module.exports = {
                 },
                 function(recoverable, next) {
                     recoverable
-                        .sendRecovery(next);
+                        .sendRecoveryEmail(next);
                 }
             ],
             function(error, recoverable) {
@@ -349,7 +349,7 @@ module.exports = {
                 },
                 function(lockable, next) {
                     lockable
-                        .sendLock(next);
+                        .sendUnlockEmail(next);
                 }
             ],
             function(error, lockable) {
