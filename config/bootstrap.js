@@ -46,7 +46,7 @@ module.exports.bootstrap = function(cb) {
                             senderName: 'Sails Police',
                             token: user.recoveryToken
                         }, {
-                            to: 'juser.email',
+                            to: user.email,
                             subject: 'Account Recovery'
                         },
                         function(error) {
@@ -61,11 +61,12 @@ module.exports.bootstrap = function(cb) {
                     .email
                     .send(
                         'unlock', {
-                            recipientName: 'Joe',
-                            senderName: 'Sue'
+                            recipientName: user.username,
+                            senderName: 'Sails Police',
+                            token: user.unlockToken
                         }, {
-                            to: 'joe@example.com',
-                            subject: 'Hi there'
+                            to: user.email,
+                            subject: 'Account Locked'
                         },
                         function(error) {
                             done();
