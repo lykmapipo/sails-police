@@ -70,7 +70,7 @@ module.exports = {
                         //track authenticable
                         authenticable.track(request.ip, next);
                     },
-                    function(authenticate, next) {
+                    function(authenticable, next) {
                         //setting initial remember me token
                         if (!rememberMe) {
                             next(null, authenticable);
@@ -85,9 +85,8 @@ module.exports = {
                                             .cookie(
                                                 'remember_me',
                                                 authenticable.rememberMeToken, {
-                                                    path: '/',
                                                     httpOnly: true,
-                                                    maxAge: 60000
+                                                    maxAge: sails.config.session.cookie.maxAge
                                                 });
 
                                         next(null, authenticable);

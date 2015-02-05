@@ -4,7 +4,7 @@ var async = require('async');
 
 describe('Lockable', function() {
 
-    it('should do have lockable attributes', function(done) {
+    it('should have lockable attributes', function(done) {
         expect(User._attributes.failedAttempts).to.exist;
         expect(User._attributes.lockedAt).to.exist;
         expect(User._attributes.unlockedAt).to.exist;
@@ -26,7 +26,6 @@ describe('Lockable', function() {
         user
             .generateUnlockToken(function(error, lockable) {
                 if (error) {
-                    console.log(error)
                     done(error)
                 } else {
                     expect(lockable.unlockToken).to.not.be.null;
@@ -48,7 +47,6 @@ describe('Lockable', function() {
         user
             .sendUnLockEmail(function(error, lockable) {
                 if (error) {
-                    console.log(error)
                     done(error);
                 } else {
                     expect(lockable.unlockTokenSentAt).to.not.be.null;
