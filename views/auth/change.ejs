@@ -6,15 +6,17 @@
                     <div class="col-md-4 col-md-offset-1">
                         <div class="normal-signin">
                             <div class="title">
-                                <h3>Recover your account</h3>
+                                <h3>Change your password</h3>
                             </div>
                             <div class="form-main">
-                                <form action="/recover" method="POST" autocomplete="off">
+                                <form action="/change" method="POST" autocomplete="off">
                                     <input type="hidden" name="_csrf" value="<%=_csrf%>" />
-                                    <input type="hidden" name="_token" value="<%=token%>" />
                                     <div class="form-group">
                                         <div class="pw-wrap"><i class="fa fa-lock"></i>
-                                            <input type="password" name="password" id="password" class="form-control" placeholder="New password" required autofocus>
+                                            <input type="password" name="current_password" id="current_password" class="form-control" placeholder="Current password" required autofocus>
+                                        </div>
+                                        <div class="pw-wrap"><i class="fa fa-lock"></i>
+                                            <input type="password" name="new_password" id="new_password" class="form-control" placeholder="New password" required>
                                         </div>
                                         <div class="row top-buffer">
                                             <div class="col-md-4 col-md-offset-8">
@@ -23,16 +25,6 @@
                                         </div>
                                     </div>
                                 </form>
-                            </div>
-                            <div class="top-buffer bottom-wrap">
-                                <div class="row">
-                                    <div class="col-xs-6 col-md-5 col-md-offset-1">
-                                        <a href="/forgot" title="Recover your account password" id="forgot_from_2">Forgot password</a>
-                                    </div>
-                                    <div class="col-xs-6 col-md-6">
-                                        <a href="/signup" title="Create a new account" id="signup_from_2">Sign Up</a>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

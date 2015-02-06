@@ -363,6 +363,68 @@ module.exports = {
     },
 
     /**
+     * @description GET /post
+     *
+     * @param {HttpRequest} request
+     * @param {HttpResponse} response
+     */
+    getChange: function(request, response) {
+
+        var data = _.extend({
+            title: 'Change password'
+        }, messages(request));
+
+        response.view('auth/change', data);
+    },
+
+
+    /**
+     * @description POST /change
+     *
+     * @param {HttpRequest} request
+     * @param {HttpResponse} response
+     */
+    postChange: function(request, response) {
+        var currentPassword = request.body.current_password;
+        var newPassword = request.body.new_password;
+
+        var authenticable = request.user;
+
+        async
+            .waterfall(
+                [
+                    function(next) {
+                        authenticable
+                            .comparePassword(currentPassword, next);
+                    },
+                    function(authenticable, next) {
+                        authenticable
+                            .changePassword(newPassword, next);
+                    }
+                ],
+                function(error, authenticable) {
+                    if (error) {
+                        sails.emit('authenticable::change:error', error);
+
+                        request.flash('error', error.message);
+
+                        response.redirect('/change');
+
+                    } else {
+                        sails.log(authenticable);
+
+                        sails.emit('authenticable::change::successfully', authenticable);
+
+                        request.flash('success', 'Password changed successfully');
+
+                        request.logout();
+
+                        response.redirect('/signin');
+                    }
+                });
+    },
+
+    /**
      * @description DELETE /signout
      *
      * @param {HttpRequest} request
