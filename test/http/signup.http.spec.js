@@ -1,10 +1,7 @@
 var request = require('supertest');
-var jsdom = require('jsdom');
-var fs = require("fs");
-var path = require('path');
-var jquery = fs.readFileSync(path.join(__dirname, "jquery.js"), "utf-8");
 var async = require('async');
 var expect = require('chai').expect;
+var cheerio = require('cheerio');
 
 describe('AuthController#signup', function() {
 
@@ -24,22 +21,14 @@ describe('AuthController#signup', function() {
                                 }
                             },
                             function(response, next) {
-                                jsdom
-                                    .env({
-                                        html: response.text,
-                                        src: [jquery],
-                                        done: next
-                                    });
+                                next(null, cheerio.load(response.text));
                             }
                         ],
-                        function(error, window) {
+                        function(error, $) {
                             if (error) {
                                 done(error);
                             } else {
-                                var $ = window.$;
-
                                 expect($('form').attr('action')).to.be.equal('/signup');
-
                                 done()
                             }
                         });
