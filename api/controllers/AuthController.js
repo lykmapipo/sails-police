@@ -442,5 +442,15 @@ module.exports = {
         request.flash('success', 'Signout successfully.');
 
         response.redirect('/signin');
+    },
+
+    /**
+     * @description override default sails controller configurations
+     * @type {Object}
+     */
+    _config: {
+        actions: false,
+        rest: false,
+        shortcuts: false
     }
 }

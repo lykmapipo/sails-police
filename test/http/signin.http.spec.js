@@ -28,7 +28,9 @@ describe('AuthController#signin', function() {
                             if (error) {
                                 done(error);
                             } else {
-                                expect($('form').attr('action')).to.be.equal('/signin');
+                            	var form = $('form');
+                                expect(form.attr('action')).to.be.equal('/signin');
+                                expect(form.attr('method')).to.be.equal('POST');
                                 done()
                             }
                         });
