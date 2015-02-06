@@ -64,6 +64,29 @@ describe('Authenticable', function() {
 
     });
 
+    it('should be able to change its password', function(done) {
+        var user = User.new({
+            email: faker.internet.email(),
+            username: faker.internet.userName(),
+            password: faker.internet.password()
+        });
+
+        var previousPassword = user.password;
+
+        expect(user.changePassword).to.be.a('function');
+
+        user
+            .changePassword(faker.internet.password(), function(error, authenticable) {
+                if (error) {
+                    done(error);
+                } else {
+                    expect(authenticable.password).to.not.be.null;
+                    expect(authenticable.password).to.not.equal(previousPassword);
+                    done();
+                }
+            });
+    });
+
 
     it('should have authenticate method', function(done) {
         expect(User.authenticate).to.exist;
