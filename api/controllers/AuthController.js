@@ -16,6 +16,7 @@ function messages(request) {
 }
 
 //TODO add logs
+//TODO handle json request
 module.exports = {
     /**
      * @description GET /signin
@@ -434,6 +435,9 @@ module.exports = {
         var user = request.user;
 
         request.logout();
+
+        //clear remember_me
+        response.clearCookie('remember_me');
 
         sails.emit('authenticable::signout', user);
 

@@ -10,6 +10,8 @@
 Simple and flexible authentication workflows for [sails](https://github.com/balderdashy/sails) inspired by 
 [devise](https://github.com/plataformatec/devise) and [passportjs](https://github.com/jaredhanson/passport).
 
+*Note: This requires Sails v0.11.0+.  If v0.11.0+ isn't published to NPM yet, you'll need to install it via Github.*
+
 ## Installation
 
 ```sh
@@ -17,9 +19,9 @@ $ npm install --save sails-police
 ```
 
 ## Setup
-`sails-police` expose `mixins` that will extend different parts of sails flow and easy your setup. It expose the following `mixins`:
+`sails-police` expose `mixins` that will extend different parts of sails application and easy your setup. It expose the following `mixins`:
 
-### model.mixin 
+## model.mixin 
 It extend valid sails model with sails-police [morphs](https://github.com/lykmapipo/sails-police#modules) to make it a viable canditate to be used in `sails-police`. 
 
 Before hand, you have to choose a model that will be used for `sails-police`, 
@@ -47,7 +49,7 @@ module.exports = User;
 ```
 The model mixed with `sails-police morphs` will have all required `attributes` and `methods` to make it work out of the box with `sails-police`. To know what `attributes` and `methods` added please consult [Modules](https://github.com/lykmapipo/sails-police#modules) section.
 
-### routes.mixin
+## routes.mixin
 Its extend sails `routes` to setup all required `sails-police` routes. Currently there is no option of providing alternative routes, be patient its on go.
 
 To mix `sails-police` routes in your `routes` do as bellow:
@@ -77,7 +79,7 @@ After `mixin sails-police routes` your will have the following routes at your di
 ```
 Other `routes` are coming...
 
-### policies.mixin
+## policies.mixin
 It extend your `policies` with the requires `sails-police` polices to make it work out of box.
 
 To mixin `sails-police` into your policies do as bellow:
@@ -105,7 +107,7 @@ After `sails-police policies mixin` the following `policies` will be added into 
 ```
 Other `policies` are comming....
 
-### middlewares.mixin
+## middlewares.mixin
 It extend `sails http config` with policies middlewares and patch the middleware `order` so that `sails-police` can achieve its intended purpose.
 
 To `mixin sails-police middlewares` do as bellow:
@@ -155,8 +157,7 @@ To have a clear picture of the setup please check on this repo
 
 And finally the `starter-app` is on todo.
 
-Modules
-========
+# Modules
 
 ## [Authenticable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/authenticable.js)
 It lays down the infrastructure for authenticating a user in `sails-police` application. It extend model supplied to it with the following:
@@ -561,32 +562,32 @@ User
     });
 ``` 
 
-## Transport API
-By default `sails-police` default transport is `noop`. This is because 
-there are different use case when it came on sending notification. Example 
-you may opt to send you notification through sms, email or any other medium 
-of your choice.
+## Sending Email
+The default implementation of `sails-police` to send email is `noop`. This is because there are different use case(s) when it come on sending email notification.
 
-Due to that reason sails-police has the method `setTransport` which accept 
-a function and pass the `type, authentication, done` as it argurments
+Due to that reason, `sails-police` requires your model to implement `sendEmail`method which accept `type, authentication, done` as it argurments.
 
-- `type` : Refer to the type of notifcation to be sent.
+- `type` : Refer to the type of email notifcation to be sent. There are just three types which are `EMAIL_REGISTRATION_CONFIRMATON`, `EMAIL_UNLOCK` and `EMAIL_PASSWORD_RECOVERY` which are sent when new account is registered, an account is locked and need to be unlocked and when account is requesting to recover the password repsectively.
 - `authenticable` : Refer to the model instance that you have mixin 
 `sails-police morphs`.
 - `done` : Is the callback that you must call after finish sending 
 the notification. By default this callback will update notification 
 send details based on the usage.
 
-## How to implement a transport
-Simple and clear way to register a transport is to call `setTrasport(fn)` of 
-`sails-police` and pass in your transport `function`. It is recommended to implement all your notification send scenario(s) within that function i.e if you are suppose to send both email and sms just implement them together in that single function.
+## How to implement a `Model.sendEmail`
+Simple add `sendEmail` into your model `instance attributes`.
 ```js
+//in your models/User.js
 var police = require('sails-police');
 
-//define your transport
-//you may store this in sails services 
-//and register it on bootstrap.js
-var transport = function(type, authenticable, done) {
+//define your model
+var User = {};
+
+//mixin police to it
+User = police.model.mixin(User);
+
+//the add sendEmail
+User.attributes.sendEmail = function(type, authenticable, done) {
 				//your transport implementation
 		        console
 		            .log(
@@ -596,13 +597,11 @@ var transport = function(type, authenticable, done) {
 		            );
 		        done();
     };
-
-//then set the transport
-police.setTransport(transport);
 ```
+Thats all needed and `sails-police` will be able to utilize your `sendEmail` implementation.
+
 ### Transport Issues
-It is recommended to use job queue like [kue](https://github.com/learnboost/kue) 
-when implementing your transport to reduce your API response time.
+It is recommended to use job queue like [kue](https://github.com/learnboost/kue) when implementing your `sendEmail` to reduce your API response time.
 
 ## Testing
 
