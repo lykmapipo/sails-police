@@ -643,6 +643,15 @@ $ npm install
 $ npm test
 ```
 
+## Screenshots
+![signup](https://cdn.rawgit.com/lykmapipo/sails-police/master/signup.png "signup") 
+
+![signin](https://cdn.rawgit.com/lykmapipo/sails-police/master/signin.png "signin") 
+
+![forget](https://cdn.rawgit.com/lykmapipo/sails-police/master/forgot.png "forget") 
+
+![change](https://cdn.rawgit.com/lykmapipo/sails-police/master/change.png "change") 
+
 ## Contribute
 
 Fork this repo and push in your ideas. 
