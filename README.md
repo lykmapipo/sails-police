@@ -76,6 +76,12 @@ After `mixin sails-police routes` your will have the following routes at your di
 'post /signup': 'AuthController.postSignup',
 'get /confirm/:token': 'AuthController.getConfirm', //TODO make use of PUT
 'get /forgot': 'AuthController.getForgot',
+'post /forgot': 'AuthController.postForgot',
+'get /recover/:token': 'AuthController.getRecover',
+'post /recover': 'AuthController.postRecover',
+'get /unlock/:token': 'AuthController.getUnlock',
+'get /change': 'AuthController.getChange',
+'post /change': 'AuthController.postChange'
 ```
 Other `routes` are coming...
 
@@ -96,13 +102,17 @@ module.exports.policies = police.policies.mixin({
 ```
 After `sails-police policies mixin` the following `policies` will be added into your policies definition:
 ```js
-'AuthController': {
+''AuthController': {
                 getSignin: true,
                 postSignin: true,
                 getSignup: true,
                 postSignup: true,
                 getConfirm: true,
-                getForgot: true
+                getForgot: true,
+                postForgot: true,
+                getRecover: true,
+                postRecover: true,
+                getUnlock: true
             }
 ```
 Other `policies` are comming....
