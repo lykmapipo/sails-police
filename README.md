@@ -625,7 +625,7 @@ User.attributes.sendEmail = function(type, authenticable, done) {
 ```
 Thats all needed and `sails-police` will be able to utilize your `sendEmail` implementation.
 
-### Transport Issues
+### Sending Email Issues
 It is recommended to use job queue like [kue](https://github.com/learnboost/kue) when implementing your `sendEmail` to reduce your API response time.
 
 ## Testing
@@ -644,13 +644,13 @@ $ npm test
 ```
 
 ## Screenshots
-![signup](https://cdn.rawgit.com/lykmapipo/sails-police/master/signup.png "signup") 
+![signup](https://rawgit.com/lykmapipo/sails-police/master/screenshots/signup.png "signup") 
 
-![signin](https://cdn.rawgit.com/lykmapipo/sails-police/master/signin.png "signin") 
+![signin](https://rawgit.com/lykmapipo/sails-police/master/screenshots/signin.png "signin") 
 
-![forget](https://cdn.rawgit.com/lykmapipo/sails-police/master/forgot.png "forget") 
+![forget](https://rawgit.com/lykmapipo/sails-police/master/screenshots/forgot.png "forget") 
 
-![change](https://cdn.rawgit.com/lykmapipo/sails-police/master/change.png "change") 
+![change](https://rawgit.com/lykmapipo/sails-police/master/screenshots/change.png "change") 
 
 ## Contribute
 
