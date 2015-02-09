@@ -134,7 +134,7 @@ module.exports.http = police.middlewares.mixin({
 
 All of the above `middlewares` are injected before `sails router middleware`, in case of any issue please lets discuss.
 
-##Sample
+## Sample
 To have a clear picture of the setup please check on this repo 
 
 - [api/AuthController.js](https://github.com/lykmapipo/sails-police/blob/master/api/controllers/AuthController.js)
@@ -155,7 +155,22 @@ To have a clear picture of the setup please check on this repo
 
 - [views](https://github.com/lykmapipo/sails-police/tree/master/views)
 
-And finally the `starter-app` is on todo.
+## Sample Application
+
+* Clone this repository
+
+* Install all dependencies
+
+```sh
+$ npm install
+```
+* Then run development
+
+```sh
+$ npm run dev
+```
+* Then access the dev application by navigating to [ http://localhost:9090
+]( http://localhost:9090) in your favourite browser
 
 # Modules
 

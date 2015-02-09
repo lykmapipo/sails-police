@@ -78,6 +78,8 @@ module.exports = {
                     },
                     function(authenticable, next) {
                         //setting initial remember me token
+                        //as documented at 
+                        //https://github.com/jaredhanson/passport-remember-me#setting-the-remember-me-cookie
                         if (!rememberMe) {
                             next(null, authenticable);
                         } else {
