@@ -51,6 +51,23 @@ module.exports = User;
 ```
 The model mixed with `sails-police morphs` will have all required `attributes` and `methods` to make it work out of the box with `sails-police`. To know what `attributes` and `methods` added please consult [Modules](https://github.com/lykmapipo/sails-police#modules) section.
 
+## controller.mixin
+`contoller.mixin` aim to be used with `AuthController` in your sails aplication. It will extend your `AuthController` with all `authentication workflows` handlers. You can setup your `AuthController` for `sails-police` as below
+
+```js
+//in your controllers/AuthController.js
+
+//require sails-police
+var police = require('sails-police');
+
+module.exports = police.controller.mixin({
+    //other Http handlers ...
+});
+```
+Thats all needed, `sails-police` will add its Http handlers in your `AuthController`.
+
+*Note: So far `sails-police` require `AuthController` for it to work. Custom controller will come in future*
+
 ## routes.mixin
 Its extend sails `routes` to setup all required `sails-police` routes. Currently there is no option of providing alternative routes, be patient its on go.
 
@@ -85,7 +102,6 @@ After `mixin sails-police routes` your will have the following routes at your di
 'get /change': 'AuthController.getChange',
 'post /change': 'AuthController.postChange'
 ```
-Other `routes` are coming...
 
 ## policies.mixin
 It extend your `policies` with the requires `sails-police` polices to make it work out of box.
