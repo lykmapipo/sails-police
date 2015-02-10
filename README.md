@@ -38,7 +38,7 @@ done();
 
 module.exports = User
 ```
-- Mix `sails-police controller mixins` inn your `AuthController`
+- Mix `sails-police controller mixins` in your `AuthController`
 ```js
 //in controllers/AuthController.js
 var police = require('sails-police');
@@ -98,7 +98,7 @@ module.exports = require('sails-police').policies.isAuthenticated;
 //add to restrict all routes
 '*': 'Auth'
 ```
-Thats all need to add `sails-police` in your application. [For detailed setup check](https://github.com/lykmapipo/sails-police#detailed setup)
+Thats all need to add `sails-police` in your application. [For detailed setup check](https://github.com/lykmapipo/sails-police#detailed-setup)
 
 ## Detailed Setup
 `sails-police` expose `mixins` that will extend different parts of sails application and easy your setup. It expose the following `mixins`:
