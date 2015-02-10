@@ -10,6 +10,8 @@
 Simple and flexible authentication workflows for [sails](https://github.com/balderdashy/sails) inspired by 
 [devise](https://github.com/plataformatec/devise) and [passportjs](https://github.com/jaredhanson/passport).
 
+[View screenshots](https://github.com/lykmapipo/sails-police#screenshots)
+
 *Note: This requires Sails v0.11.0+.  If v0.11.0+ isn't published to NPM yet, you'll need to install it via Github.*
 
 ## Installation

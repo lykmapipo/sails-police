@@ -21,14 +21,21 @@ describe('AuthController#signup', function() {
                                 }
                             },
                             function(response, next) {
-                                next(null, cheerio.load(response.text));
+                                next(null, cheerio.load(response.text), response);
                             }
                         ],
-                        function(error, $) {
+                        function(error, $, response) {
                             if (error) {
                                 done(error);
                             } else {
-                                expect($('form').attr('action')).to.be.equal('/signup');
+                                expect(response.status).to.equal(200);
+                                expect(response.ok).to.be.true;
+                                expect(response.type).to.equal('text/html');
+
+                                var form = $('form');
+                                expect(form.attr('action')).to.be.equal('/signup');
+                                expect(form.attr('method')).to.be.equal('POST');
+
                                 done()
                             }
                         });

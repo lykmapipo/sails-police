@@ -3,11 +3,11 @@ var async = require('async');
 var expect = require('chai').expect;
 var cheerio = require('cheerio');
 
-describe('AuthController#signin', function() {
+describe('AuthController#forgot', function() {
 
-    it('should respond to http#get on /signin', function(done) {
+    it('should respond to http#get on /forgot', function(done) {
         request(sails.hooks.http.app)
-            .get('/signin')
+            .get('/forgot')
             .set('Accept', 'text/html')
             .end(function(error, response) {
                 async
@@ -33,9 +33,9 @@ describe('AuthController#signin', function() {
                                 expect(response.type).to.equal('text/html');
 
                                 var form = $('form');
-                                expect(form.attr('action')).to.be.equal('/signin');
+                                expect(form.attr('action')).to.be.equal('/forgot');
                                 expect(form.attr('method')).to.be.equal('POST');
-                                
+
                                 done()
                             }
                         });
