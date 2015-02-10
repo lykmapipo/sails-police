@@ -19,8 +19,88 @@ Simple and flexible authentication workflows for [sails](https://github.com/bald
 ```sh
 $ npm install --save sails-police
 ```
+## Quick Setup
+- Mix `sails-police model mixins` in your application `User` model
+```js
+//in your models/User.js
+var police = require('sails-police');
 
-## Setup
+var User = {};
+
+//mixin police morphs into User model
+police.model.mixin(User);
+
+//implement sendEmail
+User.attributes.sendEmail = function(type, user, done) {
+//your send email logic
+done();
+};
+
+module.exports = User
+```
+- Mix `sails-police controller mixins` inn your `AuthController`
+```js
+//in controllers/AuthController.js
+var police = require('sails-police');
+
+module.exports = police.controller.mixin({
+    //your codes goes here
+});
+```
+- Mix `sails-police routes mixins` in your `routes`
+```js
+//in your config/routes,js
+var police = require('sails-police');
+
+//then use routes.mixin to add
+//sails-police routes
+module.exports.routes = police.routes.mixin({
+    //then continue adding your routes
+    //as you normally do
+    //with sails routes
+    '/': 'HomeController.index'
+});
+```
+- Mix `sails-police policies mixins` into your policies
+```js
+//in your config/policies.js
+var police = require('sails-police');
+
+//then use policies.mixin
+//to add sails-police mixins
+module.exports.policies = police.policies.mixin({
+   //continue define your policies 
+   //as you do with sails police normally 
+});
+```
+- Mix `sails-police middlewares mixins` into your `http.js`
+```js
+//in your config/http.js
+//uncomment the exports
+//then
+var police = require('sails-police');
+
+//the use middlewares.mixin
+//to add require sails-police middlewares
+//which wrap the initial module.exports.http
+module.exports.http = police.middlewares.mixin({
+    //initial sails http exports definition goes here
+});
+```
+- Export `sails-police Auth policy` in your policies folder
+```js
+//in your api/policies/Auth.js
+module.exports = require('sails-police').policies.isAuthenticated;
+```
+- Add `Auth policy` in your policies to restrict your routes
+```js
+//in config/policies.js
+//add to restrict all routes
+'*': 'Auth'
+```
+Thats all need to add `sails-police` in your application. [For detailed setup check](https://github.com/lykmapipo/sails-police#detailed setup)
+
+## Detailed Setup
 `sails-police` expose `mixins` that will extend different parts of sails application and easy your setup. It expose the following `mixins`:
 
 ## model.mixin 
