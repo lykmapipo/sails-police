@@ -1,6 +1,6 @@
 {
   "name": "sails-police",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Simple and flexible authentication workflows for sails",
   "main": "index.js",
   "scripts": {
