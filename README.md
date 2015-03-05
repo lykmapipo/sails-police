@@ -736,7 +736,7 @@ It is recommended to use job queue like [kue](https://github.com/learnboost/kue)
 ![change](https://rawgit.com/lykmapipo/sails-police/master/screenshots/change.png "change") 
 
 ## Demo
-`sails-police` has a sample application inside its repo. To run the sample application, do the following:
+`sails-police` has a sample application inside its repo. It writes all sent emails into `.tmp/email.txt`. So you will have to copy sent links to simulate the workflow. To run the sample application, do the following:
 
 * Clone this repository
 
