@@ -16,10 +16,12 @@ Simple and flexible authentication workflows for [sails](https://github.com/bald
 * [Sceenshots](https://github.com/lykmapipo/sails-police#screenshots)
 * [Install](https://github.com/lykmapipo/sails-police#install)
 * [Quick Setup](https://github.com/lykmapipo/sails-police#quick-setup)
-    * [Model Setup]() 
-    * [Controller Setup]() 
-    * [Routes Setup]() 
-    * [Policies Setup]() 
+    * [Model Setup](https://github.com/lykmapipo/sails-police#quick-setup) 
+    * [Controller Setup](https://github.com/lykmapipo/sails-police#controller-setup) 
+    * [Routes Setup](https://github.com/lykmapipo/sails-police#routes-setup) 
+    * [Policies Setup](https://github.com/lykmapipo/sails-police#policies-setup) 
+    * [Middlewares Setup](https://github.com/lykmapipo/sails-police#middlewares-setup)
+    * [Authentication Policy Setup](https://github.com/lykmapipo/sails-police#authentication-policy-setup)
 * [Detailed Setup](https://github.com/lykmapipo/sails-police#detailed-setup)
 * [Demo](https://github.com/lykmapipo/sails-police#demo)
 * [Testing](https://github.com/lykmapipo/sails-police#testing)
@@ -114,7 +116,7 @@ module.exports.http = police.middlewares.mixin({
 });
 ```
 
-### Auth Policy Setup
+### Authentication Policy Setup
 Export `sails-police Auth policy` in your policies folder
 ```js
 //in your api/policies/Auth.js
