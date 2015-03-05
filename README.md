@@ -16,6 +16,10 @@ Simple and flexible authentication workflows for [sails](https://github.com/bald
 * [Sceenshots](https://github.com/lykmapipo/sails-police#screenshots)
 * [Install](https://github.com/lykmapipo/sails-police#install)
 * [Quick Setup](https://github.com/lykmapipo/sails-police#quick-setup)
+    * [Model Setup]() 
+    * [Controller Setup]() 
+    * [Routes Setup]() 
+    * [Policies Setup]() 
 * [Detailed Setup](https://github.com/lykmapipo/sails-police#detailed-setup)
 * [Demo](https://github.com/lykmapipo/sails-police#demo)
 * [Testing](https://github.com/lykmapipo/sails-police#testing)
@@ -23,12 +27,14 @@ Simple and flexible authentication workflows for [sails](https://github.com/bald
 * [Contribute](https://github.com/lykmapipo/sails-police#contribute)
 
 ## Install
-
 ```sh
 $ npm install --save sails-police
 ```
+
 ## Quick Setup
-- Mix `sails-police model mixins` in your application `User` model
+
+### Model Setup
+Apply `sails-police model mixins` in your application `User` model.
 ```js
 //in your models/User.js
 var police = require('sails-police');
@@ -39,6 +45,9 @@ var User = {};
 police.model.mixin(User);
 
 //implement sendEmail
+//which will be called by
+//sails police when
+//whenever it want to send email
 User.attributes.sendEmail = function(type, user, done) {
 //your send email logic
 done();
@@ -46,16 +55,21 @@ done();
 
 module.exports = User
 ```
-- Mix `sails-police controller mixins` in your `AuthController`
+
+### Controller Setup
+Apply `sails-police controller mixins` in your `AuthController`
 ```js
 //in controllers/AuthController.js
 var police = require('sails-police');
 
 module.exports = police.controller.mixin({
-    //your codes goes here
+    //your custom controller
+    //codes goes here
 });
 ```
-- Mix `sails-police routes mixins` in your `routes`
+
+### Routes Setup
+Apply `sails-police routes mixins` in your `routes`
 ```js
 //in your config/routes,js
 var police = require('sails-police');
@@ -69,7 +83,9 @@ module.exports.routes = police.routes.mixin({
     '/': 'HomeController.index'
 });
 ```
-- Mix `sails-police policies mixins` into your policies
+
+### Policies Setup
+Apply `sails-police policies mixins` into your policies
 ```js
 //in your config/policies.js
 var police = require('sails-police');
@@ -81,7 +97,9 @@ module.exports.policies = police.policies.mixin({
    //as you do with sails police normally 
 });
 ```
-- Mix `sails-police middlewares mixins` into your `http.js`
+
+### Middlewares Setup
+Apply `sails-police middlewares mixins` into your `http.js`
 ```js
 //in your config/http.js
 //uncomment the exports
@@ -95,7 +113,9 @@ module.exports.http = police.middlewares.mixin({
     //initial sails http exports definition goes here
 });
 ```
-- Export `sails-police Auth policy` in your policies folder
+
+### Auth Policy Setup
+Export `sails-police Auth policy` in your policies folder
 ```js
 //in your api/policies/Auth.js
 module.exports = require('sails-police').policies.isAuthenticated;
@@ -734,21 +754,6 @@ Thats all needed and `sails-police` will be able to utilize your `sendEmail` imp
 ### Sending Email Issues
 It is recommended to use job queue like [kue](https://github.com/learnboost/kue) when implementing your `sendEmail` to reduce your API response time.
 
-## Testing
-
-* Clone this repository
-
-* Install all development dependencies
-
-```sh
-$ npm install
-```
-* Then run test
-
-```sh
-$ npm test
-```
-
 ## Screenshots
 ![signup](https://rawgit.com/lykmapipo/sails-police/master/screenshots/signup.png "signup") 
 
@@ -758,10 +763,34 @@ $ npm test
 
 ![change](https://rawgit.com/lykmapipo/sails-police/master/screenshots/change.png "change") 
 
-## Contribute
+## Demo
+`sails-police` has a sample application inside its repo. To run the sample application, do the following:
 
-Fork this repo and push in your ideas. 
-Do not forget to add a bit of test(s) of what value you adding.
+* Clone this repository
+
+* Install all dependencies
+```sh
+$ npm install
+```
+* Then run demo
+```sh
+$ npm run dev
+```
+
+## Testing
+* Clone this repository
+
+* Install all development dependencies
+```sh
+$ npm install
+```
+* Then run test
+```sh
+$ npm test
+```
+
+## Contribute
+Fork this repo and push in your ideas. Do not forget to add a bit of test(s) of what value you adding.
 
 It will be nice, if you add it as an issue so that we can know what is going on.Also I have some form of todo, [check it](https://github.com/lykmapipo/sails-police/blob/master/TODO.md) before start working on your brilliant idea or feature.
 
