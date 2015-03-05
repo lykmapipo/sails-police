@@ -12,7 +12,7 @@
     - [x] check if account locked
     - [x] compare password
     - [x] if password dont match update failedAttempts
-    - [ ] if password match clear previous attempts
+    - [x] if password match clear previous attempts
     - [x] track user on successfully signin
 - [x] hook authenticate in sails request lifecycle
 
@@ -69,12 +69,13 @@ lastSignInAt, lastSignInIpAddress attributes
 - [ ] creating detailing tutorials on how to use sails police
 
 ## Controller
-- [ ] log all errors and any request data
+- [x] log all errors 
+- [ ] log request data
 - [x] implement signup
 - [x] implement confirm
 - [x] implement signin
 - [x] implement signout
-- [ ] implement forgot password
+- [x] implement forgot password
 - [ ] Make controller rest aware
 - [ ] Use method-override on some of controllers method
 
