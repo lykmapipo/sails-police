@@ -112,7 +112,8 @@ var police = require('sails-police');
 //to add require sails-police middlewares
 //which wrap the initial module.exports.http
 module.exports.http = police.middlewares.mixin({
-    //initial sails http exports definition goes here
+    //initial content of sails http 
+    //exports definition goes here
 });
 ```
 
@@ -122,23 +123,21 @@ Export `sails-police Auth policy` in your policies folder
 //in your api/policies/Auth.js
 module.exports = require('sails-police').policies.isAuthenticated;
 ```
-- Add `Auth policy` in your policies to restrict your routes
+Add `Auth policy` in your policies to restrict your routes
 ```js
 //in config/policies.js
 //add to restrict all routes
 '*': 'Auth'
 ```
-Thats all need to add `sails-police` in your application. [For detailed setup check](https://github.com/lykmapipo/sails-police#detailed-setup)
+Thats all need to add `sails-police` in your application.
 
 ## Detailed Setup
 `sails-police` expose `mixins` that will extend different parts of sails application and easy your setup. It expose the following `mixins`:
 
-## model.mixin 
+### Model Mixin 
 It extend valid sails model with sails-police [morphs](https://github.com/lykmapipo/sails-police#modules) to make it a viable canditate to be used in `sails-police`. 
 
-Before hand, you have to choose a model that will be used for `sails-police`, 
-which is `User` most of the time. After choosing the `sails-police` model 
-your have to mix `sails-police morphs` into it. 
+By convection, you must have a `User` model in your `models/User.js`. After creating the `User` model then your will have to mix `sails-police morphs` into it. 
 
 To setup your model for `sails-police` do as bellow:
 ```js
@@ -161,7 +160,7 @@ module.exports = User;
 ```
 The model mixed with `sails-police morphs` will have all required `attributes` and `methods` to make it work out of the box with `sails-police`. To know what `attributes` and `methods` added please consult [Modules](https://github.com/lykmapipo/sails-police#modules) section.
 
-## controller.mixin
+### Controller Mixin
 `contoller.mixin` aim to be used with `AuthController` in your sails aplication. It will extend your `AuthController` with all `authentication workflows` handlers. You can setup your `AuthController` for `sails-police` as below
 
 ```js
@@ -176,12 +175,8 @@ module.exports = police.controller.mixin({
 ```
 Thats all needed, `sails-police` will add its Http handlers in your `AuthController`.
 
-*Note: So far `sails-police` require `AuthController` for it to work. Custom controller will come in future*
-
-## routes.mixin
-Its extend sails `routes` to setup all required `sails-police` routes. Currently there is no option of providing alternative routes, be patient its on go.
-
-To mix `sails-police` routes in your `routes` do as bellow:
+### Routes Mixin
+Its extend sails `routes` to setup all required `sails-police` routes. To mix `sails-police` routes in your `routes` do as bellow:
 
 ```js
 //in your config/routes,js
@@ -196,7 +191,7 @@ module.exports.routes = police.routes.mixin({
     '/': 'HomeController.index'
 });
 ```
-After `mixin sails-police routes` your will have the following routes at your disposal:
+After `mixin sails-police routes`, the following routes will get added into sails router
 ```js
 'get /signin': 'AuthController.getSignin',
 'post /signin': 'AuthController.postSignin',
@@ -213,7 +208,7 @@ After `mixin sails-police routes` your will have the following routes at your di
 'post /change': 'AuthController.postChange'
 ```
 
-## policies.mixin
+### Policies Mixin
 It extend your `policies` with the requires `sails-police` polices to make it work out of box.
 
 To mixin `sails-police` into your policies do as bellow:
@@ -243,9 +238,8 @@ After `sails-police policies mixin` the following `policies` will be added into 
                 getUnlock: true
             }
 ```
-Other `policies` are comming....
 
-## middlewares.mixin
+### Middlewares mixin
 It extend `sails http config` with policies middlewares and patch the middleware `order` so that `sails-police` can achieve its intended purpose.
 
 To `mixin sails-police middlewares` do as bellow:
@@ -264,7 +258,7 @@ module.exports.http = police.middlewares.mixin({
 ```
 `sails-police middleware mixins` are divided into:
 
-- `policeLocals`: Which extends `request,locals` with `error`, `warning` and `success` key so that at any time if you assing a value to them they will get displayed in the view.
+- `policeLocals`: Which extends `request.locals` with `error`, `warning` and `success` key so that at any time if you assign a value to them they will get displayed in the view.
 
 - `policeInit`: Which is the wrapper around [passportjs initialize](http://passportjs.org/guide/configure) but also provide a hook point where `sails-police` setup its passportjs. And what it does is to add passportjs initialize into `sails middlewares` as `policeInit` and `middlewares order` as `policeInit`.
 
@@ -272,47 +266,9 @@ module.exports.http = police.middlewares.mixin({
 
 All of the above `middlewares` are injected before `sails router middleware`, in case of any issue please lets discuss.
 
-## Sample
-To have a clear picture of the setup please check on this repo 
+## Modules
 
-- [api/AuthController.js](https://github.com/lykmapipo/sails-police/blob/master/api/controllers/AuthController.js)
-
-- [config/policies.js](https://github.com/lykmapipo/sails-police/blob/master/config/policies.js)
-
-- [config/routes.js](https://github.com/lykmapipo/sails-police/blob/master/config/routes.js)
-
-- [api/User.js](https://github.com/lykmapipo/sails-police/blob/master/api/models/User.js)
-
-- [config/http.js](https://github.com/lykmapipo/sails-police/blob/master/config/http.js)
-
-- [config/bootstrap.js](https://github.com/lykmapipo/sails-police/blob/master/config/bootstrap.js)
-
-- [api/hooks/email.js](https://github.com/lykmapipo/sails-police/blob/master/api/hooks/email.js)
-
-- [config/paths.js](https://github.com/lykmapipo/sails-police/blob/master/config/paths.js)
-
-- [views](https://github.com/lykmapipo/sails-police/tree/master/views)
-
-## Sample Application
-
-* Clone this repository
-
-* Install all dependencies
-
-```sh
-$ npm install
-```
-* Then run development
-
-```sh
-$ npm run dev
-```
-* Then access the dev application by navigating to [ http://localhost:9090
-]( http://localhost:9090) in your favourite browser
-
-# Modules
-
-## [Authenticable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/authenticable.js)
+### Authenticable
 It lays down the infrastructure for authenticating a user in `sails-police` application. It extend model supplied to it with the following:
 
 - `email` : An attribute used to store user email address. `sails-police` 
@@ -403,7 +359,7 @@ User
     });
 ```
 
-## [Confirmable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/confirmable.js)
+### Confirmable
 Provide a means to confirm user registration. It extend model with the following:
 
 - `confirmationToken` : An attribute which used to store current user 
@@ -471,7 +427,7 @@ Example
        		});
 ```
 
-## [Lockable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/lockable.js)
+### Lockable
 Provide a means of locking an account after a specified number of failed sign-in attempts `(defaults to 5 attempts)`. Can unlock account through unlock instructions sent. It extend the model with the following:
 
 - `failedAttempt` : An attribute which keeps track of failed login attempts.
@@ -558,7 +514,7 @@ User
     });
 ```
 
-## [Recoverable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/recoverable.js)
+### Recoverable
 Lays out infrastructure of resets the user password and sends reset instructions. It extend model with the following:
 
 - `recoveryToken` : An attribute that store recovery token
@@ -625,7 +581,7 @@ User
         });
 ```
 
-## [Registerable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/registerable.js)
+### Registerable
 Handles signing up users through a registration process, also allowing them to edit and destroy their account. It extend model with the following:
 
 - `registeredAt` : An attribute which keeps track of whn an account is registered.
@@ -667,7 +623,7 @@ use
                 });
 ```
 
-## [Trackable](https://github.com/lykmapipo/sails-police/blob/master/lib/morphs/trackable.js)
+### Trackable
 Provide a means of tracking user signin activities. It extend provided 
 model with the followings:
 
@@ -727,7 +683,7 @@ Due to that reason, `sails-police` requires your model to implement `sendEmail`m
 the notification. By default this callback will update notification 
 send details based on the usage.
 
-## How to implement a `Model.sendEmail`
+### How to implement a sendEmail
 Simple add `sendEmail` into your model `instance attributes`.
 ```js
 //in your models/User.js
@@ -771,13 +727,18 @@ It is recommended to use job queue like [kue](https://github.com/learnboost/kue)
 * Clone this repository
 
 * Install all dependencies
+
 ```sh
 $ npm install
 ```
-* Then run demo
+* Then run development
+
 ```sh
 $ npm run dev
 ```
+* Then access the dev application by navigating to [ http://localhost:9090
+]( http://localhost:9090) in your favourite browser
+
 
 ## Testing
 * Clone this repository
