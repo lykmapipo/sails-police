@@ -23,6 +23,11 @@ Simple and flexible authentication workflows for [sails](https://github.com/bald
     * [Middlewares Setup](https://github.com/lykmapipo/sails-police#middlewares-setup)
     * [Authentication Policy Setup](https://github.com/lykmapipo/sails-police#authentication-policy-setup)
 * [Detailed Setup](https://github.com/lykmapipo/sails-police#detailed-setup)
+    * [Model Mixin](https://github.com/lykmapipo/sails-police#model-mixin)
+    * [Controller Mixin](https://github.com/lykmapipo/sails-police#controller-mixin) 
+    * [Routes Mixin](https://github.com/lykmapipo/sails-police#routes-mixin) 
+    * [Policies Mixin](https://github.com/lykmapipo/sails-police#policies-mixin) 
+    * [Middleware Mixin](https://github.com/lykmapipo/sails-police#middlewares-mixin) 
 * [Demo](https://github.com/lykmapipo/sails-police#demo)
 * [Testing](https://github.com/lykmapipo/sails-police#testing)
 * [Development](https://github.com/lykmapipo/sails-police#development)
@@ -239,7 +244,7 @@ After `sails-police policies mixin` the following `policies` will be added into 
             }
 ```
 
-### Middlewares mixin
+### Middlewares Mixin
 It extend `sails http config` with policies middlewares and patch the middleware `order` so that `sails-police` can achieve its intended purpose.
 
 To `mixin sails-police middlewares` do as bellow:
