@@ -15,6 +15,7 @@ Simple and flexible authentication workflows for [sails](https://github.com/bald
 ## Guide
 * [Sceenshots](https://github.com/lykmapipo/sails-police#screenshots)
 * [Install](https://github.com/lykmapipo/sails-police#install)
+* [Quick Start](https://github.com/lykmapipo/sails-police#quick-start)
 * [Quick Setup](https://github.com/lykmapipo/sails-police#quick-setup)
     * [Model Setup](https://github.com/lykmapipo/sails-police#quick-setup) 
     * [Controller Setup](https://github.com/lykmapipo/sails-police#controller-setup) 
@@ -46,6 +47,9 @@ Simple and flexible authentication workflows for [sails](https://github.com/bald
 ```sh
 $ npm install --save sails-police
 ```
+
+## Quick start
+[Use sails-generate-police](https://github.com/lykmapipo/sails-generate-police)
 
 ## Quick Setup
 
