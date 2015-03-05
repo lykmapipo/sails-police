@@ -10,11 +10,19 @@
 Simple and flexible authentication workflows for [sails](https://github.com/balderdashy/sails) inspired by 
 [devise](https://github.com/plataformatec/devise) and [passportjs](https://github.com/jaredhanson/passport).
 
-[View screenshots](https://github.com/lykmapipo/sails-police#screenshots)
-
 *Note: This requires Sails v0.11.0+.  If v0.11.0+ isn't published to NPM yet, you'll need to install it via Github.*
 
-## Installation
+## Guide
+* [Sceenshots](https://github.com/lykmapipo/sails-police#screenshots)
+* [Install](https://github.com/lykmapipo/sails-police#install)
+* [Quick Setup](https://github.com/lykmapipo/sails-police#quick-setup)
+* [Detailed Setup](https://github.com/lykmapipo/sails-police#detailed-setup)
+* [Demo](https://github.com/lykmapipo/sails-police#demo)
+* [Testing](https://github.com/lykmapipo/sails-police#testing)
+* [Development](https://github.com/lykmapipo/sails-police#development)
+* [Contribute](https://github.com/lykmapipo/sails-police#contribute)
+
+## Install
 
 ```sh
 $ npm install --save sails-police
