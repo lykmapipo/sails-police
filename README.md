@@ -406,9 +406,7 @@ user
     })
 ```
 
-- `sendConfirmation(callback(error,confirmable))` : This instance method utilize the configured transport and send the confirmation notification. On successfully send it will update `confirmationSentAt` instance attribute with the current time stamp and persist the instance before return it.
-
-Note: send confirmation use the transport api provide on [setTranport](https://github.com/lykmapipo/sails-police#how-to-implement-a-transport) configuration.
+- `sendConfirmation(callback(error,confirmable))` : This instance method utilize `[model sendEmail()](https://github.com/lykmapipo/sails-police#sending-email)` and send the confirmation notification. On successfully send it will update `confirmationSentAt` instance attribute with the current time stamp and persist the instance before return it.
 
 Example
 ```js
@@ -631,7 +629,7 @@ User
 
 Example:
 ```js
-use
+user
     .unregister(function(error, registerable) {
                     if (error) {
                         console.log(error);
